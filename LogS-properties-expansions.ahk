@@ -10,6 +10,8 @@
 :SEk1*:kw::+{Enter}::{Sleep 5}knowledge{Sleep 5}{Enter}
 :SEk1:k::::{Sleep 5}knowledge{Sleep 5}{Enter}
 :o:r::reference
+:SEk1*:kr::+{Enter}::{Sleep 5}knowledge{Sleep 5}{Enter}reference{Sleep 5}{Enter}
+
 :SEk1*:gt::+{Enter}::{Sleep 5}gtd-object{Sleep 5}{Enter}
 :SEk1:o::::{Sleep 5}gtd-object{Sleep 5}{Enter}
 :SEk1:n::[[next-action{Sleep 5}{Enter}
