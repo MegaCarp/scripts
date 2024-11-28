@@ -23,3 +23,6 @@
 
 ^Up::Send "{Home}" ; Ctrl+Up arrow = Home button
 ^Down::Send "{End}" ; Ctrl+Down arrow = End button
+
++3::Send "{#}"
+:*:номер::№
