@@ -4,7 +4,7 @@
 
 ; text expansion is called "hotstrings"
 
-:*:aof::+{Enter}::{Sleep 100}{Enter}area-of-focus{Sleep 150}{Enter}{Sleep 100}{Enter}
+:k5*:aof::+{Enter}::{Sleep 200}area-of-focus{Sleep 200}{Enter}{Sleep 200}{Enter}{Sleep 200}{Enter}
 :*:pj::+{Enter}project::{Space}[
 ::p::+{Enter}project::{Space}[
 :*:kw::+{Enter}knowledge::{Space}
