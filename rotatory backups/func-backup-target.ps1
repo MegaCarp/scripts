@@ -34,40 +34,31 @@ function Backup-Target {
         return
     }
 
-    # Get source files excluding the specified patterns
-    $sourceFiles = Get-ChildItem -Path $sourcePath -Recurse -File | 
-    Where-Object { 
-        $exclude = $false
-        foreach ($pattern in $exclusions) {
-            if ($_.Name -like $pattern) {
-                $exclude = $true
-                break
-            }
-        }
-        -not $exclude
-    }
-
     # Get the last backup folder (if it exists)
-    $lastBackupFolder = Get-ChildItem -Path $parentDirectory -Directory | 
+    $lastBackupFolder = Get-ChildItem -Path $backupPath -Directory | 
     Sort-Object LastWriteTime -Descending | 
     Select-Object -First 1
 
     # Check if a folder was found and display the result
-    if ($lastModifiedFolder) {
-        Write-Host "The last modified folder is: $($lastModifiedFolder.FullName)"
-        Write-Host "Last modified on: $($lastModifiedFolder.LastWriteTime)"
+    if ($lastBackupFolder) {
+        Write-Host "The last modified folder is: $($lastBackupFolder.FullName)"
+        Write-Host "Last modified on: $($lastBackupFolder.LastWriteTime)"
     }
     else {
         Write-Host "No folders found in the specified directory."
     }
 
+    # Prepare robocopy options
+    $robocopyOptions = "/E /COPY:DAT /R:3 /W:5 /XD $($exclusions -join ' ')"
+
     if (-not (Test-Path $lastBackupFolder)) {
         # If no last backup exists, copy all files
-        Copy-Item -Path "$sourcePath\*" -Destination $backupFolder -Recurse -Force -Exclude $exclusions
+        $robocopyCommand = "robocopy `"$sourcePath`" `"$backupFolder`" $robocopyOptions"
+        Invoke-Expression $robocopyCommand
     }
     else {
         # Perform incremental backup using hard links
-        foreach ($sourceFile in $sourceFiles) {
+        foreach ($sourceFile in Get-ChildItem -Path $sourcePath -Recurse -File) {
             $relativePath = $sourceFile.FullName.Substring($sourcePath.Length + 1)
             $destFile = Join-Path -Path $backupFolder -ChildPath $relativePath
             $lastBackupFile = Join-Path -Path $lastBackupFolder -ChildPath $relativePath
@@ -84,7 +75,8 @@ function Backup-Target {
             }
             else {
                 # If the file does not exist in the last backup, copy it
-                Copy-Item -Path $sourceFile.FullName -Destination $destFile -Force
+                $robocopyCommand = "robocopy `"$sourcePath`" `"$backupFolder`" $robocopyOptions"
+                Invoke-Expression $robocopyCommand
             }
         }
     }
