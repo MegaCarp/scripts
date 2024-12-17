@@ -5,12 +5,12 @@
 F10::
 {
     Send "{Enter}"
-    Sleep 20
+    Sleep 200
     Send "/w Captatrix"
-    Sleep 20
+    Sleep 200
     Send "{Tab}" 
-    Sleep 20
+    Sleep 200
     SendEvent "^v"
-    Sleep 20
+    Sleep 200
     Send "{Enter}"
 }
