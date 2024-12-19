@@ -1,61 +1,39 @@
-; Modified from the v1.1 open source project: libcrypt.ahk
-; The original project maintainer is: joedf
-; The original project uses: MIT license
-; https://github.com/ahkscript/libcrypt.ahk
-; I also referred to thqby's open source project: https://github.com/thqby/ahk2_lib/blob/master/Base64.ahk
+﻿; =============================================================================================================================================================
+; Author ........: jNizM
+; Released ......: 2016-10-21
+; Modified ......: 2023-01-13
+; Tested with....: AutoHotkey v2.0.2 (x64)
+; Tested on .....: Windows 11 - 22H2 (x64)
+; Function ......: Base64ToString()
 ;
+; Parameter(s)...: Base64 - encoded string
+;
+; Return ........: Converts a base64 string to a readable string.
 ; sauce
-; https://www.autohotkey.com/boards/viewtopic.php?t=112821
+; https://github.com/jNizM/ahk-scripts-v2/blob/main/src/Strings/Base64ToString.ahk
+; =============================================================================================================================================================
 
-LC_Base64_Encode_Text(Text_, Encoding_ := "UTF-8")
+#Requires AutoHotkey v2.0
+
+
+Base64ToString(Base64)
 {
-    Bin_ := Buffer(StrPut(Text_, Encoding_))
-    LC_Base64_Encode(&Base64_, &Bin_, StrPut(Text_, Bin_, Encoding_) - 1)
-    return Base64_
+	static CRYPT_STRING_BASE64 := 0x00000001
+
+	if !(DllCall("crypt32\CryptStringToBinaryW", "Str", Base64, "UInt", 0, "UInt", CRYPT_STRING_BASE64, "Ptr", 0, "UInt*", &Size := 0, "Ptr", 0, "Ptr", 0))
+		throw OSError()
+
+	String := Buffer(Size)
+	if !(DllCall("crypt32\CryptStringToBinaryW", "Str", Base64, "UInt", 0, "UInt", CRYPT_STRING_BASE64, "Ptr", String, "UInt*", Size, "Ptr", 0, "Ptr", 0))
+		throw OSError()
+
+	return NumGet(String, "Int64")
 }
 
-LC_Base64_Decode_Text(Text_, Encoding_ := "UTF-8")
-{
-    Len_ := LC_Base64_Decode(&Bin_, &Text_)
-    return StrGet(StrPtr(Bin_), Len_, Encoding_)
-}
 
-LC_Base64_Encode(&Out_, &In_, In_Len)
-{
-    return LC_Bin2Str(&Out_, &In_, In_Len, 0x40000001)
-}
+; =============================================================================================================================================================
+; Example
+; =============================================================================================================================================================
+MsgBox  Format("{:x}", Base64ToString("AgGqtgAA"))
+; => The quick brown fox jumps over the lazy dog
 
-LC_Base64_Decode(&Out_, &In_)
-{
-    return LC_Str2Bin(&Out_, &In_, 0x1)
-}
-
-LC_Bin2Str(&Out_, &In_, In_Len, Flags_)
-{
-    DllCall("Crypt32.dll\CryptBinaryToString", "Ptr", In_, "UInt", In_Len, "UInt", Flags_, "Ptr", 0, "UInt*", &Out_Len := 0)
-    VarSetStrCapacity(&Out_, Out_Len * 2)
-    DllCall("Crypt32.dll\CryptBinaryToString", "Ptr", In_, "UInt", In_Len, "UInt", Flags_, "Str", Out_, "UInt*", &Out_Len)
-    return Out_Len
-}
-
-LC_Str2Bin(&Out_, &In_, Flags_)
-{
-    DllCall("Crypt32.dll\CryptStringToBinary", "Ptr", StrPtr(In_), "UInt", StrLen(In_), "UInt", Flags_, "Ptr", 0, "UInt*", &Out_Len := 0, "Ptr", 0, "Ptr", 0)
-    VarSetStrCapacity(&Out_, Out_Len)
-    DllCall("Crypt32.dll\CryptStringToBinary", "Ptr", StrPtr(In_), "UInt", StrLen(In_), "UInt", Flags_, "Str", Out_, "UInt*", &Out_Len, "Ptr", 0, "Ptr", 0)
-    return Out_Len
-}
-
-LC_Base64_Decode_2_bin(Text_, Encoding_ := "UTF-8")
-{
-    Len_ := LC_Base64_Decode(&Bin_, &Text_)
-    return StrGet(StrPtr(Bin_), Len_)
-}
-inputString := "AgGqtgAA"
-result := LC_Base64_Decode_2_bin(inputString)
-
-A_Clipboard := result ; Ă뚪
-
-bin2dec := (n) => (StrLen(n) > 1 ? bin2dec(SubStr(n, 1, -1)) << 1 : 0) | SubStr(n, -1)
-
-MsgBox Format('0x{:X}', bin2dec('%result%'))
