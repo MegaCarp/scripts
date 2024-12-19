@@ -1,62 +1,61 @@
+; Modified from the v1.1 open source project: libcrypt.ahk
+; The original project maintainer is: joedf
+; The original project uses: MIT license
+; https://github.com/ahkscript/libcrypt.ahk
+; I also referred to thqby's open source project: https://github.com/thqby/ahk2_lib/blob/master/Base64.ahk
+;
 ; sauce
-; https://www.autohotkey.com/boards/viewtopic.php?f=83&t=120470&sid=fa2e031d4e936ec27e54e5ba5b7cbdbc
+; https://www.autohotkey.com/boards/viewtopic.php?t=112821
 
-BufToStr(&Src, &Trg, TrgIsHex := False)                    ;  By SKAN for ah2 on D66U/D68I
-{                                                          ;   @ autohotkey.com/r?t=120470
-    if Type(Src) != "Buffer" Or Src.Size < 1
-        return 0
-
-    local Flags := (TrgIsHex ? 0xC : 0x1) | 0x40000000
-    , Bytes := Src.Size
-    , RqdCap := 1 + (TrgIsHex ? (Bytes * 2) : ((Ceil(Bytes * 4 / 3) + 3) & ~0x03))
-
-    VarSetStrCapacity(&Trg, RqdCap - 1)
-    return DllCall("Crypt32\CryptBinaryToStringW", "ptr", Src, "int", Bytes
-        , "int", Flags, "str", Trg, "intp", &RqdCap)
+LC_Base64_Encode_Text(Text_, Encoding_ := "UTF-8")
+{
+    Bin_ := Buffer(StrPut(Text_, Encoding_))
+    LC_Base64_Encode(&Base64_, &Bin_, StrPut(Text_, Bin_, Encoding_) - 1)
+    return Base64_
 }
 
-StrToBuf(&Src, &Trg, SrcIsHex := False)                    ;  By SKAN for ah2 on D66U/D68I
-{                                                          ;   @ autohotkey.com/r?t=120470
-    if Type(Src) != "String"
-        return 0
-
-    local Flags := (SrcIsHex ? 0xC : 0x1)
-    , EqTo := SrcIsHex ? 0 : (SubStr(Src, -2, 1) = "=") + (SubStr(Src, -1) = "=")
-    , Bytes := SrcIsHex ? StrLen(Src) // 2 : (StrLen(Src) - EqTo) * 3 // 4
-
-    Trg := Buffer(Bytes)
-    return DllCall("Crypt32\CryptStringToBinaryW", "str", Src, "int", StrLen(Src)
-    , "int", Flags, "ptr", Trg, "intp", &Bytes, "int", 0, "int", 0)
+LC_Base64_Decode_Text(Text_, Encoding_ := "UTF-8")
+{
+    Len_ := LC_Base64_Decode(&Bin_, &Text_)
+    return StrGet(StrPtr(Bin_), Len_, Encoding_)
 }
 
-TxtEnc(Str) {
-    local Bytes := StrPut(Str, "utf-8") - 1
-    , Src := Buffer(Bytes, 0)
-    , Trg := ""
-
-    StrPut(Str, Src, Bytes, "utf-8")
-    BufToStr(&Src, &Trg)
-
-    return Trg
+LC_Base64_Encode(&Out_, &In_, In_Len)
+{
+    return LC_Bin2Str(&Out_, &In_, In_Len, 0x40000001)
 }
 
-TxtDec(Src) {
-    local Trg := ""
-    StrToBuf(&Src, &Trg)
-    return StrGet(Trg, "utf-8")
+LC_Base64_Decode(&Out_, &In_)
+{
+    return LC_Str2Bin(&Out_, &In_, 0x1)
 }
 
-; base64toBinary(Str) {
-;     local Bytes := StrPut(Str, "utf-8") - 1
-;     , Src := Buffer(Bytes, 0)
-;     , 
-; }
-#Requires AutoHotkey v2.0
-#SingleInstance
-ImageData := "AQAAAAA="
+LC_Bin2Str(&Out_, &In_, In_Len, Flags_)
+{
+    DllCall("Crypt32.dll\CryptBinaryToString", "Ptr", In_, "UInt", In_Len, "UInt", Flags_, "Ptr", 0, "UInt*", &Out_Len := 0)
+    VarSetStrCapacity(&Out_, Out_Len * 2)
+    DllCall("Crypt32.dll\CryptBinaryToString", "Ptr", In_, "UInt", In_Len, "UInt", Flags_, "Str", Out_, "UInt*", &Out_Len)
+    return Out_Len
+}
 
+LC_Str2Bin(&Out_, &In_, Flags_)
+{
+    DllCall("Crypt32.dll\CryptStringToBinary", "Ptr", StrPtr(In_), "UInt", StrLen(In_), "UInt", Flags_, "Ptr", 0, "UInt*", &Out_Len := 0, "Ptr", 0, "Ptr", 0)
+    VarSetStrCapacity(&Out_, Out_Len)
+    DllCall("Crypt32.dll\CryptStringToBinary", "Ptr", StrPtr(In_), "UInt", StrLen(In_), "UInt", Flags_, "Str", Out_, "UInt*", &Out_Len, "Ptr", 0, "Ptr", 0)
+    return Out_Len
+}
 
-StrToBuf(&ImageData, &Bin)
-BinStr := StrGet(Bin)
+LC_Base64_Decode_2_bin(Text_, Encoding_ := "UTF-8")
+{
+    Len_ := LC_Base64_Decode(&Bin_, &Text_)
+    return StrGet(StrPtr(Bin_), Len_)
+}
+inputString := "AgGqtgAA"
+result := LC_Base64_Decode_2_bin(inputString)
 
-MsgBox(BinStr)
+A_Clipboard := result ; Ă뚪
+
+bin2dec := (n) => (StrLen(n) > 1 ? bin2dec(SubStr(n, 1, -1)) << 1 : 0) | SubStr(n, -1)
+
+MsgBox Format('0x{:X}', bin2dec('%result%'))
