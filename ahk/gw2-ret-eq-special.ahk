@@ -17,5 +17,3 @@ r::
    }
 
 BackSpace::Send "{Ctrl down}{Alt Down}{Shift down}-{Ctrl up}{Alt up}{Shift up}"
-
-
