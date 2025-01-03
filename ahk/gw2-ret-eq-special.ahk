@@ -17,3 +17,11 @@ r::
    }
 
 BackSpace::Send "{Ctrl down}{Alt Down}{Shift down}-{Ctrl up}{Alt up}{Shift up}"
+
+t::
+{
+    MouseGetPos &xpos, &ypos
+    Click X := 1901, Y := 456
+    Sleep 0 ; Adjust the delay as needed
+    Click X := 1043, Y := 698
+}
