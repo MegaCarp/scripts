@@ -3,5 +3,5 @@
 F12::
 {
     MouseGetPos &xpos, &ypos
-    A_Clipboard := xpos ", " ypos
+    A_Clipboard := "X := " xpos ", Y := " ypos
 }
