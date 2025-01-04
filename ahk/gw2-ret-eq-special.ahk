@@ -22,6 +22,9 @@ t::
 {
     MouseGetPos &xpos, &ypos
     Click X := 1901, Y := 456
+    Send "t"
     Sleep 0 ; Adjust the delay as needed
     Click X := 1043, Y := 698
 }
+
+if (GetKeyState("LButton", "P"))
