@@ -108,13 +108,13 @@
       }
     }
   },
-  "name": "Уит Соймерсет (хум)",
+  "name": "Уит Соммерсет (смол)",
   "type": "character",
   "effects": [],
   "system": {
     "attributes": {
       "hp": {
-        "value": 28,
+        "value": 42,
         "temp": 0
       },
       "speed": {
@@ -3949,8 +3949,8 @@
         "systemVersion": "6.8.0",
         "coreVersion": "12.331",
         "createdTime": 1696447828202,
-        "modifiedTime": 1735861922477,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
+        "modifiedTime": 1736083967550,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h",
         "compendiumSource": "Compendium.pf2e.equipment-srd.Item.1k3AsSW7lpU0kEpY",
         "duplicateSource": null
       }
@@ -4044,98 +4044,6 @@
         "modifiedTime": 1696448345043,
         "lastModifiedBy": "wxAVMXAgFFmeduLl",
         "compendiumSource": "Compendium.pf2e.feats-srd.Item.iWvpq3uDZcXvBJj8",
-        "duplicateSource": null
-      }
-    },
-    {
-      "_id": "mHNgl86H15RzETzd",
-      "img": "systems/pf2e/icons/features/feats/feats.webp",
-      "name": "Живучесть",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p>Вы можете выдержать больше ударов, чем большинство. Увеличьте ваши максимальные Очки Здоровья на значение вашего уровня. Ваш КС проверок восстановления становится равным 9 + ваше значения состояния @UUID[Compendium.pf2e.conditionitems.yZRUzMqrMmfLu0V1]{При смерти} (<a href=\"https://clck.ru/ajgEV\">Проверки восстановления</a>).</p>"
-        },
-        "rules": [
-          {
-            "key": "FlatModifier",
-            "selector": "hp",
-            "value": "@actor.level"
-          },
-          {
-            "key": "ActiveEffectLike",
-            "mode": "downgrade",
-            "path": "system.attributes.dying.recoveryDC",
-            "value": 9
-          }
-        ],
-        "slug": "toughness",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": {
-            "schema": 0.931,
-            "foundry": "12.331",
-            "system": "6.8.0"
-          }
-        },
-        "traits": {
-          "otherTags": [],
-          "value": [
-            "general"
-          ],
-          "rarity": "common"
-        },
-        "publication": {
-          "title": "Pathfinder Core Rulebook",
-          "authors": "",
-          "license": "OGL",
-          "remaster": false
-        },
-        "level": {
-          "value": 1,
-          "taken": 3
-        },
-        "category": "general",
-        "onlyLevel1": false,
-        "maxTakable": 1,
-        "actionType": {
-          "value": "passive"
-        },
-        "actions": {
-          "value": null
-        },
-        "prerequisites": {
-          "value": []
-        },
-        "location": "general-3"
-      },
-      "type": "feat",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.pf2e.feats-srd.Item.AmP0qu7c5dlBSath"
-        },
-        "babele": {
-          "translated": true,
-          "hasTranslation": true,
-          "originalName": "Toughness"
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wxAVMXAgFFmeduLl": 3
-      },
-      "_stats": {
-        "systemId": "pf2e",
-        "systemVersion": "5.6.2",
-        "coreVersion": "12.328",
-        "createdTime": 1696448504667,
-        "modifiedTime": 1696448504667,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
-        "compendiumSource": "Compendium.pf2e.feats-srd.Item.AmP0qu7c5dlBSath",
         "duplicateSource": null
       }
     },
@@ -7149,588 +7057,6 @@
         "modifiedTime": 1709400085874,
         "lastModifiedBy": "Ss0fsOHvNiqAOS8h",
         "compendiumSource": "Compendium.pf2e.feats-srd.Item.pekKtubQTkG9m1xK",
-        "duplicateSource": null
-      }
-    },
-    {
-      "_id": "wcjJCdOdBGIwMDcp",
-      "img": "icons/sundries/books/book-red-exclamation.webp",
-      "name": "Snarecrafter Dedication",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p>You've learned to create a limited number of snares at no cost. Each day during your daily preparations, you can prepare four snares from your formula book for quick deployment; if they normally take 1 minute to @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{Craft}, you can Craft them with 3 @UUID[Compendium.pf2e.actionspf2e.Item.pvQ5rY2zrtPI614F]{Interact} actions. The number of snares increases to six if you're a master in Crafting and eight if you're legendary.</p>\n<p>Snares prepared in this way don't cost you any resources to Craft.</p>\n<hr />\n<p><strong>Special</strong> The feat counts as @UUID[Compendium.pf2e.feats-srd.Item.0haS0qXR9xTYKoTG]{Snare Specialist} for the purpose of feat prerequisites. If you also have the Snare Specialist ranger feat, the @UUID[Compendium.pf2e.feats-srd.Item.KW6K5Zv4J7ClWkKA]{Quick Snares} from both feats are cumulative. You can't select another dedication feat until you have gained two other feats from the @UUID[Compendium.pf2e.journals.JournalEntry.vx5FGEG34AxI2dow.JournalEntryPage.G9Fzy5ZK4KtAmcFb]{Snarecrafter} archetype.</p>"
-        },
-        "rules": [
-          {
-            "craftableItems": [
-              "item:trait:snare"
-            ],
-            "isDailyPrep": false,
-            "isPrepared": true,
-            "key": "CraftingAbility",
-            "label": "PF2E.SpecificRule.DedicationCraftingEntry.Snarecrafter",
-            "maxItemLevel": "@actor.level",
-            "slug": "snare-crafting",
-            "prepared": [
-              {
-                "quantity": 1,
-                "expended": true,
-                "uuid": "Compendium.pf2e.equipment-srd.Item.Km4lSOsyrip5q6iD"
-              },
-              {
-                "quantity": 1,
-                "expended": true,
-                "uuid": "Compendium.pf2e.equipment-srd.Item.kF761P3ibBIFmLm9"
-              },
-              {
-                "quantity": 1,
-                "uuid": "Compendium.pf2e.equipment-srd.Item.riLNCaVS9zGvt4Nn"
-              },
-              {
-                "quantity": 1,
-                "expended": true,
-                "uuid": "Compendium.pf2e.equipment-srd.Item.kF761P3ibBIFmLm9"
-              }
-            ]
-          },
-          {
-            "key": "ActiveEffectLike",
-            "mode": "add",
-            "path": "system.crafting.entries.snareCrafting.maxSlots",
-            "phase": "beforeDerived",
-            "value": {
-              "brackets": [
-                {
-                  "end": 2,
-                  "start": 1,
-                  "value": 4
-                },
-                {
-                  "end": 3,
-                  "start": 3,
-                  "value": 6
-                },
-                {
-                  "start": 4,
-                  "value": 8
-                }
-              ],
-              "field": "actor|system.skills.crafting.rank"
-            }
-          }
-        ],
-        "slug": "snarecrafter-dedication",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": {
-            "schema": 0.931,
-            "foundry": "12.331",
-            "system": "6.8.0"
-          }
-        },
-        "traits": {
-          "otherTags": [],
-          "value": [
-            "archetype",
-            "dedication"
-          ],
-          "rarity": "common"
-        },
-        "publication": {
-          "title": "Pathfinder Advanced Player's Guide",
-          "authors": "",
-          "license": "OGL",
-          "remaster": false
-        },
-        "level": {
-          "value": 2
-        },
-        "category": "class",
-        "onlyLevel1": false,
-        "maxTakable": 1,
-        "actionType": {
-          "value": "passive"
-        },
-        "actions": {
-          "value": null
-        },
-        "prerequisites": {
-          "value": [
-            {
-              "value": "trained in Crafting"
-            },
-            {
-              "value": "Snare Crafting"
-            }
-          ]
-        },
-        "location": "class-2"
-      },
-      "type": "feat",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.pf2e.feats-srd.Item.4MUbwilvb9dI0X59"
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wxAVMXAgFFmeduLl": 3
-      },
-      "_stats": {
-        "systemId": "pf2e",
-        "systemVersion": "5.16.0",
-        "coreVersion": "12.328",
-        "createdTime": 1709404315396,
-        "modifiedTime": 1716637720868,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
-        "compendiumSource": "Compendium.pf2e.feats-srd.Item.4MUbwilvb9dI0X59",
-        "duplicateSource": null
-      }
-    },
-    {
-      "_id": "TwCkp7Rzvn9oG7HB",
-      "img": "icons/sundries/books/book-red-exclamation.webp",
-      "name": "Snare Crafting",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p>You can use the Craft activity to create snares. When you select this feat, you add the formulas for four common snares to your formula book.</p>"
-        },
-        "rules": [],
-        "slug": "snare-crafting",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": {
-            "schema": 0.931,
-            "foundry": "12.331",
-            "system": "6.8.0"
-          }
-        },
-        "traits": {
-          "otherTags": [],
-          "value": [
-            "general",
-            "skill"
-          ],
-          "rarity": "common"
-        },
-        "publication": {
-          "title": "Pathfinder Core Rulebook",
-          "authors": "",
-          "license": "OGL",
-          "remaster": false
-        },
-        "level": {
-          "value": 1
-        },
-        "category": "skill",
-        "onlyLevel1": false,
-        "maxTakable": 1,
-        "actionType": {
-          "value": "passive"
-        },
-        "actions": {
-          "value": null
-        },
-        "prerequisites": {
-          "value": [
-            {
-              "value": "trained in Crafting"
-            }
-          ]
-        },
-        "location": "skill-3"
-      },
-      "type": "feat",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.pf2e.feats-srd.Item.DMetdzt1VJL2Y62i"
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wxAVMXAgFFmeduLl": 3
-      },
-      "_stats": {
-        "systemId": "pf2e",
-        "systemVersion": "5.13.6",
-        "coreVersion": "12.328",
-        "createdTime": 1709404667567,
-        "modifiedTime": 1709404667567,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
-        "compendiumSource": "Compendium.pf2e.feats-srd.Item.DMetdzt1VJL2Y62i",
-        "duplicateSource": null
-      }
-    },
-    {
-      "img": "systems/pf2e/icons/default-icons/alternatives/ancestries/human.svg",
-      "name": "Human",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p><em>As unpredictable and varied as any of Golarion's peoples, humans have exceptional drive and the capacity to endure and expand. Though many civilizations thrived before humanity rose to prominence, humans have built some of the greatest and the most terrible societies throughout the course of history, and today they are the most populous people in the realms around the Inner Sea.</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.45SK8rdbbxvEHfMn.JournalEntryPage.7pU8yM7yPMw92SY3]{Human}</em></p>"
-        },
-        "rules": [],
-        "slug": "human",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": {
-            "schema": 0.931,
-            "foundry": "12.331",
-            "system": "6.8.0"
-          }
-        },
-        "traits": {
-          "otherTags": [],
-          "value": [
-            "human",
-            "humanoid"
-          ],
-          "rarity": "common"
-        },
-        "publication": {
-          "title": "Pathfinder Core Rulebook",
-          "authors": "",
-          "license": "OGL",
-          "remaster": false
-        },
-        "hp": 8,
-        "size": "med",
-        "reach": 5,
-        "speed": 25,
-        "boosts": {
-          "0": {
-            "value": [
-              "cha",
-              "con",
-              "dex",
-              "int",
-              "str",
-              "wis"
-            ],
-            "selected": "dex"
-          },
-          "1": {
-            "value": [
-              "str",
-              "dex",
-              "con",
-              "int",
-              "wis",
-              "cha"
-            ],
-            "selected": "int"
-          },
-          "2": {
-            "value": []
-          }
-        },
-        "flaws": {
-          "0": {
-            "value": []
-          }
-        },
-        "languages": {
-          "value": [
-            "common"
-          ],
-          "custom": ""
-        },
-        "additionalLanguages": {
-          "count": 1,
-          "value": [],
-          "custom": ""
-        },
-        "items": {},
-        "vision": "normal"
-      },
-      "type": "ancestry",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.pf2e.ancestries.Item.IiG7DgeLWYrSNXuX"
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wxAVMXAgFFmeduLl": 3
-      },
-      "_stats": {
-        "systemId": "pf2e",
-        "systemVersion": "5.13.6",
-        "coreVersion": "12.328",
-        "createdTime": 1709412117929,
-        "modifiedTime": 1709412805185,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
-        "compendiumSource": "Compendium.pf2e.ancestries.Item.IiG7DgeLWYrSNXuX",
-        "duplicateSource": null
-      },
-      "_id": "r0qBiYBkdlocAAlw"
-    },
-    {
-      "img": "systems/pf2e/icons/features/ancestry/versatile-heritage.webp",
-      "name": "Versatile Human",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p>Humanity's versatility and ambition have fueled its ascendance to be the most common ancestry in most nations throughout the world. Select a general feat of your choice for which you meet the prerequisites (as with your ancestry feat, you can select this general feat at any point during character creation).</p>"
-        },
-        "rules": [
-          {
-            "adjustName": false,
-            "choices": {
-              "filter": [
-                "item:level:1",
-                "item:trait:general"
-              ],
-              "itemType": "feat"
-            },
-            "flag": "versatileHeritage",
-            "key": "ChoiceSet",
-            "prompt": "PF2E.SpecificRule.GeneralTraining.Prompt",
-            "selection": "Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8"
-          },
-          {
-            "key": "GrantItem",
-            "uuid": "{item|flags.pf2e.rulesSelections.versatileHeritage}",
-            "flag": "shieldBlock"
-          }
-        ],
-        "slug": "versatile-human",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": {
-            "schema": 0.931,
-            "foundry": "12.331",
-            "system": "6.8.0"
-          }
-        },
-        "traits": {
-          "otherTags": [],
-          "value": [],
-          "rarity": "common"
-        },
-        "publication": {
-          "title": "Pathfinder Player Core",
-          "authors": "",
-          "license": "ORC",
-          "remaster": true
-        },
-        "ancestry": {
-          "name": "Human",
-          "slug": "human",
-          "uuid": "Compendium.pf2e.ancestries.Item.IiG7DgeLWYrSNXuX"
-        }
-      },
-      "type": "heritage",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.pf2e.heritages.Item.hFBwsVcSnNCJoimo"
-        },
-        "pf2e": {
-          "itemGrants": {
-            "shieldBlock": {
-              "id": "easUSalgG9hVwCfG",
-              "onDelete": "detach"
-            }
-          }
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wxAVMXAgFFmeduLl": 3
-      },
-      "_stats": {
-        "systemId": "pf2e",
-        "systemVersion": "5.13.6",
-        "coreVersion": "12.328",
-        "createdTime": 1709412129334,
-        "modifiedTime": 1709412129334,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
-        "compendiumSource": "Compendium.pf2e.heritages.Item.hFBwsVcSnNCJoimo",
-        "duplicateSource": null
-      },
-      "_id": "CQMLqgj5WtyDUUf6"
-    },
-    {
-      "img": "icons/sundries/books/book-red-exclamation.webp",
-      "name": "Shield Block",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p><strong>Trigger</strong> While you have your shield raised, you would take physical damage (bludgeoning, piercing, or slashing) from an attack.</p>\n<hr />\n<p>You snap your shield in place to ward off a blow. Your shield prevents you from taking an amount of damage up to the shield's Hardness. You and the shield each take any remaining damage, possibly breaking or destroying the shield.</p>"
-        },
-        "rules": [],
-        "slug": "shield-block",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": {
-            "schema": 0.931,
-            "foundry": "12.331",
-            "system": "6.8.0"
-          }
-        },
-        "traits": {
-          "otherTags": [],
-          "value": [
-            "general"
-          ],
-          "rarity": "common"
-        },
-        "publication": {
-          "title": "Pathfinder Player Core",
-          "authors": "",
-          "license": "ORC",
-          "remaster": true
-        },
-        "level": {
-          "value": 1
-        },
-        "category": "general",
-        "onlyLevel1": false,
-        "maxTakable": 1,
-        "actionType": {
-          "value": "reaction"
-        },
-        "actions": {
-          "value": null
-        },
-        "prerequisites": {
-          "value": []
-        },
-        "location": null
-      },
-      "type": "feat",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8"
-        },
-        "pf2e": {
-          "grantedBy": {
-            "id": "CQMLqgj5WtyDUUf6",
-            "onDelete": "cascade"
-          }
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wxAVMXAgFFmeduLl": 3
-      },
-      "_stats": {
-        "systemId": "pf2e",
-        "systemVersion": "5.13.6",
-        "coreVersion": "12.328",
-        "createdTime": 1709412129334,
-        "modifiedTime": 1709412129334,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
-        "compendiumSource": "Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8",
-        "duplicateSource": null
-      },
-      "_id": "easUSalgG9hVwCfG"
-    },
-    {
-      "_id": "SkAYUnbXw7p5MqWm",
-      "img": "icons/sundries/books/book-red-exclamation.webp",
-      "name": "Gloomseer",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p>Gloom holds few terrors for you, and the pall of darkness over Nidal has made you comfortable in dim light. You gain low-light vision.</p>"
-        },
-        "rules": [],
-        "slug": "gloomseer",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": {
-            "schema": 0.931,
-            "foundry": "12.331",
-            "system": "6.8.0"
-          }
-        },
-        "traits": {
-          "otherTags": [],
-          "value": [
-            "human"
-          ],
-          "rarity": "common"
-        },
-        "publication": {
-          "title": "Pathfinder Lost Omens: Character Guide",
-          "authors": "",
-          "license": "OGL",
-          "remaster": false
-        },
-        "level": {
-          "value": 1
-        },
-        "category": "ancestry",
-        "onlyLevel1": false,
-        "maxTakable": 1,
-        "actionType": {
-          "value": "passive"
-        },
-        "actions": {
-          "value": null
-        },
-        "prerequisites": {
-          "value": [
-            {
-              "value": "Nidalese ethnicity"
-            }
-          ]
-        },
-        "location": "ancestry-1",
-        "subfeatures": {
-          "senses": {
-            "low-light-vision": {
-              "acuity": "imprecise",
-              "range": 30
-            }
-          }
-        }
-      },
-      "type": "feat",
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.pf2e.feats-srd.Item.sL2GmYve5NXJ0wc1"
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wxAVMXAgFFmeduLl": 3
-      },
-      "_stats": {
-        "systemId": "pf2e",
-        "systemVersion": "5.13.6",
-        "coreVersion": "12.328",
-        "createdTime": 1709412201178,
-        "modifiedTime": 1709412201178,
-        "lastModifiedBy": "wxAVMXAgFFmeduLl",
-        "compendiumSource": "Compendium.pf2e.feats-srd.Item.sL2GmYve5NXJ0wc1",
         "duplicateSource": null
       }
     },
@@ -10942,204 +10268,15 @@
       "_id": "IQh9oyFJMb1bkUUI"
     },
     {
-      "img": "systems/pf2e/icons/conditions/persistent-damage.webp",
-      "name": "Продолжительный урон",
+      "img": "systems/pf2e/icons/default-icons/alternatives/ancestries/halfling.svg",
+      "name": "Halfling",
       "system": {
         "description": {
           "gm": "",
-          "value": "<p>Продолжительный урон идет от таких эффектов как кислота, пламя и других. Он описывается как «X продолжительного урона [тип]», где «X» количество урона, а «[тип]» это тип урона. Вместо получения продолжительного урона мгновенного, вы получаете его в конце каждого вашего хода, бросая кости урона заново, пока у вас не пропадет состояние. После того как вы получили продолжительный урон, сделайте чистую проверку @Check[flat|dc:15]{КС 15}, чтобы узнать оправились ли вы от продолжительного урона. Если проверка прошла успешно, состояние заканчивается.</p>"
+          "value": "<p><em>Claiming no place as their own, halflings control few settlements larger than villages. Instead, they frequently live among humans within the walls of larger cities, carving out small communities alongside taller folk. Many halflings lead perfectly fulfilling lives in the shadows of their larger neighbors, while others prefer a nomadic existence, traveling the world and taking advantage of opportunities and adventures as they come.</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.45SK8rdbbxvEHfMn.JournalEntryPage.voI7uPS9vsG74JIn]{Halfling}</em></p>"
         },
         "rules": [],
-        "slug": "persistent-damage",
-        "_migration": {
-          "version": 0.935,
-          "lastMigration": null,
-          "previous": null
-        },
-        "traits": {
-          "otherTags": [],
-          "value": []
-        },
-        "publication": {
-          "title": "Pathfinder Player Core",
-          "authors": "",
-          "license": "ORC",
-          "remaster": true
-        },
-        "group": null,
-        "duration": {
-          "value": -1,
-          "unit": "unlimited",
-          "expiry": null,
-          "perpetual": false,
-          "text": ""
-        },
-        "value": {
-          "isValued": false,
-          "value": null
-        },
-        "references": {
-          "children": [],
-          "overrides": [],
-          "overriddenBy": [],
-          "immunityFrom": []
-        },
-        "overrides": [],
-        "active": false,
-        "removable": false,
-        "persistent": {
-          "formula": "1d6",
-          "damageType": "bleed",
-          "dc": 15,
-          "criticalHit": false
-        }
-      },
-      "type": "condition",
-      "_stats": {
-        "compendiumSource": "Compendium.pf2e.conditionitems.Item.lDVqvLKA6eF3Df60",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "pf2e",
-        "systemVersion": "6.8.0",
-        "createdTime": 1735694298843,
-        "modifiedTime": 1735694298843,
-        "lastModifiedBy": "F4sJs3l1IWGGEBjf"
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "F4sJs3l1IWGGEBjf": 3
-      },
-      "flags": {},
-      "_id": "5sQdlllBZjjYDgBx"
-    },
-    {
-      "_id": "JBgI4mS7j2uwsiFI",
-      "img": "systems/pf2e/icons/features/classes/devise-a-stratagem.webp",
-      "name": "Effect: Devise a Stratagem",
-      "system": {
-        "description": {
-          "gm": "",
-          "value": "<p>Granted by @UUID[Compendium.pf2e.actionspf2e.Item.m0f2B7G9eaaTmhFL]{Devise a Stratagem}</p>\n<p>You assess a foe's weaknesses in combat and use them to formulate a plan of attack against your enemy. Choose a creature you can see, and roll a d20. If you Strike the chosen creature later this round, you must use the result of the roll you made to Devise a Stratagem for your Strike's attack roll instead of rolling. You make this substitution only for the first Strike you make against the creature this round, not any subsequent attacks.</p>\n<p>When you make this substitution, you can also add your Intelligence modifier to your attack roll instead of your Strength or Dexterity modifier, provided your Strike uses an agile or finesse melee weapon, an agile or finesse unarmed attack, a ranged weapon (which must be agile or finesse if it's a melee weapon with the thrown trait) or @UUID[Compendium.pf2e.equipment-srd.Item.TLQErnOpM9Luy7rL]{Sap}.</p>"
-        },
-        "rules": [
-          {
-            "key": "TokenMark",
-            "slug": "devise-a-stratagem",
-            "uuid": "Scene.N2JpIGoyUkTXE48T.Token.6Q40jz4n2SyZw92n"
-          },
-          {
-            "alwaysActive": true,
-            "key": "RollOption",
-            "option": "devise-a-stratagem",
-            "suboptions": [
-              {
-                "label": "PF2E.SpecificRule.Investigator.DeviseAStratagem.Attack",
-                "value": "attack"
-              },
-              {
-                "label": "PF2E.SpecificRule.Investigator.DeviseAStratagem.Skill",
-                "value": "skill"
-              },
-              {
-                "label": "PF2E.SpecificRule.Investigator.DeviseAStratagem.Defensive",
-                "predicate": [
-                  "feat:defensive-stratagem"
-                ],
-                "value": "defensive"
-              }
-            ],
-            "toggleable": true
-          },
-          {
-            "key": "SubstituteRoll",
-            "predicate": [
-              "devise-a-stratagem:attack",
-              "target:mark:devise-a-stratagem"
-            ],
-            "removeAfterRoll": "if-enabled",
-            "required": true,
-            "selector": "strike-attack-roll",
-            "slug": "devise-a-stratagem",
-            "value": "@item.badge.value"
-          },
-          {
-            "key": "SubstituteRoll",
-            "predicate": [
-              "devise-a-stratagem:attack",
-              "feat:athletic-strategist",
-              {
-                "or": [
-                  "devise-a-stratagem",
-                  "target:mark:devise-a-stratagem"
-                ]
-              },
-              {
-                "or": [
-                  "action:disarm",
-                  "action:grapple",
-                  "action:shove",
-                  "action:trip"
-                ]
-              }
-            ],
-            "removeAfterRoll": "if-enabled",
-            "required": true,
-            "selector": "athletics",
-            "slug": "devise-a-strategem",
-            "value": "@item.badge.value"
-          },
-          {
-            "key": "FlatModifier",
-            "label": "PF2E.SpecificRule.Investigator.DeviseAStratagem.Skill",
-            "predicate": [
-              "devise-a-stratagem:skill"
-            ],
-            "removeAfterRoll": "if-enabled",
-            "selector": [
-              "perception",
-              "cha-skill-check",
-              "int-skill-check",
-              "wis-skill-check"
-            ],
-            "type": "circumstance",
-            "value": 1
-          },
-          {
-            "key": "AdjustModifier",
-            "mode": "add",
-            "predicate": [
-              "devise-a-stratagem:skill"
-            ],
-            "selectors": [
-              "perception",
-              "cha-skill-check",
-              "int-skill-check",
-              "wis-skill-check"
-            ],
-            "slug": "pursue-a-lead",
-            "value": 1
-          },
-          {
-            "key": "FlatModifier",
-            "label": "PF2E.SpecificRule.Investigator.DeviseAStratagem.Defensive",
-            "predicate": [
-              "devise-a-stratagem:defensive",
-              "origin:mark:devise-a-stratagem"
-            ],
-            "selector": [
-              "ac",
-              "fortitude",
-              "reflex",
-              "will"
-            ],
-            "type": "circumstance",
-            "value": 1
-          }
-        ],
-        "slug": "effect-devise-a-stratagem",
+        "slug": "halfling",
         "_migration": {
           "version": 0.935,
           "lastMigration": null,
@@ -11148,8 +10285,432 @@
         "traits": {
           "otherTags": [],
           "value": [
-            "fortune"
-          ]
+            "halfling",
+            "humanoid"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Pathfinder Player Core",
+          "authors": "",
+          "license": "ORC",
+          "remaster": true
+        },
+        "hp": 6,
+        "size": "sm",
+        "reach": 5,
+        "speed": 25,
+        "boosts": {
+          "0": {
+            "value": [
+              "dex"
+            ]
+          },
+          "1": {
+            "value": [
+              "wis"
+            ]
+          },
+          "2": {
+            "value": [
+              "str",
+              "dex",
+              "con",
+              "int",
+              "wis",
+              "cha"
+            ],
+            "selected": "int"
+          }
+        },
+        "flaws": {
+          "0": {
+            "value": [
+              "str"
+            ]
+          }
+        },
+        "languages": {
+          "value": [
+            "common",
+            "halfling"
+          ],
+          "custom": ""
+        },
+        "additionalLanguages": {
+          "count": 0,
+          "value": [
+            "dwarven",
+            "elven",
+            "gnomish",
+            "goblin"
+          ],
+          "custom": ""
+        },
+        "items": {
+          "3084v": {
+            "img": "systems/pf2e/icons/features/ancestry/keen-eyes.webp",
+            "level": "0",
+            "name": "Keen Eyes",
+            "uuid": "Compendium.pf2e.ancestryfeatures.Item.y1EmCv2cEb5hXBwx"
+          }
+        },
+        "vision": "normal"
+      },
+      "type": "ancestry",
+      "_stats": {
+        "compendiumSource": "Compendium.pf2e.ancestries.Item.GgZAHbrjnzWOZy2v",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "pf2e",
+        "systemVersion": "6.8.0",
+        "createdTime": 1736080941761,
+        "modifiedTime": 1736081759427,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Ss0fsOHvNiqAOS8h": 3
+      },
+      "flags": {},
+      "_id": "vmq1V2wMJmRHl9QS"
+    },
+    {
+      "img": "systems/pf2e/icons/features/ancestry/keen-eyes.webp",
+      "name": "Keen Eyes",
+      "system": {
+        "description": {
+          "gm": "",
+          "value": "<p>Your eyes are sharp, allowing you to make out small details about @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} or even @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible} creatures that others might miss. You gain a +2 circumstance bonus when using the @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{Seek} action to find @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden} or @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{Undetected} creatures within 30 feet of you. When you target an opponent that is concealed from you or hidden from you, reduce the DC of the flat check to 3 for a concealed target or 9 for a hidden one.</p>"
+        },
+        "rules": [
+          {
+            "key": "FlatModifier",
+            "predicate": [
+              "action:seek",
+              {
+                "lte": [
+                  "target:distance",
+                  30
+                ]
+              },
+              {
+                "or": [
+                  "target:hidden",
+                  "target:undetected"
+                ]
+              }
+            ],
+            "selector": "perception",
+            "type": "circumstance",
+            "value": 2
+          }
+        ],
+        "slug": "keen-eyes",
+        "_migration": {
+          "version": 0.935,
+          "lastMigration": null,
+          "previous": null
+        },
+        "traits": {
+          "otherTags": [],
+          "value": [
+            "halfling"
+          ],
+          "rarity": "common",
+          "selected": {
+            "halfling": "Halfling"
+          }
+        },
+        "publication": {
+          "title": "Pathfinder Player Core",
+          "authors": "",
+          "license": "ORC",
+          "remaster": true
+        },
+        "level": {
+          "value": 0
+        },
+        "category": "ancestryfeature",
+        "onlyLevel1": false,
+        "maxTakable": 1,
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "location": "vmq1V2wMJmRHl9QS"
+      },
+      "type": "feat",
+      "_stats": {
+        "compendiumSource": "Compendium.pf2e.ancestryfeatures.Item.y1EmCv2cEb5hXBwx",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "pf2e",
+        "systemVersion": "6.8.0",
+        "createdTime": 1736080941761,
+        "modifiedTime": 1736080941761,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Ss0fsOHvNiqAOS8h": 3
+      },
+      "flags": {},
+      "_id": "kps7BjYthcoNncfQ"
+    },
+    {
+      "folder": "08Fzay10gP83ZWp2",
+      "img": "systems/pf2e/icons/features/ancestry/hillock-halfling.webp",
+      "name": "Hillock Halfling",
+      "system": {
+        "description": {
+          "gm": "",
+          "value": "<p>Accustomed to a calm life in the hills, your people find rest and relaxation especially replenishing, particularly when indulging in creature comforts. When you regain Hit Points overnight, add your level to the Hit Points regained. When anyone uses the Medicine skill to @UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]{Treat your Wounds}, you can eat a snack to add your level to the Hit Points you regain from their treatment.</p>"
+        },
+        "rules": [
+          {
+            "key": "ActiveEffectLike",
+            "mode": "add",
+            "path": "system.attributes.hp.recoveryAddend",
+            "value": "@actor.level"
+          },
+          {
+            "key": "FlatModifier",
+            "predicate": [
+              "action:treat-wounds"
+            ],
+            "selector": "healing-received",
+            "value": "@actor.level"
+          }
+        ],
+        "slug": "hillock-halfling",
+        "_migration": {
+          "version": 0.935,
+          "lastMigration": null,
+          "previous": null
+        },
+        "traits": {
+          "otherTags": [],
+          "value": [],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Pathfinder Player Core",
+          "authors": "",
+          "license": "ORC",
+          "remaster": true
+        },
+        "ancestry": {
+          "name": "Halfling",
+          "slug": "halfling",
+          "uuid": "Compendium.pf2e.ancestries.Item.GgZAHbrjnzWOZy2v"
+        }
+      },
+      "type": "heritage",
+      "_stats": {
+        "compendiumSource": "Compendium.pf2e.heritages.Item.Mj7uHxxVkRUlOFwJ",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "pf2e",
+        "systemVersion": "6.8.0",
+        "createdTime": 1736081570868,
+        "modifiedTime": 1736081570868,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Ss0fsOHvNiqAOS8h": 3
+      },
+      "flags": {},
+      "_id": "e5kxDCb5PfMOnZ62"
+    },
+    {
+      "_id": "pQWTfZWxnyXvGInK",
+      "img": "icons/sundries/books/book-red-exclamation.webp",
+      "name": "Halfling Weapon Familiarity",
+      "system": {
+        "description": {
+          "gm": "",
+          "value": "<p>You favor traditional halfling weapons, so you've learned how to use them more effectively. You gain access to all uncommon weapons with the halfling trait. You have familiarity with weapons with the halfling trait plus the sling and shortsword—for the purposes of proficiency, you treat any of these that are martial weapons as simple weapons and any that are advanced weapons as martial weapons.</p>\n<p>At 5th level, whenever you get a critical hit with one of these weapons, you get its critical specialization effect.</p>"
+        },
+        "rules": [
+          {
+            "definition": [
+              {
+                "or": [
+                  {
+                    "and": [
+                      "item:trait:halfling",
+                      "item:category:martial"
+                    ]
+                  },
+                  "item:base:shortsword"
+                ]
+              }
+            ],
+            "key": "MartialProficiency",
+            "label": "PF2E.SpecificRule.MartialProficiency.MartialHalflingWeapons",
+            "sameAs": "simple",
+            "slug": "martial-halfling-weapons"
+          },
+          {
+            "definition": [
+              "item:trait:halfling",
+              "item:category:advanced"
+            ],
+            "key": "MartialProficiency",
+            "label": "PF2E.SpecificRule.MartialProficiency.AdvancedHalflingWeapons",
+            "sameAs": "martial",
+            "slug": "advanced-halfling-weapons"
+          },
+          {
+            "key": "CriticalSpecialization",
+            "predicate": [
+              {
+                "gte": [
+                  "self:level",
+                  5
+                ]
+              },
+              {
+                "or": [
+                  "item:trait:halfling",
+                  "item:base:sling",
+                  "item:base:shortsword"
+                ]
+              }
+            ]
+          }
+        ],
+        "slug": "halfling-weapon-familiarity",
+        "_migration": {
+          "version": 0.935,
+          "lastMigration": null,
+          "previous": null
+        },
+        "traits": {
+          "otherTags": [],
+          "value": [
+            "halfling"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Pathfinder Player Core",
+          "authors": "",
+          "license": "ORC",
+          "remaster": true
+        },
+        "level": {
+          "value": 1,
+          "taken": 1
+        },
+        "category": "ancestry",
+        "onlyLevel1": false,
+        "maxTakable": 1,
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "location": "ancestry-1"
+      },
+      "type": "feat",
+      "_stats": {
+        "compendiumSource": "Compendium.pf2e.feats-srd.Item.2ebcYbg68pCZfAFQ",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "pf2e",
+        "systemVersion": "6.8.0",
+        "createdTime": 1736081897717,
+        "modifiedTime": 1736081897717,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Ss0fsOHvNiqAOS8h": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "RwdE5xXSBmTag4pX",
+      "img": "icons/sundries/books/book-red-exclamation.webp",
+      "name": "Snarecrafter Dedication",
+      "system": {
+        "description": {
+          "gm": "",
+          "value": "<p>You have studied the art of crafting snares and laying traps, and few have shown more talent in these arts than you. You gain the Snare Crafting feat. When you set a snare, the DC of any saving throw it requires uses the higher of your class DC or the snare's DC. If a snare normally takes 1 minute to Craft, you can Craft it with 3 Interact actions instead.</p>\n<p>Each day during your daily preparations, you can prepare four snares from your formula book for quick deployment (increasing to six snares if you're a master in Crafting and eight if you're legendary). Snares prepared in this way don't cost you any resources to Craft.</p>\n<p>When you increase your proficiency rank in Crafting to expert, master, or legendary, add three additional snare formulas to your formula book. The snares must be of your level or lower.</p><hr /><p><strong>Special</strong> Rangers can adapt snare crafting techniques to create snares from natural materials. If you are a ranger, you can use Survival instead of Crafting for all prerequisites and functions of feats from this archetype. (This includes using Survival to Craft a snare.)</p>\n<p>@UUID[Compendium.pf2e.journals.JournalEntry.vx5FGEG34AxI2dow.JournalEntryPage.G9Fzy5ZK4KtAmcFb]{Snarecrafter}</p>"
+        },
+        "rules": [
+          {
+            "craftableItems": [
+              "item:trait:snare"
+            ],
+            "isDailyPrep": false,
+            "isPrepared": true,
+            "key": "CraftingAbility",
+            "label": "PF2E.SpecificRule.DedicationCraftingEntry.Snarecrafter",
+            "slug": "snare-crafting"
+          },
+          {
+            "key": "ActiveEffectLike",
+            "mode": "add",
+            "path": "system.crafting.entries.snareCrafting.maxSlots",
+            "phase": "beforeDerived",
+            "value": {
+              "brackets": [
+                {
+                  "end": 2,
+                  "start": 1,
+                  "value": 4
+                },
+                {
+                  "end": 3,
+                  "start": 3,
+                  "value": 6
+                },
+                {
+                  "start": 4,
+                  "value": 8
+                }
+              ],
+              "field": "actor|system.skills.crafting.rank"
+            }
+          }
+        ],
+        "slug": "snarecrafter-dedication",
+        "_migration": {
+          "version": 0.935,
+          "lastMigration": null,
+          "previous": null
+        },
+        "traits": {
+          "otherTags": [],
+          "value": [
+            "archetype",
+            "dedication"
+          ],
+          "rarity": "common"
         },
         "publication": {
           "title": "Pathfinder Player Core 2",
@@ -11158,95 +10719,198 @@
           "remaster": true
         },
         "level": {
-          "value": 1
+          "value": 2,
+          "taken": 2
         },
-        "duration": {
-          "value": 0,
-          "unit": "rounds",
-          "expiry": "round-end",
-          "sustained": false
+        "category": "class",
+        "onlyLevel1": false,
+        "maxTakable": 1,
+        "actionType": {
+          "value": "passive"
         },
-        "start": {
-          "value": -85188892957,
-          "initiative": 30
+        "actions": {
+          "value": null
         },
-        "tokenIcon": {
-          "show": true
+        "prerequisites": {
+          "value": [
+            {
+              "value": "trained in Crafting"
+            },
+            {
+              "value": "Snare Crafting"
+            }
+          ]
         },
-        "badge": {
-          "type": "value",
-          "value": 4,
-          "reevaluate": null
-        },
-        "context": {
-          "origin": {
-            "actor": "Actor.6p9TJ4E8i6yg2xd5",
-            "token": "Scene.N2JpIGoyUkTXE48T.Token.a3mUfY5KByiR2FKb",
-            "item": "Actor.6p9TJ4E8i6yg2xd5.Item.jZhe7v98NAk1xXSU",
-            "spellcasting": null,
-            "rollOptions": [
-              "origin:type:character",
-              "origin:signature:d4297061-72f9-58a4-a548-ba0b47dfab27",
-              "origin:participant:own-turn",
-              "origin:participant:initiative:roll:30",
-              "origin:participant:initiative:rank:1",
-              "origin:creature",
-              "origin:level:4",
-              "origin:deity:slug:irori",
-              "origin:shield:equipped",
-              "origin:ancestry:human",
-              "origin:trait:human",
-              "origin:trait:humanoid",
-              "origin:heritage:versatile-human",
-              "origin:condition:persistent-damage",
-              "origin:condition:persistent-damage:bleed",
-              "origin:mode:living",
-              "origin:armored",
-              "origin:size:2",
-              "origin:size:medium",
-              "origin:item:type:action",
-              "origin:item:id:jZhe7v98NAk1xXSU",
-              "origin:item:devise-a-stratagem",
-              "origin:item:slug:devise-a-stratagem",
-              "origin:item:granter:type:feature",
-              "origin:item:granter:id:O44PbcMMpPzFlMyH",
-              "origin:item:granter:devise-a-stratagem",
-              "origin:item:granter:slug:devise-a-stratagem",
-              "origin:item:granter:trait:investigator",
-              "origin:item:granter:level:1",
-              "origin:item:granter:category:classfeature",
-              "origin:item:trait:concentrate",
-              "origin:item:trait:fortune",
-              "origin:item:trait:investigator",
-              "origin:item:frequency:limited",
-              "origin:item:action:type:action",
-              "origin:item:action:cost:1"
-            ]
-          },
-          "target": {
-            "actor": "Actor.6p9TJ4E8i6yg2xd5",
-            "token": "Scene.N2JpIGoyUkTXE48T.Token.a3mUfY5KByiR2FKb"
-          },
-          "roll": null
-        }
+        "location": "class-2"
       },
-      "type": "effect",
+      "type": "feat",
       "_stats": {
-        "compendiumSource": "Compendium.pf2e.feat-effects.Item.XQpTyjXFYYNexyOk",
+        "compendiumSource": "Compendium.pf2e.feats-srd.Item.4MUbwilvb9dI0X59",
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "pf2e",
         "systemVersion": "6.8.0",
-        "createdTime": 1735694517930,
-        "modifiedTime": 1735694517930,
-        "lastModifiedBy": "z2Ud1xTgMOEjW73c"
+        "createdTime": 1736083455677,
+        "modifiedTime": 1736083455677,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
       },
       "effects": [],
       "folder": null,
       "sort": 0,
       "ownership": {
         "default": 0,
-        "z2Ud1xTgMOEjW73c": 3
+        "Ss0fsOHvNiqAOS8h": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "vKpvhQOenXUPTiTW",
+      "img": "icons/sundries/books/book-red-exclamation.webp",
+      "name": "Robust Recovery",
+      "system": {
+        "description": {
+          "gm": "",
+          "value": "<p>You learned folk medicine to help recover from diseases and poison, and using it diligently has made you especially resilient. When you Treat a Disease or a Poison, or someone else uses one of these actions on you, increase the circumstance bonus granted on a success to +4, and if the result of the patient's saving throw is a success, the patient gets a critical success.</p>"
+        },
+        "rules": [],
+        "slug": "robust-recovery",
+        "_migration": {
+          "version": 0.935,
+          "lastMigration": null,
+          "previous": null
+        },
+        "traits": {
+          "otherTags": [],
+          "value": [
+            "general",
+            "skill"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Pathfinder Player Core",
+          "authors": "",
+          "license": "ORC",
+          "remaster": true
+        },
+        "level": {
+          "value": 2,
+          "taken": 3
+        },
+        "category": "skill",
+        "onlyLevel1": false,
+        "maxTakable": 1,
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": [
+            {
+              "value": "expert in Medicine"
+            }
+          ]
+        },
+        "location": "skill-3"
+      },
+      "type": "feat",
+      "_stats": {
+        "compendiumSource": "Compendium.pf2e.feats-srd.Item.3ZerjLH8ls3JT6cD",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "pf2e",
+        "systemVersion": "6.8.0",
+        "createdTime": 1736083921749,
+        "modifiedTime": 1736083921749,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Ss0fsOHvNiqAOS8h": 3
+      },
+      "flags": {}
+    },
+    {
+      "_id": "6NUMZI2JHJ2DVW3p",
+      "img": "icons/sundries/books/book-red-exclamation.webp",
+      "name": "Toughness",
+      "system": {
+        "description": {
+          "gm": "",
+          "value": "<p>Your body can withstand more punishment than most before succumbing. Increase your maximum Hit Points by your level. You reduce the DC of recovery checks by 1.</p>"
+        },
+        "rules": [
+          {
+            "key": "FlatModifier",
+            "selector": "hp",
+            "value": "@actor.level"
+          },
+          {
+            "key": "ActiveEffectLike",
+            "mode": "subtract",
+            "path": "system.attributes.dying.recoveryDC",
+            "value": 1
+          }
+        ],
+        "slug": "toughness",
+        "_migration": {
+          "version": 0.935,
+          "lastMigration": null,
+          "previous": null
+        },
+        "traits": {
+          "otherTags": [],
+          "value": [
+            "general"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Pathfinder Player Core",
+          "authors": "",
+          "license": "ORC",
+          "remaster": true
+        },
+        "level": {
+          "value": 1,
+          "taken": 3
+        },
+        "category": "general",
+        "onlyLevel1": false,
+        "maxTakable": 1,
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "location": "general-3"
+      },
+      "type": "feat",
+      "_stats": {
+        "compendiumSource": "Compendium.pf2e.feats-srd.Item.AmP0qu7c5dlBSath",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "pf2e",
+        "systemVersion": "6.8.0",
+        "createdTime": 1736083933964,
+        "modifiedTime": 1736083933964,
+        "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Ss0fsOHvNiqAOS8h": 3
       },
       "flags": {}
     }
@@ -11330,7 +10994,7 @@
     "systemVersion": "6.8.0",
     "coreVersion": "12.331",
     "createdTime": 1696445651649,
-    "modifiedTime": 1735861912751,
-    "lastModifiedBy": "wxAVMXAgFFmeduLl"
+    "modifiedTime": 1736083965043,
+    "lastModifiedBy": "Ss0fsOHvNiqAOS8h"
   }
 }
