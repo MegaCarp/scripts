@@ -10,7 +10,8 @@ F10::
     Sleep 200
     Send "{Tab}" 
     Sleep 200
-    SendEvent "^v"
+    ; SendEvent "^v"
+    Send A_Clipboard
     Sleep 200
     Send "{Enter}"
 }
