@@ -3,6 +3,6 @@
 
 ; SplitPath(A_MyDocuments,, &outDir) ; C:\Users\Денис
 
-screenshotScreen(screenshotUtility := "C:\Program Files (x86)\MiniCap\MiniCap.exe", screenshotParameters := " -capturescreen -exit -save ", screenshotToFile := "`"C:\Users\Денис\Downloads\image.png`"") {
+screenshotScreen(screenshotToFile := "`"C:\Users\Денис\Downloads\image.png`"", screenshotUtility := "C:\Program Files (x86)\MiniCap\MiniCap.exe", screenshotParameters := " -capturescreen -exit -save ") {
     Run screenshotUtility screenshotParameters screenshotToFile
 }

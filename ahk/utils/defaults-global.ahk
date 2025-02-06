@@ -1,10 +1,13 @@
 #Requires AutoHotkey v2.0
-#Include debug-notification.ahk
 #Include base-sleep-interval.ahk
 #Include screenshotScreen.ahk
+
+#Include notification.ahk
+#Include errorNotification.ahk
+#Include ticksTimer.ahk
 
 logfile := A_MyDocuments "\logs\ahk\" FormatTime(,"yyyy-MM-dd") ".txt"
 
 screenshotUtilityPath := "C:\Program Files (x86)\MiniCap\MiniCap.exe"
 
-debug := ''
+; debug := 1
