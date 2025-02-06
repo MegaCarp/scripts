@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-#Include utils\defaults.ahk
+#Include utils\defaults-gw2.ahk
 
 #Include ..\lib\lib_base64ToBinToHex.ahk
 

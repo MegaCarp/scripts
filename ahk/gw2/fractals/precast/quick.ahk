@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 #HotIf WinActive("ahk_exe Gw2-64.exe") or WinActive("ahk_exe Blish\ HUD.exe")
-#Include ..\..\utils\defaults.ahk
+#Include ..\..\utils\defaults-gw2.ahk
 
 ;; manual swap to the precast utilities
 ; Click X := 1278, Y := 1005 ; swap elite

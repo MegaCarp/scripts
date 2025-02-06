@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 #HotIf WinActive("ahk_exe Gw2-64.exe") or WinActive("ahk_exe Blish\ HUD.exe")
-#Include ..\..\utils\defaults.ahk
+#Include ..\..\utils\defaults-gw2.ahk
 
 ;;;;
 Click X := 630, Y := 1000 ; open gear
