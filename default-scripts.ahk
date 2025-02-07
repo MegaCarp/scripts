@@ -6,6 +6,6 @@ Run "ahk\gw2-kbds-and-scripts.ahk"
 
 ; HotIfWinExist "DNP" ; work hotkeys
 
-; `:: Run "ahk\work\go-to-VDI-and-open-work-tab.ahk"
+`:: Run "ahk\work\go-to-VDI-and-open-work-tab.ahk"
 
 ; HotIf
