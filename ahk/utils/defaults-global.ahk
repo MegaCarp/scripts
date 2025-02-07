@@ -6,7 +6,7 @@
 #Include errorNotification.ahk
 #Include ticksTimer.ahk
 
-logfile := A_MyDocuments "\logs\ahk\" FormatTime(,"yyyy-MM-dd") ".txt"
+LogFileName := A_MyDocuments "\logs\ahk\" FormatTime(,"yyyy-MM-dd") ".txt"
 
 screenshotUtilityPath := "C:\Program Files (x86)\MiniCap\MiniCap.exe"
 
