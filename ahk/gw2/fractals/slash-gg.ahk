@@ -3,8 +3,8 @@
 #HotIf WinActive("ahk_exe Gw2-64.exe")
 
 Send "{Enter}"
-w8(standardWaitTime + 100)
+w8(200)
 Send "/gg"
-w8(standardWaitTime + 100)
+w8(200)
 Send "{Enter}"
 MouseMove X := 991, Y := 551
