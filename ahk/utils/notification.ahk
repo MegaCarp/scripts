@@ -27,8 +27,21 @@
 class Notification extends Gui {
 
     static LogFileName := A_MyDocuments "\logs\ahk\" FormatTime(, "yyyy-MM-dd") "\log.txt"
-    
-    __New(Text, Image){
-        
+
+    __New(Text, Image) {
+        this := Gui(, Text)
+        this.Opt("+AlwaysOnTop +Disabled -SysMenu +Owner")
+
+        if Image {
+            this.AddPicture(, Image)
+        }
+    }
+    Show() {
+        this.super.Show("NoActivate w200 x1698")
+        SetTimer(deleteNotification, 2200)
+
+        deleteNotification() {
+            this.Destroy()
+        }
     }
 }
