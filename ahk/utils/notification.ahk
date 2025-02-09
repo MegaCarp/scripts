@@ -31,17 +31,27 @@ class Notification extends Gui {
     __New(Text, Image := '') {
         super.__New()
         this.Opt("+AlwaysOnTop +Disabled -SysMenu +Owner -Caption")
-        this.BackColor := "808080" ; Gray; https://www.autohotkey.com/docs/v2/misc/Colors.htm
-        this.AddText(, Text)
+        ; this.BackColor := "808080" ; Gray; https://www.autohotkey.com/docs/v2/misc/Colors.htm
+        this.AddText(, Text).GetPos(,,&textWidth)
 
+        imageWidth := 0
         if Image {
-            this.AddPicture(, Image)
+            this.AddPicture(, Image).GetPos(,,&imageWidth)
         }
+
+        if (textWidth >= imageWidth) {
+            this.notificationWidth := textWidth
+        } else {
+            this.notificationWidth := imageWidth
+        }
+
     }
     
     Show() {
-        super.Show("NoActivate AutoSize x1698")
-        SetTimer(deleteNotification, 2200)
+
+        xPos := A_ScreenWidth - this.notificationWidth - 100
+        super.Show("NoActivate AutoSize x" xPos)
+        SetTimer(deleteNotification, 2500)
 
         deleteNotification() {
             this.Destroy()
@@ -49,5 +59,5 @@ class Notification extends Gui {
     }
 }
 
-testNoti := Notification("testText")
-testNoti.Show()
+; testNoti := Notification("Попка мипса.", "C:\Users\Денис\Downloads\images.jpg")
+; testNoti.Show()
