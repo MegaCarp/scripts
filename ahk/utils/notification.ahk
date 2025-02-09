@@ -28,16 +28,19 @@ class Notification extends Gui {
 
     static LogFileName := A_MyDocuments "\logs\ahk\" FormatTime(, "yyyy-MM-dd") "\log.txt"
 
-    __New(Text, Image) {
-        this := Gui(, Text)
-        this.Opt("+AlwaysOnTop +Disabled -SysMenu +Owner")
+    __New(Text, Image := '') {
+        super.__New()
+        this.Opt("+AlwaysOnTop +Disabled -SysMenu +Owner -Caption")
+        this.BackColor := "808080" ; Gray; https://www.autohotkey.com/docs/v2/misc/Colors.htm
+        this.AddText(, Text)
 
         if Image {
             this.AddPicture(, Image)
         }
     }
+    
     Show() {
-        this.super.Show("NoActivate w200 x1698")
+        super.Show("NoActivate AutoSize x1698")
         SetTimer(deleteNotification, 2200)
 
         deleteNotification() {
@@ -45,3 +48,6 @@ class Notification extends Gui {
         }
     }
 }
+
+testNoti := Notification("testText")
+testNoti.Show()
