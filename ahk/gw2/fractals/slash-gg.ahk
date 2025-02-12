@@ -1,6 +1,5 @@
 #Requires AutoHotkey v2.0
-
-#HotIf WinActive("ahk_exe Gw2-64.exe")
+#Include ..\utils\defaults-gw2.ahk
 
 Send "{Enter}"
 w8(200)
