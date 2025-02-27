@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 
 MouseGetPos &xpos, &ypos
-LastWindow := WinGetTitle("A")
+LastWindow := WinGetID("A")
 WinActivate "DNP"
 MouseMove 363, 1025 ; здесь у меня расположен Google Chrome
 Sleep 500
@@ -10,3 +10,11 @@ Click 158, 92 ; здесь первая вкладка Chrome
 Sleep 200
 WinActivate LastWindow
 MouseMove xpos, ypos
+if WinActive("ahk_exe Gw2-64.exe") != 0 {
+    Sleep 100
+    Send "e"
+    Send "e"
+    Send "e"
+}
+
+; msgbox WinGetTitle("A")

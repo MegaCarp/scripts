@@ -1,12 +1,26 @@
 #Requires AutoHotkey v2.0
-
+#SingleInstance
 #Include utils\defaults-gw2.ahk
 
-RoundRobin := Object()
-RoundRobin.CurrentlyOn := ''
-RoundRobin.GoToWaypoint := GoToWaypoint
+class RoundRobin extends Object
 
-GoToWaypoint() {
+RoundRobin.Waypoints := Map
+RoundRobin.CurrentlyOnNum := 0
+
+RoundRobin.Waypoints := []
+RoundRobin.Waypoints[1]
+
+; RoundRobin.Waypoints.ChatCode
+; RoundRobin.Waypoints.ReadableTitle := ''
+
+RoundRobin.GoToWaypoint := GoToWaypoint
+RoundRobin.GoingRound := GoingRound
+
+MakeListOfWaypoint(this.Waypoints) {
+    for key, value IN this.Waypoints()
+        this.GoingRound.=
+}
+GoToWaypoint(this) {
     SendItToChat
     Click X := 190, Y := 1010 ; LButton click in chat on the link following the nickname in the last
     w8(standardWaitTime + 900)
@@ -14,28 +28,44 @@ GoToWaypoint() {
     Click
 }
 
-RoundRobin.GoingRound()
-switch RoundRobin.CurrentlyOn {
-    case "[&BKgDAAA=]": ; diessa gate wp, Black Citadel
-        RoundRobin.CurrentlyOn := "[&BAwEAAA =]" ; commodore's quarters wp; Lion's Arch
-        A_Clipboard := RoundRobin.CurrentlyOn
-        RoundRobin.GoToWaypoint
+^f10:: RoundRobin.GoingRound
 
-    case "[&BAwEAAA =]": ; commodore's quarters wp; Lion's Arch
-        RoundRobin.CurrentlyOn := "[&BMwHAAA =]" ; ogre camp wp; Tangled Depth
-        A_Clipboard := RoundRobin.CurrentlyOn
-        RoundRobin.GoToWaypoint
+GoingRound(this) {
+    switch RoundRobin.CurrentWaypoint.ChatCode {
+        case "[&BKgDAAA=]": ; diessa gate wp, Black Citadel
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BAwEAAA=]" ; commodore's quarters wp; Lion's Arch
+            A_Clipboard := RoundRobin.CurrentWaypoint.ChatCode
+            RoundRobin.GoToWaypoint
 
-    case "[&BMwHAAA =]": ; ogre camp wp; Tangled Depth
-        RoundRobin.CurrentlyOn := "[&BNYHAAA =]" ; wanderer's wp; Auric Basin
-        A_Clipboard := RoundRobin.CurrentlyOn
-        RoundRobin.GoToWaypoint
+        case "[&BAwEAAA=]": ; commodore's quarters wp; Lion's Arch
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BMwHAAA=]" ; ogre camp wp; Tangled Depth
+            A_Clipboard := RoundRobin.CurrentWaypoint.ChatCode
+            RoundRobin.GoToWaypoint
 
-    default:
-        RoundRobin.CurrentlyOn := "[&BKgDAAA=]" ; diessa gate wp, Black Citadel
-        A_Clipboard := RoundRobin.CurrentlyOn
-        RoundRobin.GoToWaypoint
+        case "[&BMwHAAA=]": ; ogre camp wp; Tangled Depth
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BNYHAAA=]" ; wanderer's wp; Auric Basin
+            A_Clipboard := RoundRobin.CurrentWaypoint.ChatCode
+            RoundRobin.GoToWaypoint
 
+        default:
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BKgDAAA=]" ; diessa gate wp, Black Citadel
+            A_Clipboard := RoundRobin.CurrentWaypoint.ChatCode
+            RoundRobin.GoToWaypoint
+
+        case "[&BKgDAAA=]": ; diessa gate wp, Black Citadel
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BAwEAAA=]" ; commodore's quarters wp; Lion's Arch
+            MsgBox "it's currently diessa gate wp, Black Citadel`n"
+
+        case "[&BAwEAAA=]": ; commodore's quarters wp; Lion's Arch
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BMwHAAA=]" ; ogre camp wp; Tangled Depth
+
+        case "[&BMwHAAA=]": ; ogre camp wp; Tangled Depth
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BNYHAAA=]" ; wanderer's wp; Auric Basin
+
+        default:
+            RoundRobin.CurrentWaypoint.ChatCode := "[&BKgDAAA=]" ; diessa gate wp, Black Citadel
+
+    }
 }
 
 ; [&BKgDAAA =] ; diessa gate wp, Black Citadel
