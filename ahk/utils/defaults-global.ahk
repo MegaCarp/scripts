@@ -3,7 +3,7 @@
 
 #Include WorkWithImages.ahk
 
-; #Include screenshotScreen.ahk
+#Include Screenshot.ahkcreenshot.ahk
 
 #Include notification.ahk
 #Include ticksTimer.ahk
