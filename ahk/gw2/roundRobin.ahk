@@ -16,10 +16,7 @@ RoundRobin.Waypoints[1]
 RoundRobin.GoToWaypoint := GoToWaypoint
 RoundRobin.GoingRound := GoingRound
 
-MakeListOfWaypoint(this.Waypoints) {
-    for key, value IN this.Waypoints()
-        this.GoingRound.=
-}
+
 GoToWaypoint(this) {
     SendItToChat
     Click X := 190, Y := 1010 ; LButton click in chat on the link following the nickname in the last

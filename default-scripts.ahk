@@ -2,6 +2,7 @@
 #SingleInstance 
 
 F12:: Run "ahk\record-mouse-position.ahk"
+^F12:: Run "ahk\record-mouse-position_Window.ahk"
 
 Run "ahk\gw2-kbds-and-scripts.ahk"
 

@@ -3,14 +3,14 @@
 
 #Include WorkWithImages.ahk
 
-#Include screenshotScreen.ahk
+; #Include screenshotScreen.ahk
 
 #Include notification.ahk
 #Include ticksTimer.ahk
 
+#Include toggleNightlight.ahk
+
 TempDir := "C:\Users\" A_UserName "\AppData\Local\Temp\"
 LogFileName := A_MyDocuments "\logs\ahk\" FormatTime(,"yyyy-MM-dd") ".txt"
-
-screenshotUtilityPath := "C:\Program Files (x86)\MiniCap\MiniCap.exe"
 
 ; debug := 1
