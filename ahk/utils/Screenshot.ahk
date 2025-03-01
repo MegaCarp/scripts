@@ -26,17 +26,30 @@ class Screenshot {
         RunWait this.screenshotUtility " -capturescreen" this.defaultParameters SaveTo this.Extension
     }
 
-    ScreenshotSearchables(FileName := this.defaultFileName "_searchable", Size := 30) {
+    ScreenshotSearchables(FileName := this.defaultFileName "_searchable", Size := 30, Extension := this.Extension) {
+
+        if !FileName {
+            this.defaultFileName "_searchable"
+        }
+
+        FileNameExtensionCandidate := SubStr(FileName, StrLen(FileName) -4)
+        if SubStr(StrLen(FileName))
+
+        LastWindow := WinGetID("A")
         MouseGetPos &Xcoordinates, &Ycoordinates
 
         ; TODO FileSelect()
-        ScreenshotRegion()
+        WinActivate LastWindow
+        ScreenshotRegion(1)
         toggleNightlight()
         Sleep 3000
+        WinActivate LastWindow
         ScreenshotRegion(2)
         toggleNightlight()
 
-        ScreenshotRegion(Iteration := '') {
+        ScreenshotRegion(IterationNum := '') {
+
+            fullFileName := FileName IterationNum this.Extension
 
             ; -captureregion left top right bottom
             left := Ceil(Xcoordinates - Size / 2) " "
@@ -46,9 +59,12 @@ class Screenshot {
 
             Region := " -captureregion " left top right bottom
 
-            RunWait this.screenshotUtility Region this.defaultParameters FileName Iteration this.Extension
+            RunWait this.screenshotUtility Region this.defaultParameters fullFileName
+            Run("C:\Windows\system32\mspaint.exe " fullFileName,, 'Min')
         }
     }
 
 }
 
+testScreen := Screenshot()
+testScreen.ScreenshotSearchables(FileSelect('S8'))
