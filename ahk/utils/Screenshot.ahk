@@ -25,16 +25,22 @@ class Screenshot {
     ;     MsgBox "C:\Program Files (x86)\MiniCap\MiniCap.exe" " -capturescreen" " -exit -save " A_MyDocuments FormatTime(, "yy-MM-dd_hh.mm.ss") "_screen.png"
     ; }
 
-    FinalizeFilenameExtension(SaveToDir, FileName, FileSearch) {
+    FinalizeFilenameAndExtension(SaveToDir, FileName, FileSearch, &PathAndName, &Extension) {
+
+        timestamp := this.GetName()
 
         ; if you cancel the filesearch, it makes the screenshot anyway and saves it to a chronomically named .png into Downloads
         if FileSearch {
             ; FileName := FileSelect('S8', "C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\test")
-            FileName := FileSelect('S8', SaveToDir FileName)
+            PathAndName := FileSelect('S8', SaveToDir FileName, "Where to Save the screenshot?")
+        }
+
+        if !SaveToDir {
+            SaveToDir := this.MyDownloads
         }
 
         if !FileName {
-            FileName := this.GetName
+            FileName := SaveToDir "\" timestamp
         }
 
         ; if extension is doubled, remove the extension
@@ -42,28 +48,26 @@ class Screenshot {
         switch SubStr(FileName, StrLen(FileName) - 3) {
             case ".jpg":
                 Extension := ".jpg"
-                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+                PathAndName := SubStr(FileName, 1, StrLen(FileName) - 4)
             case ".gif":
                 Extension := ".gif"
-                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+                PathAndName := SubStr(FileName, 1, StrLen(FileName) - 4)
             case ".pdf":
                 Extension := ".pdf"
-                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+                PathAndName := SubStr(FileName, 1, StrLen(FileName) - 4)
             case ".png":
                 Extension := ".png"
-                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+                PathAndName := SubStr(FileName, 1, StrLen(FileName) - 4)
             case ".bmp":
                 Extension := ".bmp"
-                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+                PathAndName := SubStr(FileName, 1, StrLen(FileName) - 4)
             case ".tiff":
                 Extension := ".tiff"
-                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+                PathAndName := SubStr(FileName, 1, StrLen(FileName) - 4)
 
             default:
                 Extension := ".png"
         }
-
-        return [FileName, Extension]
     }
 
     ScreenshotScreen(SaveTo := this.defaultSavePath this.GetName "_screen") {
@@ -75,10 +79,17 @@ class Screenshot {
         FileSearch := "Yes",
         Extension := this.Extension,
         SaveToDir := "C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\",
-        FileName := this.GetName
+        FileName := this.GetName()
     ) {
 
-        PathWithNameAndExtension := this.FinalizeFilenameExtension(SaveToDir, FileName "_searchable", FileSearch)
+        this.FinalizeFilenameAndExtension(SaveToDir, FileName, FileSearch, &PathAndName, &Extension)
+
+        ;;;; TESTING ;;;;
+        MsgBox FileName
+        MsgBox Extension
+        ;;;; TESTING ;;;;
+
+        FileName := PathAndName "_searchable"
 
         LastWindow := WinGetID("A")
         MouseGetPos &Xcoordinates, &Ycoordinates
@@ -99,7 +110,7 @@ class Screenshot {
 
         ScreenshotRegion(IterationNum := '') {
 
-            fullFileName := PathWithNameAndExtension[1] IterationNum PathWithNameAndExtension[2]
+            fullFileName := FileName IterationNum
 
             ; -captureregion left top right bottom
             left := Ceil(Xcoordinates - Size / 2) " "

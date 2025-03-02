@@ -22,12 +22,10 @@
 
 ; CheckOverTheFileName("C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\", "\test" "_searchable", 1)
 
+; FileName := FileSelect('S8')
 
-myfun() {
-    one := "first"
-    two := "second"
-    return [one, two]
+GetName() {
+    return FormatTime(, "yy-MM-dd_HH.mm.ss")
 }
 
-result := myfun()
-MsgBox result[2]
+MsgBox Type(GetName())
