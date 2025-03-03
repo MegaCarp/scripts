@@ -1,6 +1,9 @@
 #Requires AutoHotkey v2.0
 #Include defaults-global.ahk
 
+; testScreen := Screenshot()
+; testScreen.ScreenshotSearchables()
+    
 ; toggleNightlight()
 ; ; Sleep 3000
 ; ; toggleNightlight()

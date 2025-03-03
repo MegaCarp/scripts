@@ -127,5 +127,3 @@ class Screenshot {
 
 }
 
-; testScreen := Screenshot()
-; testScreen.ScreenshotSearchables()
