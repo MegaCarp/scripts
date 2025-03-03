@@ -7,18 +7,27 @@ TradeWindow.MainIconImage := "trade-window.png"
 ; TradeWindow.CraftingComponent := "crafting-component.png"
 ; TradeWindow.CogWheel := "cogwheel.png"
 
-; FindWhereIsEverything() {
-;     ImageSearch(&xout, &yout, 0, 0, A_ScreenHeight, A_ScreenWidth, TradeWindow.MainIconImage)
-;     TradeWindow.SearchCoordsX := xout + 65
-;     TradeWindow.SearchCoordsy := yout + 62 
+FindWhereIsEverything() {
+    ImageSearch(&xout, &yout, 0, 0, A_ScreenHeight, A_ScreenWidth, TradeWindow.MainIconImage)
+    TradeWindow.SearchCoordsX := xout + 65
+    TradeWindow.SearchCoordsy := yout + 62
 
-; }
+    TradeWindow.Discovery := xout + 16 yout + 81		 ; discovery
+    TradeWindow.production := xout + 16, yout + 129		 ; production;
+    TradeWindow.cogwheelX := xout + 291		 ; cogwheel
+    TradeWindow.cogwheelY := yout + 65		 ; cogwheel
+    TradeWindow.collapseAll := xout + 332, yout + 85		 ; collapse all
+    TradeWindow.craftingComponent := xout + 112, yout + 129		 ; supposedly collapsed “crafting component”
+    TradeWindow.firstItemUnderCraftComp := xout + 96, yout + 156		 ; first item in there
 
+}
 
+FindWhereIsEverything()
 
-ImageSearch(&xout, &yout, 0, 0, A_ScreenHeight, A_ScreenWidth, TradeWindow.MainIconImage)
+; ImageSearch(&xout, &yout, 0, 0, A_ScreenHeight, A_ScreenWidth, TradeWindow.MainIconImage)
 
-MouseMove xout, yout
+MouseMove TradeWindow.cogwheelX, TradeWindow.cogwheelY
+
 ; Click X := 682, Y := 226 ; trade icon
 ; Click X := 747, Y := 288 ; search window
 
