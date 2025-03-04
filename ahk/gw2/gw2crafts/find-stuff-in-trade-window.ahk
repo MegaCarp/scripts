@@ -2,6 +2,9 @@
 #Include ..\utils\defaults-gw2.ahk
 
 TradeWindow := Object()
+TradeWindow.Discovery := Object
+TradeWindow.Production := Object
+TradeWindow.Cogwheel := Object
 
 TradeWindow.MainIconImage := "trade-window.png"
 ; TradeWindow.CraftingComponent := "crafting-component.png"
@@ -9,16 +12,14 @@ TradeWindow.MainIconImage := "trade-window.png"
 
 FindWhereIsEverything() {
     ImageSearch(&xout, &yout, 0, 0, A_ScreenHeight, A_ScreenWidth, TradeWindow.MainIconImage)
-    TradeWindow.SearchCoordsX := xout + 65
-    TradeWindow.SearchCoordsy := yout + 62
-
-    TradeWindow.Discovery := xout + 16 yout + 81		 ; discovery
-    TradeWindow.production := xout + 16, yout + 129		 ; production;
-    TradeWindow.cogwheelX := xout + 291		 ; cogwheel
-    TradeWindow.cogwheelY := yout + 65		 ; cogwheel
-    TradeWindow.collapseAll := xout + 332, yout + 85		 ; collapse all
-    TradeWindow.craftingComponent := xout + 112, yout + 129		 ; supposedly collapsed “crafting component”
-    TradeWindow.firstItemUnderCraftComp := xout + 96, yout + 156		 ; first item in there
+    TradeWindow.MainIconCoords := [xout, yout]
+    TradeWindow.SearchField := [xout + 65, yout + 62]
+    TradeWindow.Discovery.Tab := [xout + 16, yout + 81]		 ; discovery
+    TradeWindow.Production.Tab := [xout + 16, yout + 129]		 ; production;
+    TradeWindow.Cogwheel.Button := [xout + 291, yout + 65]		 ; cogwheel
+    TradeWindow.Cogwheel.CollapseAll := [xout + 332, yout + 85]		 ; collapse all
+    TradeWindow.craftingComponent := [xout + 112, yout + 129]		 ; supposedly collapsed “crafting component”
+    TradeWindow.firstItemUnderCraftComp := [xout + 96, yout + 156]		 ; first item in there
 
 }
 
@@ -26,20 +27,12 @@ FindWhereIsEverything()
 
 ; ImageSearch(&xout, &yout, 0, 0, A_ScreenHeight, A_ScreenWidth, TradeWindow.MainIconImage)
 
-MouseMove TradeWindow.cogwheelX, TradeWindow.cogwheelY
+MouseMove TradeWindow.MainIconCoords[1], TradeWindow.MainIconCoords[2]
 
-; Click X := 682, Y := 226 ; trade icon
-; Click X := 747, Y := 288 ; search window
+; Click X := 557, Y := 294 ; in discovery top item
+; Click X := 1431, Y := 191 ; in discovery X to close
+; Click X := 1075, Y := 835 ; in discovery Craft
+; Click X := 1041, Y := 737 ; in production Craft
 
-; A_Clipboard := "+" 747 - 682 "+" 288-226
-;  X := 698, Y := 307 ; discovery
-; X := 698, Y := 355 ; production
-; X := 973, Y := 291 ; cogwheel
-; X := 1014, Y := 311 ; collapse all
-
-; X := 794, Y := 355 ; supposedly collapsed crafting component
-; X := 778, Y := 382 ; first item in there
-Click X := 557, Y := 294 ; in discovery top item
-Click X := 1431, Y := 191 ; in discovery X to close
-Click X := 1075, Y := 835 ; in discovery Craft
-Click X := 1041, Y := 737 ; in production Craft
+Click X := 469, Y := 178 ; 
+w8
