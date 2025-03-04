@@ -39,3 +39,7 @@ MouseMove TradeWindow.cogwheelX, TradeWindow.cogwheelY
 
 ; X := 794, Y := 355 ; supposedly collapsed crafting component
 ; X := 778, Y := 382 ; first item in there
+Click X := 557, Y := 294 ; in discovery top item
+Click X := 1431, Y := 191 ; in discovery X to close
+Click X := 1075, Y := 835 ; in discovery Craft
+Click X := 1041, Y := 737 ; in production Craft
