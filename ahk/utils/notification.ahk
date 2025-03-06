@@ -33,7 +33,7 @@ class Notification extends Gui {
         super.__New()
 
         this.Opt("+AlwaysOnTop +Disabled -SysMenu +Owner -Caption")
-        this.BackColor := "808080" ; Gray; https://www.autohotkey.com/docs/v2/misc/Colors.htm
+        this.BackColor := "808080" ; Gray; https://www.autohotkey.com/docs/v2/misc/Colors.html
         this.AddText(, Text).GetPos(, , &textWidth)
 
         imageWidth := 0
