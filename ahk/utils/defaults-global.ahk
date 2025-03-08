@@ -4,6 +4,7 @@
 #Include WorkWithImages.ahk
 
 #Include Screenshot.ahk
+#Include GetUserInput.ahk
 
 #Include notification.ahk
 #Include ticksTimer.ahk

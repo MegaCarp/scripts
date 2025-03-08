@@ -11,8 +11,8 @@ Run "ahk\gw2-kbds-and-scripts.ahk"
 ; HotIfWinNotExist "DNP"
 ; Hotkey("``", Run("ahk\work\go-to-VDI-and-open-work-tab.ahk"))
 
-; `:: Run "ahk\work\go-to-VDI-and-open-work-tab.ahk"
+`:: Run "ahk\work\go-to-VDI-and-open-work-tab.ahk"
 
-; ^`:: Run "ahk\work\check-on-VDI.ahk"
+^`:: Run "ahk\work\check-on-VDI.ahk"
 
 ;  HotIf

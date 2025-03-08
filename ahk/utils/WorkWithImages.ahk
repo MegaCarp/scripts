@@ -27,17 +27,19 @@ class ActWithImages {
     }
 
     UpdateWinPos() {
-        if this.Window {
             WinGetPos(&outX, &outY, &outWidth, &outHeight, this.Window)
-            this.topLeftWindowCornerX := outX
-            this.topLeftWindowCornerY := outY
-            this.windowWidth := outWidth
-            this.windowHeight := outHeight
-        }
+            this.Window.topLeftWindowCorner := [outX, outY]
+            this.Window.windowWidth := outWidth
+            this.Window.windowHeight := outHeight
     }
 
-    FindTarget(Image) {
+    FindTarget(
+        Image,
+        TopLeftCorner := this.Window.topLeftWindowCorner,
+         BottomRightCorner := []
+    ) {
 
+        Rectangle := [TopLeftCorner, BottomRightCorner]
         if this.Window {
         }
 
