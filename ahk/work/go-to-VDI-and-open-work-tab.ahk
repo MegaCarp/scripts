@@ -10,7 +10,9 @@ VDIOpenerBeenRelaunched := 1
 ; Send "{Space}"
 ; Sleep 150
 ; WinMinimize "Картинка в картинке"
-WinMinimize "Blish"
+try {
+    WinMinimize "Blish"
+}
 WinActivate "DNP"
 MouseMove 363, 1025 ; здесь у меня расположен Google Chrome
 Sleep 500
