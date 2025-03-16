@@ -19,7 +19,7 @@ class Notification extends Gui {
 
         imageWidth := 0
         if NOT FileExist(Image) = '' {
-            this.AddPicture(, Image).GetPos(, , &imageWidth)
+            this.AddPicture(, this.MakeDithered(Image)).GetPos(, , &imageWidth)
         }
 
         if (textWidth >= imageWidth) {
