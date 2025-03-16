@@ -1,0 +1,17 @@
+﻿;ahk;on-mouse
+special action key;.;f23
+mastery key;,;f24
+stow weapon;m;f22
+;;
+unmount;p;
+raptor;n;
+warclaw; ';
+;;
+novelty;";";
+chair;l;
+musical instrument;k;
+held item;j;
+toy;h;
+tonic;];
+;;
+action camera;[;

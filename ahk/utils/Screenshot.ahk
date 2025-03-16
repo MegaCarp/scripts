@@ -15,8 +15,8 @@ class Screenshot {
 
     }
 
-    GetName() {
-        return FormatTime(, "yy-MM-dd_HH.mm.ss")
+    GetName(postfix := '') {
+        return FormatTime(, "yy-MM-dd_HH.mm.ss") postfix
     }
 
     defaultParameters := " -exit -save "

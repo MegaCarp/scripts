@@ -12,22 +12,9 @@ class SearchableImage extends Object {
         this.UpdateWindowPosition
 
         this.FindTargetSuccess := ''
-        this.TempDir := "C:\Users\" A_UserName "\AppData\Local\Temp\"
-        this.Image := Image
-
-        this.MakeDithered(&dithImage)
-        this.ImageDithered := dithImage
 
         this.Debug := ''
 
-    }
-
-    MakeDithered(&dithImagePath) {
-        dithImagePath := this.TempDir "dith-" this.Image
-
-        if FileExist(dithImagePath) = '' {
-            RunWait "magick " A_WorkingDir "\" this.Image " -colorspace gray -ordered-dither o8x8 " dithImagePath
-        }
     }
 
     UpdateWindowPosition() {

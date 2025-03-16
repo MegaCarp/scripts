@@ -21,8 +21,9 @@ F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
 F7:: Run "gw2\fractals\slash-gg.ahk"
 
-; special action key
-; BackSpace:: Send "{Ctrl down}{Alt Down}{Shift down}-{Ctrl up}{Alt up}{Shift up}"
+ F23:: Send "{Ctrl down}{Alt Down}{Shift down}.{Ctrl up}{Alt up}{Shift up}" ; special action key
+ F24:: Send "{Ctrl down}{Alt Down}{Shift down},{Ctrl up}{Alt up}{Shift up}" ; mastery key
+ F22:: Send "{Ctrl down}{Alt Down}{Shift down}m{Ctrl up}{Alt up}{Shift up}" ; stow weapon key
 
 ; F4::Run "gw2\fractals\precast\quick.ahk"
 
