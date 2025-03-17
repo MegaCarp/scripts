@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 #Include base-sleep-interval.ahk
 
-#Include SearchableImage.ahk
+; #Include SearchableImage.ahk
 
 #Include Screenshot.ahk
 #Include GetUserInput.ahk

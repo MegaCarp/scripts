@@ -9,13 +9,15 @@ class Notification extends Gui {
 
         this.Opt("+AlwaysOnTop +Disabled -SysMenu +Owner -Caption")
 
-        if NOT isError = "No" {
+        if isError = "No" {
             this.BackColor := "808080" ; Gray; https://www.autohotkey.com/docs/v2/misc/Colors.html
         } else {
             this.BackColor := "800000" ; Maroon; https://www.autohotkey.com/docs/v2/misc/Colors.htm
         }
 
         this.AddText(, Text).GetPos(, , &textWidth)
+        
+        this.TempDir := "C:\Users\" A_UserName "\AppData\Local\Temp\"
 
         imageWidth := 0
         if NOT FileExist(Image) = '' {
@@ -29,8 +31,6 @@ class Notification extends Gui {
         }
 
         this.DefaultTimeToShowFor := 2500
-
-        this.TempDir := "C:\Users\" A_UserName "\AppData\Local\Temp\"
 
     }
 

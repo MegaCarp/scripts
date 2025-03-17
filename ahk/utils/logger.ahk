@@ -2,13 +2,8 @@
 #Include defaults-global.ahk
 
 class Logger extends Object {
-    __New(ProcessName, Debug := 0, Parents := "None", LogFilePath :=
+    __New(ProcessTree, Debug := 0, LogFilePath :=
         "Default") {
-        this.ProcessName := ProcessName
-
-        if NOT Parents = "None" {
-            this.ProcessParentsName := Parents
-        }
 
         this.Debug := Debug
 
@@ -18,8 +13,14 @@ class Logger extends Object {
 
         }
 
+        this.ProcessTree := ProcessTree
+
     }
 
+    __Call(Name, Params) {
+        
+    }
+    
     GetDate(prefix := '', postfix := '') {
         return prefix FormatTime(, "yy-MM-dd_HH.mm.ss") postfix
     }
@@ -28,7 +29,7 @@ class Logger extends Object {
         return prefix FormatTime(, "HH:mm:ss") postfix
     }
 
-    Log(Text, isError := "No", prefix := '', postfix := '', Image := '', DitheredImage := '', Debug := this.Debug) {
+    Log(Text, isError := "No", prefix := '', postfix := '', Image := '', Debug := this.Debug) {
 
         if Debug > 0 {
 
@@ -38,10 +39,11 @@ class Logger extends Object {
                 Time := 4000
             }
 
-            this.notification := Notification(Text, DitheredImage, Error)
+            this.notification := Notification(Text, Image, Error)
             this.notification.Show(Time)
         }
 
+        addErr := ''
         if NOT isError = "No" {
             addErr := "Err! "
         }
