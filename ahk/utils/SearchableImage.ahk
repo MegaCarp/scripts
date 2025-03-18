@@ -3,7 +3,7 @@
 
 class SearchableImage extends Object {
 
-    __New(Image, Window := WinGetID("A")) {
+    __New(Image, ProcessTree, Window := WinGetID("A")) {
         this.Window := Object()
         this.Window.ID := Window
 
@@ -14,6 +14,10 @@ class SearchableImage extends Object {
         this.FindTargetSuccess := ''
 
         this.Debug := ''
+
+        this.ProcessTree := ProcessTree
+
+        this.Logger := Logger(this.ProcessTree "\Logger")
 
     }
 

@@ -6,7 +6,9 @@
 #Include Screenshot.ahk
 #Include GetUserInput.ahk
 
+#Include logger.ahk
 #Include notification.ahk
+
 #Include ticksTimer.ahk
 
 #Include toggleNightlight.ahk

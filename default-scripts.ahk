@@ -8,6 +8,7 @@ F12:: Run "ahk\record-mouse-position.ahk"
 
 Run "ahk\gw2-kbds-and-scripts.ahk"
 
+
 ; HotIfWinExist "DNP" ; work hotkeys
 
 ; HotIfWinNotExist "DNP"
