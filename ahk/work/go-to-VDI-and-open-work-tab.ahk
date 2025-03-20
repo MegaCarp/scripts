@@ -1,4 +1,5 @@
 #Requires AutoHotkey v2.0
+#SingleInstance Force
 
 VDIOpenerBeenRelaunched := 1
 ; WinActivate "ahk_exe Telegram.exe"
