@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-#Include ..\utils\base-sleep-interval.ahk
+#Include ..\..\utils\base-sleep-interval.ahk
 
 MouseGetPos &xpos, &ypos
 

@@ -1,7 +1,6 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-VDIOpenerBeenRelaunched := 1
 ; WinActivate "ahk_exe Telegram.exe"
 ; Sleep 200
 ; Click X := 931, Y := 38
@@ -21,14 +20,10 @@ Click 368, 956 ; не свернув, активировать хром
 ; Sleep 1200
 Click 158, 92 ; здесь первая вкладка Chrome
 
-VDIOpenerBeenRelaunched := 0
 success := 0
 
 while NOT (success = 1) {
 
-    if VDIOpenerBeenRelaunched = 1 {
-        break
-    }
     try {
         if (WinGetProcessName("A") = "Gw2-64.exe") {
             WinRestore "Blish"
