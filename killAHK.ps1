@@ -1,1 +1,0 @@
-stop-Process -name *autohotkey*
