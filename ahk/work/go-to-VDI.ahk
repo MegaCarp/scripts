@@ -73,18 +73,20 @@ HideAndWaitToRestoreBlish() {
     }
 
     WaitForGw() {
-        if (WinGetProcessName("A") = "Gw2-64.exe") {
-            if WinExist("Blish") {
-                WinRestore "Blish"
-                WinActivate "ahk_exe Gw2-64.exe"
-                SetTimer WaitForGw, 0
-            } else {
-                try {
-                    Run "C:\Users\Денис\games\gw2\blishud\Blish HUD.exe"
-                } catch {
-                    MsgBox "blish is offline and couldn't find it"
+        try {
+            if (WinGetProcessName("A") = "Gw2-64.exe") {
+                if WinExist("Blish") {
+                    WinRestore "Blish"
+                    WinActivate "ahk_exe Gw2-64.exe"
+                    SetTimer WaitForGw, 0
+                } else {
+                    try {
+                        Run "C:\Users\Денис\games\gw2\blishud\Blish HUD.exe"
+                    } catch {
+                        MsgBox "blish is offline and couldn't find it"
+                    }
+                    SetTimer WaitForGw, 0
                 }
-                SetTimer WaitForGw, 0
             }
         }
     }
