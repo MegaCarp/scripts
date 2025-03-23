@@ -1,41 +1,18 @@
-HideAndWaitToRestoreBlish
+#Requires AutoHotkey v2.0
+#SingleInstance Force
+#Include ..\utils\defaults-global.ahk
 
-; WinMinimize "Blish"
-; ; WinRestore "Blish"
-; MsgBox WinGetProcessName("A")
-
-HideAndWaitToRestoreBlish() {
+WinActivate "Guild"
     try {
-        WinMinimize "Blish HUD"
-        MsgBox "yes blish, hide"
+        ActiveWin := WinGetProcessName("A")
     } catch {
-        MsgBox "No blish"
+        ActiveWin := ''
     }
+    if ActiveWin = "Gw2-64.exe" {
 
-    if WinExist("ahk_exe Gw2-64.exe") {
-        SetTimer WaitForGw
-        MsgBox "gw2 exists, setting timer"
-    }
+        Click X := 15, Y := 20 ; Main menu
+        ; w8() 
+        Click X := 955, Y := 585, 3 ; Log Out - doesn't actually press anything if in char select already :)
+        ; w8(500) 
 
-    WaitForGw() {
-        try {
-            if (WinGetProcessName("A") = "Gw2-64.exe") {
-                MsgBox "active win is gw2"
-                if WinExist("Blish HUD") {
-                    WinRestore "Blish"
-                    WinActivate "ahk_exe Gw2-64.exe"
-                    SetTimer WaitForGw, 0
-                    MsgBox "restored blish, returned gw to front, deleted timer"
-                } else {
-                    Run "C:\Users\Денис\games\gw2\blishud\Blish HUD.exe"
-                    MsgBox "blish is ded, starting it up"
-                    WinWait "Blish"
-                    MsgBox "blish is up"
-                    WinActivate "ahk_exe Gw2-64.exe"
-                    SetTimer WaitForGw, 0
-                    MsgBox "blish is offline, ran blish, after it went up, returned gw to front, deleted timer"
-                }
-            }
-        }
     }
-}

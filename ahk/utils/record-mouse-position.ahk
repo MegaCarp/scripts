@@ -4,7 +4,7 @@
 class RecordMousePosition extends Object {
 
     __New() {
-        super.__New()
+        ; super.__New() ; seems to break the class
 
         this.RelativeCoordsStep := 1
     }

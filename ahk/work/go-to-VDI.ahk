@@ -2,8 +2,6 @@
 #SingleInstance Force
 #Include ..\utils\defaults-global.ahk
 
-CheckOnVdi()
-
 ; NotifyInAdvance := Notification("In 10 sec there will be a VDI check", "NotifyInAdvance")
 
 CheckOnVdi() {
@@ -27,15 +25,22 @@ CheckOnVdi() {
 GoToVDI(BackAndForth := "Yes") {
     ; SetTimer ShowNotification, -290000
 
+    MouseGetPos &xpos, &ypos
+
+    if NOT BackAndForth = "Yes" {
+        GoToCharSelectIfInGw()
+    }
+
     HideAndWaitToRestoreBlish()
 
-    MouseGetPos &xpos, &ypos
     LastWindow := WinGetID("A")
     WinActivate "DNP"
-    Click 363, 1025, 0 ; здесь у меня расположен Google Chrome
-    Sleep 500
-    Click 368, 956, 10 ; не свернув, активировать хром
-    Click 158, 92, 0 ; здесь первая вкладка Chrome
+    w8
+    Click X := 1619, Y := 1027 ; click inside VDI to guarantee it's active
+    Click 363, 1025 ; здесь у меня расположен Google Chrome
+    Sleep 200
+    Click 368, 956  ; не свернув, активировать хром
+    Click 158, 92 ; здесь первая вкладка Chrome
 
     SetTimer CheckOnVdi, -300000
 
@@ -89,5 +94,21 @@ HideAndWaitToRestoreBlish() {
                 }
             }
         }
+    }
+}
+
+GoToCharSelectIfInGw() {
+    try {
+        ActiveWin := WinGetProcessName("A")
+    } catch {
+        ActiveWin := ''
+    }
+    if ActiveWin = "Gw2-64.exe" {
+
+        Click X := 15, Y := 20
+        w8(1000) ; Main menu
+        Click X := 955, Y := 585
+        ; w8(500) ; Log Out - doesn't actually press anything if in char select already :)
+
     }
 }

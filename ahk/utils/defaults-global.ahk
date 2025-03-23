@@ -9,6 +9,8 @@
 #Include Screenshot.ahk
 #Include GetUserInput.ahk
 
+#Include record-mouse-position.ahk
+
 #Include logger.ahk
 #Include notification.ahk
 
@@ -19,3 +21,5 @@
 LogFileName := A_MyDocuments "\logs\ahk\" FormatTime(,"yyyy-MM-dd") ".txt"
 
 ; debug := 1
+
+MouseRecorder := RecordMousePosition()
