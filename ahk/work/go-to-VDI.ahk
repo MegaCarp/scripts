@@ -105,10 +105,8 @@ GoToCharSelectIfInGw() {
     }
     if ActiveWin = "Gw2-64.exe" {
 
-        Click X := 15, Y := 20
-        w8(1000) ; Main menu
-        Click X := 955, Y := 585
-        ; w8(500) ; Log Out - doesn't actually press anything if in char select already :)
+        Click X := 15, Y := 20  ; Main menu
+        Click X := 955, Y := 585, 3  ; Log Out - doesn't actually press anything if in char select already :)
 
     }
 }
