@@ -1,4 +1,7 @@
 #Requires AutoHotkey v2.0
+
+#Include ..\work\go-to-VDI.ahk
+
 #Include base-sleep-interval.ahk
 
 ; #Include SearchableImage.ahk
