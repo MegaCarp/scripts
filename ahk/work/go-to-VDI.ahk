@@ -88,7 +88,7 @@ HideAndWaitToRestoreBlish() {
                     try {
                         Run "C:\Users\Денис\games\gw2\blishud\Blish HUD.exe"
                     } catch {
-                        MsgBox "blish is offline and couldn't find it"
+                        Run "C:\Users\денис\games\gw2\addons\Blish HUD.exe"
                     }
                     SetTimer WaitForGw, 0
                 }
