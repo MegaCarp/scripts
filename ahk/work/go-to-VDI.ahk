@@ -22,13 +22,19 @@ CheckOnVdi() {
     SetTimer CheckOnVdi, -300000 ; recurse me daddy
 }
 
-GoToVDI(BackAndForth := "Yes") {
+GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
     ; SetTimer ShowNotification, -290000
 
     MouseGetPos &xpos, &ypos
 
     if NOT BackAndForth = "Yes" {
-        GoToCharSelectIfInGw()
+
+        if NOT LeaveChar = "No" {
+            GoToCharSelectIfInGw()
+        }
+
+        ; HangUpInTelegram()
+
     }
 
     HideAndWaitToRestoreBlish()
@@ -108,5 +114,21 @@ GoToCharSelectIfInGw() {
         Click X := 15, Y := 20  ; Main menu
         Click X := 955, Y := 585, 3  ; Log Out - doesn't actually press anything if in char select already :)
 
+    }
+}
+
+HangUpInTelegram() {
+    if WinExist("ahk_exe Telegram.exe") {
+        WinActivate "ahk_exe Telegram.exe"
+        w8(1000)
+        try {
+            ImageSearch(&xout, &yout, 0, 0, A_ScreenWidth, A_ScreenHeight, "..\hangup1.png")
+            Click xout, yout
+        } catch {
+            try {
+                ImageSearch(&xout, &yout, 0, 0, A_ScreenWidth, A_ScreenHeight, "..\hangup2.png")
+                Click xout, yout
+            }
+        }
     }
 }

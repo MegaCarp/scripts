@@ -8,6 +8,9 @@ Run "ahk\gw2-kbds-and-scripts.ahk"
 
 F12:: MouseRecorder.Click()
 
+; F1:: RunWait "ahk\gw2\research-item-name-on-bltc.ahk"
+; F5:: RunWait "ahk\рассылка-в-тайме.ahk"
+
 ; HotIfWinExist "DNP" ; work hotkeys
 
 ; HotIfWinNotExist "DNP"

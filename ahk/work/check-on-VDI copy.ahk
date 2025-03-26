@@ -2,17 +2,8 @@
 #SingleInstance Force
 #Include ..\utils\defaults-global.ahk
 
-WinActivate "Guild"
-    try {
-        ActiveWin := WinGetProcessName("A")
-    } catch {
-        ActiveWin := ''
-    }
-    if ActiveWin = "Gw2-64.exe" {
 
-        Click X := 15, Y := 20 ; Main menu
-        ; w8() 
-        Click X := 955, Y := 585, 3 ; Log Out - doesn't actually press anything if in char select already :)
-        ; w8(500) 
-
-    }
+        WinActivate "ahk_exe Telegram.exe"
+        w8()
+            ImageSearch(&xout, &yout, 0, 0, A_ScreenWidth, A_ScreenHeight, "*50 *Trans366693 ..\tg-tester.png")
+            MouseMove xout, yout
