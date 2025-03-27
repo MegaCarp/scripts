@@ -24,6 +24,15 @@ CheckOnVdi() {
 
 GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
     ; SetTimer ShowNotification, -290000
+    BlockInput 1
+    BlockInput 'MouseMove'
+
+    SetTimer EmergencyReenablementOfInput, -2000
+
+    EmergencyReenablementOfInput() {
+        BlockInput 0
+        BlockInput 'MouseMoveOff'
+        }
 
     MouseGetPos &xpos, &ypos
 
@@ -48,18 +57,24 @@ GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
     Click 368, 956  ; не свернув, активировать хром
     Click 158, 92 ; здесь первая вкладка Chrome
 
+    BlockInput 0
+    BlockInput 'MouseMoveOff'
     SetTimer CheckOnVdi, -300000
 
     if BackAndForth = "Yes" {
-        Sleep 200
-        WinActivate LastWindow
+        BlockInput 1
+        BlockInput 'MouseMove'
+            Sleep 200
+        try WinActivate LastWindow
         MouseMove xpos, ypos, 0
-        if WinActive("ahk_exe Gw2-64.exe") != 0 { ; why the hell does gw get locked into autorun?..
-            Sleep 100
-            Send "e"
-            Send "e"
-            Send "e"
-        }
+        BlockInput 0
+        BlockInput 'MouseMoveOff'
+            ; if WinActive("ahk_exe Gw2-64.exe") != 0 { ; why the hell does gw get locked into autorun?..
+        ;     Sleep 100
+        ;     Send "e"
+        ;     Send "e"
+        ;     Send "e"
+        ; }
     }
 }
 
