@@ -33,6 +33,6 @@ F7:: Run "gw2\fractals\slash-gg.ahk"
 
 ; F4::Run "gw2\fractals\precast\alac-resist.ahk"
 
-#HotIf
-F6:: Run "gw2\gw2crafts\main.ahk"
-#HotIf WinActive("ahk_exe Gw2-64.exe")
+; #HotIf
+; F6:: Run "gw2\gw2crafts\main.ahk"
+; #HotIf WinActive("ahk_exe Gw2-64.exe")
