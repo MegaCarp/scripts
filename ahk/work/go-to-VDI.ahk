@@ -42,8 +42,8 @@ GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
     LastWindow := WinGetID("A")
     WinActivate "DNP"
     w8
-    Click X := 1619, Y := 1027 ; click inside VDI to guarantee it's active
-    Click 363, 1025 ; здесь у меня расположен Google Chrome
+    Click X := 1839, Y := 249 ; click inside VDI to guarantee it's active
+    MouseMove 363, 1025 ; здесь у меня расположен Google Chrome
     Sleep 200
     Click 368, 956  ; не свернув, активировать хром
     Click 158, 92 ; здесь первая вкладка Chrome
