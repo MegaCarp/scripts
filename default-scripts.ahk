@@ -16,10 +16,10 @@ F12:: MouseRecorder.Click()
 ; HotIfWinNotExist "DNP"
 ; Hotkey("``", Run("ahk\work\go-to-VDI-and-open-work-tab.ahk"))
 
-; CheckOnVdi()
+CheckOnVdi()
 
-; `:: GoToVDI("And stay in VDI", 1)
+`:: GoToVDI("And stay in VDI", 1)
 
-; ^`:: GoToVDI()
+^`:: GoToVDI()
 
 ;  HotIf
