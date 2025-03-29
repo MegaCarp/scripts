@@ -18,7 +18,7 @@ F12:: MouseRecorder.Click()
 
 CheckOnVdi()
 
-`:: GoToVDI("And stay in VDI", 1)
+`:: GoToVDI("And stay in VDI")
 
 ^`:: GoToVDI()
 
