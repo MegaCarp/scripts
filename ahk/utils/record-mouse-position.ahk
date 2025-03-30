@@ -1,27 +1,45 @@
 #Requires AutoHotkey v2.0
 #Include defaults-global.ahk
 
-RecordMousePosition(Mode := "Click|Coords", RelativeCoords := [,]) {
+RecordMousePosition(Mode := "Click`|Coords", RelativeCoords := [0, 0], ToVisualStudio := 'Yes') {
 
     switch {
-        case RelativeCoords != [,]: MsgBox "RelativeCoords"
-        case Mode = "Click|Coords" OR "Click":
-            MsgBox "default picked"
-            MsgBox "multiline works"
-        case Mode = "Coords": MsgBox "cords"
-        default: MsgBox "nope"
+        case (not (RelativeCoords[1] = 0 AND RelativeCoords[2] = 0)): A_Clipboard := RelativeCoords[1] RelativeCoords[2]
+        case Mode = "Coords": Coords()
+        case Mode = "Click`|Coords" OR "Click": Click()
+        default: MsgBox "RecordMousePosition Mode's set wrong" ; TODO notification and some way to test for it
     }
 
     Click() {
         MouseGetPos &xpos, &ypos
-        content := "`n" "Click X := " xpos ", Y := " ypos
-        ToVisualStudio(content, " ")
+        content := "Click X := " xpos ", Y := " ypos
+        if ToVisualStudio = 'Yes' {
+            content := "`n" content
+            SendToVisualStudio(content, GetUserInput("Comment for Click with Mouse Coords string for VSCode:"))
+            Send "`nw8"
+        } else A_Clipboard := content
     }
 
     Coords() {
         MouseGetPos &xpos, &ypos
         content := xpos ", " ypos
-        ToVisualStudio(content)
+        if ToVisualStudio = 'Yes' {
+            SendToVisualStudio(content)
+        } else A_Clipboard := content
+    }
+
+    SendToVisualStudio(content, comment := '') {
+
+        if comment != '' {
+            content := content " `; " comment
+        }
+
+        w8
+        WinActivate "Visual Studio Code"
+        w8
+        Send "{End}"
+        w8
+        Send content
     }
 
     ; RelativeCoords(OriginPointArray, TargetWindow := WinGetID("A")) {
@@ -53,18 +71,5 @@ RecordMousePosition(Mode := "Click|Coords", RelativeCoords := [,]) {
     ;     }
 
     ; MsgBox textField.Value
-
-    ToVisualStudio(content, comment := '') {
-        w8
-        WinActivate "Visual Studio Code"
-        w8
-        Send "{End}"
-        w8
-        Send content
-        if comment != '' {
-            w8
-            Send "`n" "w8" "{Up}{End}{Space};{Space}" comment
-        }
-    }
 
 }
