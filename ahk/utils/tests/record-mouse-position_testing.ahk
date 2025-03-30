@@ -19,7 +19,10 @@ Test_RecordMousePosition() {
 
     RecordMouseTester("Coords", xout ", " yout)
 
-    RecordMouseTester('Relative Coordinates', xout yout, [xout, yout]) ; relative coords
+    ; RecordMouseTester('Relative Coordinates', xout yout, [xout, yout]) ; relative coords
+    MouseMove xout + 100, yout + 100, 0
+    RecordMouseTester('Relative Coordinates', xout + 100 ", " yout + 100, [xout, yout])
+    MouseMove xout, yout, 0
 
     ; cleanup
     EmergencyUnblockMouse
@@ -33,7 +36,7 @@ Test_RecordMousePosition() {
     }
 
     RecordMouseTester(Mode, ExpectedOutput, CoordsArray := [0, 0]) {
-        RecordMousePosition(Mode, CoordsArray, 'No')
+        RecordMousePosition(Mode, CoordsArray, 'No', 'Yes')
         if Mode = '' {
             Mode := 'Default'
         }

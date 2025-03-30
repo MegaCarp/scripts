@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 #Include defaults-global.ahk
 
-RecordMousePosition(Mode := "Click`|Coords", RelativeCoords := [0, 0], ToVisualStudio := 'Yes') {
+RecordMousePosition(Mode := "Click`|Coords", RelativeCoords := [0, 0], ToVisualStudio := 'Yes', Noninteractive := 'No') {
 
     switch {
         case (not (RelativeCoords[1] = 0 AND RelativeCoords[2] = 0)): A_Clipboard := RelativeCoords[1] RelativeCoords[2]
