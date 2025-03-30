@@ -1,6 +1,7 @@
 #Requires AutoHotkey v2.0
 #Include defaults-global.ahk
 
+
 class RecordMousePosition extends Object {
 
     __New() {
@@ -11,24 +12,14 @@ class RecordMousePosition extends Object {
 
     Click() {
         MouseGetPos &xpos, &ypos
-        content := "`n" "Click X := " xpos ", Y := " ypos "`n" "w8"
-        WinActivate "Visual Studio Code"
-        w8
-        Send "{End}"
-        w8
-        Send content
-        w8
-        Send "^{Left}^{Left}^{Right}{Space};{Space}"
+        content := "`n" "Click X := " xpos ", Y := " ypos 
+        ToVisualStudio(content, " ")
     }
 
     Coords() {
         MouseGetPos &xpos, &ypos
         content := xpos ", " ypos
-        WinActivate "Visual Studio Code"
-        w8
-        Send "{End}"
-        w8
-        Send content
+        ToVisualStudio(content)
     }
 
     RelativeCoords(OriginPointArray, TargetWindow := WinGetID("A")) {
@@ -40,19 +31,21 @@ class RecordMousePosition extends Object {
                 MouseMove OriginPointArray[1], OriginPointArray[2]
 
                 this.RelativeCoordsStep := 2
-                
+
             case 2:
                 MouseGetPos &xpos, &ypos
                 this.GetCommentForRelativeCoords := GetUserInput(CollectCommentAndSetClipboard)
 
                 this.RelativeCoordsStep := 1
-        
+
         }
 
         CollectCommentAndSetClipboard(*) {
-            if NOT (!this.GetCommentForRelativeCoords.TextField.Value OR this.GetCommentForRelativeCoords.TextField.Value = "Leave empty to cancel") {
+            if NOT (!this.GetCommentForRelativeCoords.TextField.Value OR this.GetCommentForRelativeCoords.TextField.Value =
+                "Leave empty to cancel") {
                 this.GetCommentForRelativeCoords.Gui.Hide
-                A_Clipboard := xpos - OriginPointArray[1] ", " ypos - OriginPointArray[2] " `; " this.GetCommentForRelativeCoords.TextField.Value
+                A_Clipboard := xpos - OriginPointArray[1] ", " ypos - OriginPointArray[2] " `; " this.GetCommentForRelativeCoords
+                    .TextField.Value
             }
             this.GetCommentForRelativeCoord.Gui.Destroy
         }
@@ -60,4 +53,17 @@ class RecordMousePosition extends Object {
         ; MsgBox textField.Value
     }
 
+}
+
+ToVisualStudio(content, comment := '') {
+    w8
+    WinActivate "Visual Studio Code"
+    w8
+    Send "{End}"
+    w8
+    Send content
+    if comment != '' {
+        w8
+        Send "`n" "w8" "{Up}{End}{Space};{Space}" comment
+    }
 }
