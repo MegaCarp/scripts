@@ -7,7 +7,7 @@ RecordMousePosition(Mode := "Click`|Coords", RelativeCoords := [0, 0], ToVisualS
         case (not (RelativeCoords[1] = 0 AND RelativeCoords[2] = 0)): A_Clipboard := RelativeCoords[1] RelativeCoords[2]
         case Mode = "Coords": Coords()
         case Mode = "Click`|Coords" OR "Click": Click()
-        default: MsgBox "RecordMousePosition Mode's set wrong" ; TODO notification and some way to test for it
+        default: Click() ; TODO notification and some way to test for it
     }
 
     Click() {
