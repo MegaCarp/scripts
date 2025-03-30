@@ -1,24 +1,13 @@
 #Requires AutoHotkey v2.0
 #Include defaults-global.ahk
 
-GetUserInput() {
-    GetUserInputGui := Gui()
-    GetUserInputGui.TextField := GetUserInputGui.AddEdit("-WantReturn", "Leave empty to cancel")
-    GetUserInputGui.okButton := GetUserInputGui.AddButton('Default', "Ok")
+GetUserInput(Prompt := '', Title := '', Options := '', DefaultText := '') {
 
-    GetUserInputGui.Show
-    GetUserInputGui.TextField.Focus()
-    Send "^a"
+    ; just a simple-ass wrapper to make it a oneliner for clarity
 
-    GetUserInputGui.TextField.OnEvent("LoseFocus", AllDone)
-    GetUserInputGui.okButton.OnEvent('Click', AllDone)
+    InputBoxObj := InputBox(Prompt, Title, Options, DefaultText)
 
-    AllDone(&OutputValue, *) {
-        OutputValue := GetUserInputGui.TextField.Value
-        GetUserInputGui.Destroy
+    if InputBoxObj.Value != DefaultText {
+        return InputBoxObj.Value
     }
-    while IsSet(OutputValue) = 0 
-    {}
-
-    return OutputValue
 }
