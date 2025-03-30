@@ -21,5 +21,3 @@
 LogFileName := A_MyDocuments "\logs\ahk\" FormatTime(,"yyyy-MM-dd") ".txt"
 
 ; debug := 1
-
-MouseRecorder := RecordMousePosition()
