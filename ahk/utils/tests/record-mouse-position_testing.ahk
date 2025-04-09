@@ -26,12 +26,6 @@ Test_RecordMousePosition() {
     SetTimer EmergencyUnblockMouse, 0
     A_Clipboard := preTestClipboard
 
-    TestOutput(WhatAreWeTesting_str, TestedOutput, ExpectedOutput) {
-        if TestedOutput = ExpectedOutput {
-            MsgBox "👌" WhatAreWeTesting_str " working as expected." ; TODO - notification here, TODO logger here
-        } else MsgBox "❗Err! " WhatAreWeTesting_str " output differs from the expected!`nOutput:`n`n" TestedOutput ; TODO - notification here, TODO logger here
-    }
-
     RecordMouseTester(Mode, ExpectedOutput, CoordsArray := [0, 0]) {
         RecordMousePosition(Mode, CoordsArray, 'No')
         if Mode = '' {

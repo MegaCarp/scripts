@@ -3,6 +3,7 @@
 #Include ..\work\go-to-VDI.ahk
 
 #Include base-sleep-interval.ahk
+#Include TestingSuite.ahk
 
 ; #Include SearchableImage.ahk
 

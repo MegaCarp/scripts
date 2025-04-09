@@ -18,7 +18,7 @@ F12:: RecordMousePosition
 
 CheckOnVdi()
 
-`:: GoToVDI("And stay in VDI")
+`:: GoToVDI("And stay in VDI", 1)
 
 ^`:: GoToVDI()
 

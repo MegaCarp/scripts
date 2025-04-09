@@ -7,7 +7,7 @@ GetUserInput(Prompt := '', DefaultText := 'Leave empty to cancel', Title := '', 
 
     InputBoxObj := InputBox(Prompt, Title, Options, DefaultText)
 
-    if InputBoxObj.Value != DefaultText {
+    if InputBoxObj.Value != "Leave empty to cancel" {
         return InputBoxObj.Value
     } else return ''
 }
