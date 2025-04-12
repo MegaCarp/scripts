@@ -14,30 +14,29 @@
 
 class TestableDataForSwitching extends Map {
 
-    TestForMatchAmongSynonyms(Needle, OutputFieldName := 'Payload', IsThisA_Test := "No") {
-        for id, top_level_field_name IN this[]
-            for id, value IN this[top_level_field_name]["Synonyms"]
-                if RegExMatch(value, "i)^" Needle "$") != 0 {
-                    if IsThisA_Test = "No" {
-                        return this[top_level_field_name][OutputFieldName]
-                    } else return this[top_level_field_name]["ExpectedOutput"]
-                }
-    }
+    ; TestForMatchAmongSynonyms(Needle, OutputFieldName := 'Payload', IsThisA_Test := "No") {
+    ;     for id, top_level_field_name IN this[]
+    ;         for id, value IN this[top_level_field_name]["Synonyms"]
+    ;             if RegExMatch(value, "i)^" Needle "$") != 0 {
+    ;                 if IsThisA_Test = "No" {
+    ;                     return this[top_level_field_name][OutputFieldName]
+    ;                 } else return this[top_level_field_name]["ExpectedOutput"]
+    ;             }
+    ; }
 
-    GiveMeA_ListOfAllSynonyms(ToClipboard := 'No') {
-        MsgBox 'TODO'
-    }
+    ; GiveMeA_ListOfAllSynonyms(ToClipboard := 'No') {
+    ;     MsgBox 'TODO'
+    ; }
 
-    __New(ArrayOfArraysOfSynonyms) {
+    static Field1 := "ExpectedOutput"
+    static Field2 := "Synonyms"
+
+    __New(ArrayOfArraysOfSynonyms, Testing := "No", LoadingFields*) {
 
         if Type(ArrayOfArraysOfSynonyms) != "Array" {
             MsgBox "Parameter must be an Array - deleting object."
             this.__Delete()
         }
-
-        
-
-        this := Map()
 
         ; for id, value IN ArrayOfArraysOfSynonyms {
         ;     TheListOfSynonyms := []
@@ -59,6 +58,23 @@ class TestableDataForSwitching extends Map {
                 } else {
                     this[MM_id]["ExpectedOutput"] := this[MM_id]["ExpectedOutput"] ", " syn_value
                 }
+
+        if Testing != 'No' {
+
+            for top_level_id, top_level_value IN this {
+                returner .= top_level_id
+                for mid_level_id, mid_level_value IN this[top_level_id] {
+                    returner .= mid_level_id
+                    if Type(mid_level_value) = "String" {
+                        returner .= mid_level_value
+                    } 
+                    ; else {
+                    ;     ; for id, value IN Obj
+                    ; }
+                }
+            }
+            return
+        }
     }
 
     ; LoadA_FieldToTheMapOfMaps(ArrayOfValues, FieldName := 'Payload') {
