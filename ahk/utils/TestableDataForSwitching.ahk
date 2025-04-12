@@ -37,15 +37,15 @@ class TestableDataForSwitching {
 
         this[] := Map()
 
-        for id, value IN ArrayOfArraysOfSynonyms {
-            TheListOfSynonyms := []
-            if A_Index < 3 {
-            if TheListOfSynonyms = [] {
-                TheListOfSynonyms.Push value
-            } else {
-                TheListOfSynonyms.Push SubStr(value, 1, 1)
-            } } else TheListOfSynonyms.Push A_Index
-        }
+        ; for id, value IN ArrayOfArraysOfSynonyms {
+        ;     TheListOfSynonyms := []
+        ;     if A_Index < 3 {
+        ;     if TheListOfSynonyms = [] {
+        ;         TheListOfSynonyms.Push value
+        ;     } else {
+        ;         TheListOfSynonyms.Push SubStr(value, 1, 1)
+        ;     } } else TheListOfSynonyms.Push A_Index
+        ; }
 
         for id, value IN ArrayOfArraysOfSynonyms
             this[value[1]] := Map("Synonyms", value, "ExpectedOutput", '')
@@ -59,15 +59,15 @@ class TestableDataForSwitching {
                 }
     }
 
-    LoadA_FieldToTheMapOfMaps(ArrayOfValues, FieldName := 'Payload') {
+    ; LoadA_FieldToTheMapOfMaps(ArrayOfValues, FieldName := 'Payload') {
 
-        if Type(ArrayOfValues) != "Array" {
-            MsgBox "ArrayOfValues parameter must be an Array."
-            return "ArrayOfValues parameter must be an Array."
-        }
+    ;     if Type(ArrayOfValues) != "Array" {
+    ;         MsgBox "ArrayOfValues parameter must be an Array."
+    ;         return "ArrayOfValues parameter must be an Array."
+    ;     }
 
-        for id, value IN this[]
-            this[id][FieldName] := ArrayOfValues[A_Index]
-    }
+    ;     for id, value IN this[]
+    ;         this[id][FieldName] := ArrayOfValues[A_Index]
+    ; }
 
 }
