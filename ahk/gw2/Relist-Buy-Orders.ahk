@@ -27,6 +27,7 @@ SetUpTpWorkingTabs() {
 }
 
 Map_QualityModes := Map()
+QualityModes := TestableDataForSwitching([["Basic", "B", "1"], ["Fine", "F", "2"]])
 
 Map_QualityModes["Basic"] := Map("Synonyms", Array(), "ExpectedOutput", '', "Coordinates", Array())
 Map_QualityModes["Fine"] := Map("Synonyms", Array(), "ExpectedOutput", '', "Coordinates", Array())
@@ -72,7 +73,7 @@ FilterForQuality(Mode) {
 
     for key, value IN Map_QualityModes
         for key, value IN Map_QualityModes["Synonyms"] {
-            
+
         }
 
 
