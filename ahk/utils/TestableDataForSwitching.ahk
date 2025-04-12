@@ -12,7 +12,7 @@
 ; you can just use the "Masterwork" at the start and produce the rest automatically from that
 ; the default __New therefore should do that, and have a separate class.method for making synonyms out of [[1, "one", "I"], etc] arrays
 
-class TestableDataForSwitching {
+class TestableDataForSwitching extends Map {
 
     TestForMatchAmongSynonyms(Needle, OutputFieldName := 'Payload', IsThisA_Test := "No") {
         for id, top_level_field_name IN this[]
@@ -35,22 +35,24 @@ class TestableDataForSwitching {
             this.__Delete()
         }
 
-        this[] := Map()
+        
 
-        for id, value IN ArrayOfArraysOfSynonyms {
-            TheListOfSynonyms := []
-            if A_Index < 3 {
-            if TheListOfSynonyms = [] {
-                TheListOfSynonyms.Push value
-            } else {
-                TheListOfSynonyms.Push SubStr(value, 1, 1)
-            } } else TheListOfSynonyms.Push A_Index
-        }
+        this := Map()
+
+        ; for id, value IN ArrayOfArraysOfSynonyms {
+        ;     TheListOfSynonyms := []
+        ;     if A_Index < 3 {
+        ;     if TheListOfSynonyms = [] {
+        ;         TheListOfSynonyms.Push value
+        ;     } else {
+        ;         TheListOfSynonyms.Push SubStr(value, 1, 1)
+        ;     } } else TheListOfSynonyms.Push A_Index
+        ; }
 
         for id, value IN ArrayOfArraysOfSynonyms
             this[value[1]] := Map("Synonyms", value, "ExpectedOutput", '')
 
-        for MM_id, MM_value IN this[]
+        for MM_id, MM_value IN this
             for syn_id, syn_value IN this[MM_id]["Synonyms"]
                 if this[MM_id]["ExpectedOutput"] = '' {
                     this[MM_id]["ExpectedOutput"] := syn_value
@@ -59,15 +61,15 @@ class TestableDataForSwitching {
                 }
     }
 
-    LoadA_FieldToTheMapOfMaps(ArrayOfValues, FieldName := 'Payload') {
+    ; LoadA_FieldToTheMapOfMaps(ArrayOfValues, FieldName := 'Payload') {
 
-        if Type(ArrayOfValues) != "Array" {
-            MsgBox "ArrayOfValues parameter must be an Array."
-            return "ArrayOfValues parameter must be an Array."
-        }
+    ;     if Type(ArrayOfValues) != "Array" {
+    ;         MsgBox "ArrayOfValues parameter must be an Array."
+    ;         return "ArrayOfValues parameter must be an Array."
+    ;     }
 
-        for id, value IN this[]
-            this[id][FieldName] := ArrayOfValues[A_Index]
-    }
+    ;     for id, value IN this[]
+    ;         this[id][FieldName] := ArrayOfValues[A_Index]
+    ; }
 
 }
