@@ -14,5 +14,12 @@ classedMap :=
 
 ; TODO if there's an integer in Synonyms, then it'll interefere with "index is a synonym" methodology
 
-classedMap.GiveMeA_ListOfAllSynonyms
+; MsgBox classedMap.Count
 
+var := [[1, "one", "I"],
+; [, "two", "II"], ; TODO this breaks the crab ; tried to test for it
+[2, "two", "II"], 
+[3, "three", "III"]]
+
+
+TestableDataForSwitching.TestInput(var) ; silent means good
