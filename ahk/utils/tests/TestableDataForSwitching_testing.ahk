@@ -23,3 +23,39 @@ var := [[1, "one", "I"],
 
 
 TestableDataForSwitching.TestInput(var) ; silent means good
+
+if ProcessExist("Telegram.exe") {
+    ProcessClose "Telegram.exe"
+
+    WaitToLeaveVDI(Actions*) ; at present this is only used after killing an process to relaunch it after leavig VDI but let's add a 
+    {
+
+        CheckWhetherActionIsA_Exe(MaybeA_Path) {
+            if Type(MaybeA_Path) != "String" 
+                return false ; path has to be a string
+
+            if !RegExMatch(MaybeA_Path, "i)\.exe")
+                return false ; path doesn't have an .exe
+
+        }
+        try {
+            if (WinGetProcessName("A") = "Gw2-64.exe") {
+                if WinExist("Blish") {
+                    WinRestore "Blish"
+                    WinActivate "ahk_exe Gw2-64.exe"
+                    SetTimer WaitForGw, 0
+                } else {
+                    try {
+                        Run "C:\Users\Денис\games\gw2\blishud\Blish HUD.exe"
+                    } catch {
+                        Run "C:\Users\денис\games\gw2\addons\Blish HUD.exe"
+                    }
+                    SetTimer WaitForGw, 0
+                }
+            }
+        }
+    }
+}
+
+
+}

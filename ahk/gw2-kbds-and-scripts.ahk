@@ -18,8 +18,8 @@ F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
 ; ^g:: tech_TimingGather(1,2)
 ; +g:: MouseMove X := 848, Y := 676, 0 ; first slot of the inventory ; show me where the first slot is
-^g:: GatherBountifully
-^+g:: GatherBountifully(, "Force Prompt")
+; ^g:: GatherBountifully
+; ^+g:: GatherBountifully(, "Force Prompt")
 
 ; r:: Run "gw2\dodge-jump.ahk"
 

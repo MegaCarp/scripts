@@ -132,6 +132,8 @@ GoToCharSelectIfInGw() {
     }
 }
 
+; proce
+
 HangUpInTelegram() {
     if WinExist("ahk_exe Telegram.exe") {
         WinActivate "ahk_exe Telegram.exe"
