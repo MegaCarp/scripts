@@ -19,6 +19,34 @@ class SearchableImage extends Object {
 
         this.Logger := Logger(this.ProcessTree "\Logger")
 
+        if NOT FileExist(Image) = '' {
+
+            this.dithImage := this.MakeDithered(Image)
+            this.AddPicture(, this.dithImage).GetPos(, , &imageWidth)
+
+        } else if NOT Image = '' {
+
+            this.Logger.Log("Image path" Image " is incorrect!", "Yes")
+
+        }
+
+    }
+
+    MakeDithered(Image) {
+        dithImagePath := this.TempDir "dith-" Image
+
+        if FileExist(dithImagePath) = '' {
+
+            this.Logger.Log dithImagePath " doesn't exist, creating"
+
+            ;; TODO create try-catch for "imagemagick not being installed" case
+            RunWait "magick " A_WorkingDir "\" Image " -colorspace gray -ordered-dither o8x8 " dithImagePath
+
+        } else {
+            this.Logger.Log dithImagePath "exists"
+            return dithImagePath
+        }
+
     }
 
     UpdateWindowPosition() {
@@ -96,4 +124,4 @@ class SearchableImage extends Object {
 
 ; WinGetTitle
 ; testObs := ActWithImages()
-; testObs.FindTarget("C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\night-light_x-close-window.png")
+; testObs.FindTarget(A_MyDocuments "\scripts\ahk\gw2\utils\img-search\night-light_x-close-window.png")

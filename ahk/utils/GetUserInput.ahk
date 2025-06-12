@@ -1,32 +1,21 @@
 #Requires AutoHotkey v2.0
 #Include defaults-global.ahk
 
-class GetUserInput extends Gui {
-    __New(FunctionToExecute := '') {
-        this.Gui := Gui()
-        this.TextField := this.Gui.AddEdit("-WantReturn", "Leave empty to cancel")
-        this.okButton := this.Gui.AddButton('Default', "Ok")
+/**
+ * @description Get text information from the user.
+ * @param {"File name, please."|String} Prompt
+ * - Prompt name.
+ * @param {'Text already in the field, selected.'|String} DefaultText
+ *  - This is the text that will be in the Edit field already.
+ *  - If the default text is left in "Leave empty to cancel" and if it is that text that comes out of the function then it's annuled into ''
+ */
+GetUserInput(Prompt := '', DefaultText := 'Leave empty to cancel', Title := '', Options := "T10") {
 
-        this.FunctionToExecute := FunctionToExecute
+    ; just a simple-ass wrapper to make it a oneliner for clarity
 
-    }
+    InputBoxObj := InputBox(Prompt, Title, Options, DefaultText)
 
-    getInput() {
-
-        this.Gui.Show
-        this.TextField.Focus()
-        Send "{Control down}a{Control up}"
-
-        if !this.FunctionToExecute {
-            this.TextField.OnEvent("LoseFocus", JustHideGui)
-            this.okButton.OnEvent('Click', JustHideGui)
-        } else {
-            this.TextField.OnEvent("LoseFocus", this.FunctionToExecute)
-            this.okButton.OnEvent('Click', this.FunctionToExecute)
-        }
-
-        JustHideGui(*) {
-            this.Gui.Hide
-        }
-    }
+    if InputBoxObj.Value != "Leave empty to cancel" {
+        return InputBoxObj.Value
+    } else return ''
 }

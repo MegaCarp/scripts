@@ -107,9 +107,9 @@ HideAndWaitToRestoreBlish() {
                     SetTimer WaitForGw, 0
                 } else {
                     try {
-                        Run "C:\Users\Денис\games\gw2\blishud\Blish HUD.exe"
+                        Run A_MyDocuments "..\games\gw2\blishud\Blish HUD.exe"
                     } catch {
-                        Run "C:\Users\денис\games\gw2\addons\Blish HUD.exe"
+                        Run A_MyDocuments "..\games\gw2\addons\Blish HUD.exe"
                     }
                     SetTimer WaitForGw, 0
                 }
@@ -131,6 +131,8 @@ GoToCharSelectIfInGw() {
 
     }
 }
+
+; proce
 
 HangUpInTelegram() {
     if WinExist("ahk_exe Telegram.exe") {

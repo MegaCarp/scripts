@@ -1,17 +1,19 @@
 #Requires AutoHotkey v2.0
 #Include defaults-global.ahk
 
-; SplitPath(A_MyDocuments,, &outDir) ; C:\Users\Денис
 class Screenshot {
 
-    screenshotUtility := "C:\Program Files (x86)\MiniCap\MiniCap.exe"
+    __New(screenshotUtility, msPaintExecutable) {
 
-    __New() {
+        this.screenshotUtility := screenshotUtility
+        this.msPaintExecutable := msPaintExecutable
 
         SplitPath A_MyDocuments, , &homeFolder
-        this.MyDownloads := homeFolder "\Downloads\"
+        this.MyDownloads := homeFolder "\Downloads"
         this.defaultSavePath := this.MyDownloads
         this.Extension := ".png"
+
+        this.DefaultImgSearchDirectory := A_MyDocuments "\scripts\ahk\gw2\utils\img-search"
 
     }
 
@@ -19,22 +21,54 @@ class Screenshot {
         return FormatTime(, "yy-MM-dd_HH.mm.ss") postfix
     }
 
-    defaultParameters := " -exit -save "
+    defaultParameters := A_Space "-exit -save" A_Space
 
-    ; ScreenshotScreen(Name := this.defaultFileName "_screen.png") {
-    ;     MsgBox "C:\Program Files (x86)\MiniCap\MiniCap.exe" " -capturescreen" " -exit -save " A_MyDocuments FormatTime(, "yy-MM-dd_hh.mm.ss") "_screen.png"
-    ; }
-
-    FinalizeFilenameExtension(SaveToDir, FileName, FileSearch) {
+    FinalizeFilenameExtension(SaveToDir, FileSearch, FileName := this.GetName) {
 
         ; if you cancel the filesearch, it makes the screenshot anyway and saves it to a chronomically named .png into Downloads
         if FileSearch {
-            ; FileName := FileSelect('S8', "C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\test")
+            ; FileName := FileSelect('S8', A_MyDocuments "\scripts\ahk\gw2\utils\img-search\test")
             FileName := FileSelect('S8', SaveToDir FileName)
         }
 
-        if !FileName {
-            FileName := this.GetName
+        ; if extension is doubled, remove the extension
+        ; minicap docs: .jpg, .gif, .pdf, .png, .bmp, .tiff
+        switch SubStr(FileName, StrLen(FileName) - 3) {
+            case ".jpg":
+                Extension := ".jpg"
+                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+            case ".gif":
+                Extension := ".gif"
+                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+            case ".pdf":
+                Extension := ".pdf"
+                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+            case ".png":
+                Extension := ".png"
+                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+            case ".bmp":
+                Extension := ".bmp"
+                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+            case ".tiff":
+                Extension := ".tiff"
+                FileName := SubStr(FileName, 1, StrLen(FileName) - 4)
+
+            default:
+                Extension := ".png"
+        }
+
+        return [FileName, Extension]
+    }
+
+    CheckFilenameExtension(FileName := '', FileSearch := '') {
+
+        if !FileName
+            return
+
+        ; if you cancel the filesearch, it makes the screenshot anyway and saves it to a chronomically named .png into Downloads
+        if FileSearch {
+            ; FileName := FileSelect('S8', A_MyDocuments "\scripts\ahk\gw2\utils\img-search\test")
+            FileName := FileSelect('S8', A_MyDocuments "\scripts\ahk\gw2\utils\img-search" FileName)
         }
 
         ; if extension is doubled, remove the extension
@@ -74,7 +108,7 @@ class Screenshot {
         Size := 30,
         FileSearch := "Yes",
         Extension := this.Extension,
-        SaveToDir := "C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\",
+        SaveToDir := A_MyDocuments "\scripts\ahk\gw2\utils\img-search\",
         FileName := this.GetName
     ) {
 
@@ -84,11 +118,19 @@ class Screenshot {
         MouseGetPos &Xcoordinates, &Ycoordinates
 
         ; so originally it was thought that the nightlight affects the search
-        ; additional testing gives doubt to this theory, so for now, i comment the measures for nightlight toggle, etc out
+        ; additional testing gives doubt to this theory, so for now, i comment out the measures for nightlight toggle, etc
         ; TODO FileSelect()
 
+        ; -captureregion left top right bottom
+        left := Ceil(Xcoordinates - Size / 2)
+        top := Ceil(Ycoordinates - Size / 2)
+        right := Ceil(Xcoordinates + Size / 2)
+        bottom := Ceil(Ycoordinates + Size / 2)
+
+        Rectangle := [left, top, right, bottom]
+
         WinActivate LastWindow
-        ScreenshotRegion()
+        this._ScreenshotRegion(PathWithNameAndExtension, Rectangle)
 
         ; ScreenshotRegion(1)
         ; toggleNightlight()
@@ -97,24 +139,98 @@ class Screenshot {
         ; ScreenshotRegion(2)
         ; toggleNightlight()
 
-        ScreenshotRegion(IterationNum := '') {
+    }
+    /**
+     * @description Works like Slurp, using a super simple GUI to show what's being saved. 
+     * - Illustrates where the top left of the rectangle will be with a red dot.
+     * - Uses MsgBox for controls and script pause.
+     * @param {'home\Downloads\date_time-region.png'|String} Filename
+     * - by default it saves to a hardcoded single file.
+     * @param {'Yes'|String} OfferRename
+     * - Anything but 'Yes' is a negation and the rename won't be asked about. 
+     */
+    ScreenshotRegion(Filename := '', OfferRename := 'Yes') {
 
-            fullFileName := PathWithNameAndExtension[1] IterationNum PathWithNameAndExtension[2]
-
-            ; -captureregion left top right bottom
-            left := Ceil(Xcoordinates - Size / 2) " "
-            top := Ceil(Ycoordinates - Size / 2) " "
-            right := Ceil(Xcoordinates + Size / 2) " "
-            bottom := Ceil(Ycoordinates + Size / 2) " "
-
-            Region := " -captureregion " left top right bottom
-
-            RunWait this.screenshotUtility Region this.defaultParameters fullFileName
-            Run("C:\Windows\system32\mspaint.exe " fullFileName, , 'Min')
+        if !Filename
+            Filename := this.defaultSavePath '\' this.GetName('-region') ".png"
+        else {
+            Filename := this.CheckFilenameExtension(Filename)
+            Filename := Filename[1] Filename[2]
         }
+
+        MouseGetPos(&mouseX1, &mouseY1)
+        redDot := Gui('+AlwaysOnTop -Caption +ToolWindow')
+        redDot.BackColor := 'FF0000'
+        redDot.Show('x' mouseX1 A_Space 'y' mouseY1 A_Space 'w3 h3')
+
+        if MsgBox(
+            'Move mouse to where the bottom right corner of the Rectangle will be and then select Yes to make the screenshot.`n`nYou can also select `'Cancel`' to cancel operation.', ,
+            'OKCancel') = 'OK' {
+
+            redDot.Destroy
+
+            MouseGetPos(&mouseX2, &mouseY2)
+            if (mouseX1 > mouseX2 OR mouseY1 > mouseY2) {
+                MsgBox 'Incorrect Rectangle coordinates! The coordinates: ' mouseX1 A_Space mouseX2 A_Space mouseY1 A_Space mouseY2
+                return
+            }
+
+            Rectangle := [mouseX1, mouseY1, mouseX2, mouseY2]
+            this._ScreenshotRegion(Filename, Rectangle, "Open in Paint")
+
+        } else {
+            redDot.Destroy
+            return
+        }
+
+        if OfferRename = 'Yes'
+            this._AskForName(Filename)
     }
 
+    /**
+     * @description Meant to be used as a tool for other functions.
+     * @param {'c:\users\user\Downloads\gogo.png' | String} FileName
+     * - Name for the output.
+     * - By default saves into a hardcoded filename within Dowloads folder.
+     * @param {'[100, 100, 200, 200]' | Array} Rectangle
+     *  - Set the region to capture.
+     *  - By default just captures the screen
+     * @param {'No'|'1'|String} OpenPaint
+     * - By default doesn't open msPaint to see the output.
+     */
+    _ScreenshotRegion(FileName := this.MyDownloads "\defaultName-screencap-region.png", Rectangle := [0, 0,
+        A_ScreenWidth, A_ScreenHeight], OpenPaint := 'No') {
+
+        Rectangle := " -captureregion" A_Space Rectangle[1] A_Space Rectangle[2] A_Space Rectangle[3] A_Space Rectangle[
+            4]
+
+        RunWait this.screenshotUtility Rectangle this.defaultParameters FileName
+
+        if OpenPaint != 'No'
+            Run(this.msPaintExecutable A_Space FileName, ,
+                'Min')
+    }
+
+    _AskForName(Filename, DontAsk := 'No') {
+        if DontAsk != 'No' OR MsgBox('Rename file?', , 'OKCancel') = 'OK' {
+            RenameInto := this.CheckFilenameExtension(FileSelect('S', this.DefaultImgSearchDirectory))
+            RenameInto := RenameInto[1] RenameInto[2]
+
+            if RenameInto {
+                SplitPath Filename, &SansDir
+                WinKill SansDir " - Paint"
+                Sleep 20
+                MsgBox Filename '`n' RenameInto
+                A_Clipboard := Filename '`n' RenameInto
+                FileMove Filename, RenameInto, 1
+            }
+        }
+
+    }
 }
+
+; testScreen := Screenshot()
+; testScreen.ScreenshotSearchables()
 
 ; testScreen := Screenshot()
 ; testScreen.ScreenshotSearchables()

@@ -1,0 +1,20 @@
+<InputBindings>
+    <action name="Strafe Left" id="2" device="None"/>
+    <action name="Strafe Right" id="3" device="None"/>
+    <action name="Turn Left" id="4" device="Keyboard" button="65"/>
+    <action name="Turn Right" id="5" device="Keyboard" button="68"/>
+    <action name="Autorun" id="7" device="None"/>
+    <action name="Healing Skill" id="23" device="Keyboard" button="82"/>
+    <action name="Utility Skill 1" id="24" device="Keyboard" button="67"/>
+    <action name="Utility Skill 2" id="25" device="Keyboard" button="84"/>
+    <action name="Utility Skill 3" id="26" device="Keyboard" button="81"/>
+    <action name="Elite Skill" id="27" device="Keyboard" button="69"/>
+    <action name="Take Target" id="33" device="None"/>
+    <action name="Next Enemy" id="35" device="Keyboard" button="67" mod="4"/>
+    <action name="Information Dialog" id="51" device="Keyboard" button="78"/>
+    <action name="Raptor Mount/Dismount" id="155" device="Keyboard" button="98"/>
+    <action name="Springer Mount/Dismount" id="156" device="Keyboard" button="97"/>
+    <action name="Skimmer Mount/Dismount" id="157" device="Keyboard" button="99"/>
+    <action name="Warclaw Mount/Dismount" id="169" device="Keyboard" button="96"/>
+    <action name="Special Action" id="82" device="Keyboard"/>
+</InputBindings>
