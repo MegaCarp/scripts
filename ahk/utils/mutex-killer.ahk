@@ -10,7 +10,7 @@
 ; %SystemRoot%\System32\reg.exe ADD "HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor" /f /t REG_SZ /v "AUTORUN" /d "@chcp 65001>nul"
 
 ;; tried to run it invisibly using vbs script
-; wscript.exe "C:\Users\Денис\Documents\scripts\run-invisibly.vbs" "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe `"C:\Users\Денис\Documents\scripts\launch-gw2-and-blish_testing.ahk`""
+; wscript.exe A_MyDocuments "\scripts\run-invisibly.vbs" "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe `A_MyDocuments "\scripts\launch-gw2-and-blish_testing.ahk`""
 
 ; make an map of arrays
 ; keys are populated by cmd\tasklist
@@ -100,12 +100,16 @@ MutexKiller(ProcessName, MutexName, Testing := '') {
 
         MsgBox 'found mutex'
 
-        taskName := "`"\ahk\utils\Run Mutex Killer as Admin`""
-        taskAction := "`"" A_AhkPath A_Space A_ScriptFullPath "`""
-        ComBeginnerStr := A_ComSpec " /c "
-        ; ComBeginnerStr := "C:\Users\Денис\Documents\scripts\run-invisibly.vbs " A_ComSpec " /c "
+        ; taskName := "`"\ahk\utils\Run Mutex Killer as Admin`""
+        ; taskAction := "`"" A_AhkPath A_Space A_ScriptFullPath "`""
+        ; ComBeginnerStr := A_ComSpec " /c "
+        ; ComBeginnerStr := A_MyDocuments "\scripts\run-invisibly.vbs " A_ComSpec " /c "
         if !A_IsAdmin {
-            msgbox "not! admin"
+            ; msgbox "not! admin"
+            if Testing = "not admin"
+                return "not admin"
+
+            
             ; /f - don't error out if the task already exists
             ; MsgBox RunCMD(ComBeginnerStr "schtasks /delete /tn " taskName " /f")
             ; final_str := ComBeginnerStr "schtasks /create /tn " taskName " /tr " taskAction " /sc ONCE /st 17:00 /sd 11/11/2032 /f"

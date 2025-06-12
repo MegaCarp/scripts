@@ -19,16 +19,16 @@ class SearchableImage extends Object {
 
         this.Logger := Logger(this.ProcessTree "\Logger")
 
-    }
+        if NOT FileExist(Image) = '' {
 
-    if NOT FileExist(Image) = '' {
+            this.dithImage := this.MakeDithered(Image)
+            this.AddPicture(, this.dithImage).GetPos(, , &imageWidth)
 
-        this.dithImage := this.MakeDithered(Image)
-        this.AddPicture(, this.dithImage).GetPos(, , &imageWidth)
+        } else if NOT Image = '' {
 
-    } else if NOT Image = '' {
+            this.Logger.Log("Image path" Image " is incorrect!", "Yes")
 
-        this.Logger.Log("Image path" Image " is incorrect!", "Yes")
+        }
 
     }
 
@@ -48,7 +48,6 @@ class SearchableImage extends Object {
         }
 
     }
-
 
     UpdateWindowPosition() {
         WinGetPos(&outX, &outY, &outWidth, &outHeight, this.Window.ID)
@@ -125,4 +124,4 @@ class SearchableImage extends Object {
 
 ; WinGetTitle
 ; testObs := ActWithImages()
-; testObs.FindTarget("C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\night-light_x-close-window.png")
+; testObs.FindTarget(A_MyDocuments "\scripts\ahk\gw2\utils\img-search\night-light_x-close-window.png")

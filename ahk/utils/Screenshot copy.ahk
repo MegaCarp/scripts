@@ -14,13 +14,13 @@
 
 ;     ; if you cancel the filesearch, it makes the screenshot anyway and saves it to a chronomically named .png into Downloads
 ;     if FileSearch {
-;         ; FileName := FileSelect('S8', "C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\test")
+;         ; FileName := FileSelect('S8', A_MyDocuments "\scripts\ahk\gw2\utils\img-search\test")
 ;         FileName := FileSelect('S8', SaveToDir FileName)
 ;         MsgBox FileName
 ;     }
 ; }
 
-; CheckOverTheFileName("C:\Users\Денис\Documents\scripts\ahk\gw2\utils\img-search\", "\test" "_searchable", 1)
+; CheckOverTheFileName(A_MyDocuments "\scripts\ahk\gw2\utils\img-search\", "\test" "_searchable", 1)
 
 
 myfun() {

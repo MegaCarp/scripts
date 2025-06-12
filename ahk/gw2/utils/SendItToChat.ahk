@@ -17,6 +17,6 @@ SendItToChat(prependWith := "") {
     Send whatToSend
     Send "{Enter}"
     w8
-    #IncludeAgain chat\open-technical-channel.ahk
+    ; #IncludeAgain chat\open-technical-channel.ahk
 
 }

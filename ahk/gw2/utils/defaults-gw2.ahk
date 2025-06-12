@@ -1,9 +1,16 @@
 #Requires AutoHotkey v2.0
+#SingleInstance Force
+
+#Include CoordsData.ahk
 
 #Include ..\..\utils\defaults-global.ahk
 #Include chat\technical-guild-chat.ahk
 #Include SendItToChat.ahk
 #Include time-to-gather.ahk
+
+#Include ..\tp\forge-fill.ahk
+
+#Include ..\tp\sell-ten.ahk
 
 GoToGw2() {
 
@@ -14,4 +21,9 @@ GoToGw2() {
         }
     }
 
+}
+
+F12:: {
+    GoToGw2
+    RecordMousePosition(, ["C:\Users\stash\Documents\scripts\ahk\gw2\tp\tp.png", "this.Anchor"])
 }

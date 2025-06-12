@@ -15,6 +15,8 @@ testingArray := [
     ["PID-Param", nonexistantPID, "Invalid process name."]
     ["PID-Param", testPName, [testPID]]
     ["PID-Param", testPID, [testPID]]
+    ["PID-Param", testPID, [testPID]]
+    ["PID-Param", testPID, [testPID]]
 ]
 
 ; Run "a_MutexProcess.ahk",,, &MutPID

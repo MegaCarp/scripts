@@ -8,12 +8,15 @@
 ; waypoint: [&BDgAAAA=]
 
 foundChatLink := PrintChatLink(A_Clipboard)
-if NOT (foundChatLink = "") {
+    ;; woah doubled down on the "no chat link found"
+; if NOT (foundChatLink = "") {
 
     ; tester
     ; A_Clipboard := ("there is a chat link [&" foundChatLink "]") ; there is a chat link [&BDgAAAA=]
 
-    chatLink2Hex := BinaryToHex(Base64ToBinary(foundChatLink))
+    try chatLink2Hex := BinaryToHex(Base64ToBinary(foundChatLink))
+    catch 
+        chatLink2Hex := 1
 
     switch {
 
@@ -41,23 +44,36 @@ if NOT (foundChatLink = "") {
         {
             ; it's a map link, probably a waypoint
             SendItToChat
-            Click X := 190, Y := 1010 ; LButton click in chat on the link following the nickname in the last
+            Click X := 210, Y := 1010 ; LButton click in chat on the link following the nickname in the last
             w8(standardWaitTime + 900)
             Click X := 962, Y := 541 ; wait for map to show the wp then double click it
             Click
         }
 
-        default: TrayTip "No link", "No chatlink found in A_Clipboard."
+        ; okay, send me to the mystic forge then
+        default: 
+        {
+            A_Clipboard := "[&BBAEAAA=]"
+            ; it's a map link, probably a waypoint
+            SendItToChat
+            Click X := 210, Y := 1010 ; LButton click in chat on the link following the nickname in the last
+            w8(standardWaitTime + 900)
+            Click X := 962, Y := 541 ; wait for map to show the wp then double click it
+            Click
+        }
+        ; default: TrayTip "No link", "No chatlink found in A_Clipboard."
 
     }
-} else {
 
-    TrayTip "No link", "No chatlink found in A_Clipboard."
+    ;; woah doubled down on the "no chat link found"
+; } else {
 
-    ; tester
-    ; MsgBox "no chat link" foundChatLink
+;     TrayTip "No link", "No chatlink found in A_Clipboard."
 
-}
+;     ; tester
+;     ; MsgBox "no chat link" foundChatLink
+
+; }
 
 PrintChatLink(aString) {
 

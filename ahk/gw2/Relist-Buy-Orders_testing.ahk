@@ -42,27 +42,27 @@ Map_QualityModes["Legendary"]["Coordinates"] := [510, 465]
 
 
 
-FilterForQuality(Mode) {
+; FilterForQuality(Mode) {
 
-    for key, value IN Map_QualityModes
-        for key, value IN Map_QualityModes["Synonyms"] {
+;     for key, value IN Map_QualityModes
+;         for key, value IN Map_QualityModes["Synonyms"] {
             
-        }
+;         }
 
 
-        if RegExMatch(value, "")
-    switch Mode, 0 {
-        case RegExMatch(,"i)" Mode) :
+;         if RegExMatch(value, "")
+;     switch Mode, 0 {
+;         case RegExMatch(,"i)" Mode) :
             
-        default:
+;         default:
             
-    }
-    GoToGw2
+;     }
+;     GoToGw2
 
-    Click X := 620, Y := 223 ; settings and filters
-    w8
-    Click X := 574, Y := 263 ; open filters
-    w8
-    Click X := 526, Y := 313 ; basic
-    w8
-}
+;     Click X := 620, Y := 223 ; settings and filters
+;     w8
+;     Click X := 574, Y := 263 ; open filters
+;     w8
+;     Click X := 526, Y := 313 ; basic
+;     w8
+; }

@@ -1,9 +1,9 @@
 #SingleInstance Off
 
-Run "C:\games\GuildWars2-arenanet\Gw2-64.exe -shareArchive",,, &outID ; gw2arenanet
-; Run "C:\games\GuildWars2-arenanet\Gw2-64.exe",,, &outID ; gw2arenanet
+; Run "C:\games\GuildWars2-arenanet\Gw2-64.exe -shareArchive",,, &outID ; gw2arenanet
+Run A_MyDocuments "..\..\..\games\GuildWars2-arenanet\Gw2-64.exe",,, &outID ; gw2arenanet
 ; Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true",,, &outID ; gw2epic
-Run "C:\Users\Денис\games\gw2\blishud\Blish HUD.exe"
+Run A_MyDocuments "..\games\gw2\blishud\Blish HUD.exe"
 
 ; SetTimer killMutex(), -20000
 
@@ -17,7 +17,9 @@ killMutex() {
         ; 	return ; handle not found
         ; }
 
-        command := "C:\Users\Денис\Downloads\handle\handle64.exe -p " . outID . " -c " . "AN-Mutex-Install-101" . " -y"
+        HandleExecutable := A_MyDocuments "..\bin\handle\handle64.exe"
+
+        command := HandleExecutable A_Space "-p" A_Space . outID . A_Space "-c" A_Space . "AN-Mutex-Install-101" A_Space . "-y"
         Run command,, 'Hide'
 }
 
