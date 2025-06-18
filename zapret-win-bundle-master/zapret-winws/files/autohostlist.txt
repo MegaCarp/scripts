@@ -29,3 +29,5 @@ detectportal.firefox.com
 yt3.googleusercontent.com
 archiveofourown.org
 www.instagram.com
+discord.com
+alive.github.com
