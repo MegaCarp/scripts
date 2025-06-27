@@ -42,6 +42,7 @@
     <action name="Springer Mount/Dismount" id="156" device="Keyboard" button="15" mod="7"/>
     <action name="Skimmer Mount/Dismount" id="157" device="Keyboard" button="89" mod="7"/>
     <action name="Jackal Mount/Dismount" id="158" device="Keyboard" button="85" mod="7"/>
+    <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7"/>
     <action name="Warclaw Mount/Dismount" id="169" device="Keyboard" button="3" mod="7"/>
     <action name="Special Action" id="82" device="Keyboard" button="12" mod="7"/>
     <action name="Equip/Unequip Novelty" id="162" device2="Keyboard" button2="14" mod2="7"/>

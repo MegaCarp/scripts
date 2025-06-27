@@ -108,13 +108,18 @@ class Screenshot {
         Size := 30,
         FileSearch := "Yes",
         Extension := this.Extension,
-        SaveToDir := A_MyDocuments "\scripts\ahk\gw2\utils\img-search\",
-        FileName := this.GetName
+        SaveToDir := this.defaultSavePath,
+        FileName := ''
     ) {
+
+        if !FileName
+            if this.lastFilename
+                this.lastFilename := this.CheckFilenameExtension(FileSelect('S', this.lastFilename))
+            else this.lastFilename := this.CheckFilenameExtension(FileSelect('S', this.defaultSavePath))
 
         PathWithNameAndExtension := this.FinalizeFilenameExtension(SaveToDir, FileName "_searchable", FileSearch)
 
-        LastWindow := WinGetID("A")
+        WinGetID("A")
         MouseGetPos &Xcoordinates, &Ycoordinates
 
         ; so originally it was thought that the nightlight affects the search
@@ -127,10 +132,10 @@ class Screenshot {
         right := Ceil(Xcoordinates + Size / 2)
         bottom := Ceil(Ycoordinates + Size / 2)
 
-        Rectangle := [left, top, right, bottom]
+        this.lastRectangle := [left, top, right, bottom]
 
-        WinActivate LastWindow
-        this._ScreenshotRegion(PathWithNameAndExtension, Rectangle)
+        WinActivate
+        this._ScreenshotRegion('Yeah, open in Paint')
 
         ; ScreenshotRegion(1)
         ; toggleNightlight()
@@ -151,11 +156,20 @@ class Screenshot {
      */
     ScreenshotRegion(Filename := '', OfferRename := 'Yes') {
 
-        if !Filename
-            Filename := this.defaultSavePath '\' this.GetName('-region') ".png"
+        isThisADirectory := ''
+        try isThisADirectory := InStr(FileGetAttrib(Filename), "D")
+
+        if isThisADirectory {
+            this.defaultSavePath := Filename
+            Directory := Filename
+        }
+        else Directory := this.defaultSavePath
+
+        if !(Filename)
+            this.lastFilename := Directory '\' this.GetName('-region') ".png"
         else {
-            Filename := this.CheckFilenameExtension(Filename)
-            Filename := Filename[1] Filename[2]
+            this.lastFilename := this.CheckFilenameExtension(Filename)
+            this.lastFilename := this.lastFilename[1] this.lastFilename[2]
         }
 
         MouseGetPos(&mouseX1, &mouseY1)
@@ -175,8 +189,8 @@ class Screenshot {
                 return
             }
 
-            Rectangle := [mouseX1, mouseY1, mouseX2, mouseY2]
-            this._ScreenshotRegion(Filename, Rectangle, "Open in Paint")
+            this.lastRectangle := [mouseX1, mouseY1, mouseX2, mouseY2]
+            this._ScreenshotRegion("Open in Paint")
 
         } else {
             redDot.Destroy
@@ -184,7 +198,7 @@ class Screenshot {
         }
 
         if OfferRename = 'Yes'
-            this._AskForName(Filename)
+            this._AskForName(, 'Yeah, open in paint')
     }
 
     /**
@@ -198,31 +212,38 @@ class Screenshot {
      * @param {'No'|'1'|String} OpenPaint
      * - By default doesn't open msPaint to see the output.
      */
-    _ScreenshotRegion(FileName := this.MyDownloads "\defaultName-screencap-region.png", Rectangle := [0, 0,
-        A_ScreenWidth, A_ScreenHeight], OpenPaint := 'No') {
+    _ScreenshotRegion(OpenPaint := 'No') {
 
-        Rectangle := " -captureregion" A_Space Rectangle[1] A_Space Rectangle[2] A_Space Rectangle[3] A_Space Rectangle[
-            4]
+        Rectangle := " -captureregion" A_Space this.lastRectangle[1] A_Space this.lastRectangle[2] A_Space this.lastRectangle[
+            3] A_Space this.lastRectangle[
+                4]
 
-        RunWait this.screenshotUtility Rectangle this.defaultParameters FileName
+        RunWait this.screenshotUtility Rectangle this.defaultParameters this.lastFilename
 
         if OpenPaint != 'No'
-            Run(this.msPaintExecutable A_Space FileName, ,
+            Run(this.msPaintExecutable A_Space this.lastFilename, ,
                 'Min')
     }
 
-    _AskForName(Filename, DontAsk := 'No') {
-        if DontAsk != 'No' OR MsgBox('Rename file?', , 'OKCancel') = 'OK' {
-            RenameInto := this.CheckFilenameExtension(FileSelect('S', this.DefaultImgSearchDirectory))
-            RenameInto := RenameInto[1] RenameInto[2]
+    _AskForName(JustOpenFilePicker := 'No', OpenPaint := 'No') {
+        if JustOpenFilePicker != 'No' OR MsgBox('Rename file?', , 'OKCancel') = 'OK' {
+            RenameInto := this.CheckFilenameExtension(FileSelect('S', this.lastFilename))
+            ; RenameInto := this.CheckFilenameExtension(FileSelect('S', this.DefaultImgSearchDirectory))
 
             if RenameInto {
-                SplitPath Filename, &SansDir
+
+                RenameInto := RenameInto[1] RenameInto[2]
+
+                SplitPath this.lastFilename, &SansDir
                 WinKill SansDir " - Paint"
                 Sleep 20
-                MsgBox Filename '`n' RenameInto
-                A_Clipboard := Filename '`n' RenameInto
-                FileMove Filename, RenameInto, 1
+                FileMove this.lastFilename, RenameInto, 1
+                this.lastFilename := RenameInto
+
+                if OpenPaint != 'No'
+                    Run(this.msPaintExecutable A_Space this.lastFilename, ,
+                        'Min')
+
             }
         }
 

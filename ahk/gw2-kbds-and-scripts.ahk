@@ -17,10 +17,10 @@ F6:: Send "{Enter}"
 
 F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
-F2:: Gw2Sell10
+; F2:: Gw2Sell10
 ; F2:: RunWait("gw2\tp\cancel-ten.ahk")
 ; F3:: RunWait("gw2\tp\buy-ten.ahk")
-F4:: ForgeAndFill()
+; F4:: ForgeAndFill()
 
 ; ^g:: tech_TimingGather(1,2)
 ; +g:: MouseMove X := 848, Y := 676, 0 ; first slot of the inventory ; show me where the first slot is

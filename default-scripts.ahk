@@ -7,7 +7,7 @@
 Run "ahk\utils\killAHK.ahk"
 Run "ahk\gw2-kbds-and-scripts.ahk"
 
-; F12:: RecordMousePosition
+F12:: RecordMousePosition
 
 ; F1:: RunWait "ahk\gw2\research-item-name-on-bltc.ahk"
 ; F5:: RunWait "ahk\рассылка-в-тайме.ahk"
@@ -21,7 +21,7 @@ Run "ahk\gw2-kbds-and-scripts.ahk"
 
 CheckOnVdi()
 
-; `:: GoToVDI("And stay in VDI")
+; `:: GoToVDI("And stay in VDI", 'leave char')
 
 ; ^`:: GoToVDI()
 

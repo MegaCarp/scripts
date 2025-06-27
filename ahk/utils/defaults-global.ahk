@@ -1,30 +1,33 @@
 #Requires AutoHotkey v2.0
 
-#Include local-vars.ahk
+#Include ..\..
 
-#Include ..\lib\lib_runcmd.ahk
-#Include ..\lib\lib_dsvparser-ahk2.ahk
-#Include ..\lib\lib_mutex.ahk
+#Include ahk\utils\local-vars.ahk
 
-#Include ..\work\go-to-VDI.ahk
+#Include ahk\lib\lib_runcmd.ahk
+#Include ahk\lib\lib_dsvparser-ahk2.ahk
+#Include ahk\lib\lib_mutex.ahk
+#Include ahk\lib\JSON.ahk
 
-#Include base-sleep-interval.ahk
-#Include TestableDataForSwitching.ahk
-#Include TestingSuite.ahk
+#Include ahk\work\go-to-VDI.ahk
+
+#Include ahk\utils\base-sleep-interval.ahk
+#Include ahk\utils\TestableDataForSwitching.ahk
+#Include ahk\utils\TestingSuite.ahk
 
 ; #Include SearchableImage.ahk
 
-#Include Screenshot.ahk
-#Include GetUserInput.ahk
+#Include ahk\utils\Screenshot.ahk
+#Include ahk\utils\GetUserInput.ahk
 
-#Include record-mouse-position.ahk
+#Include ahk\utils\record-mouse-position.ahk
 
-#Include logger.ahk
-#Include notification.ahk
+#Include ahk\utils\logger.ahk
+#Include ahk\utils\notification.ahk
 
-#Include ticksTimer.ahk
+#Include ahk\utils\ticksTimer.ahk
 
-#Include toggleNightlight.ahk
+#Include ahk\utils\toggleNightlight.ahk
 
 LogFileName := A_MyDocuments "\logs\ahk\" FormatTime(,"yyyy-MM-dd") ".txt"
 

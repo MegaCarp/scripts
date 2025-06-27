@@ -4,7 +4,7 @@
 
 /**
  * 
- * @description Creates an object that can be used to find and click a thing visually on screen.  
+ * @description Creates an object that can be used to find and click a thing optionally visually on screen.  
  * @param {'[0, 0]'| Array} Coords_Arr  
  * - **Coords_Arr:** Where to click.  
  *   - If there's an image to search, then the   

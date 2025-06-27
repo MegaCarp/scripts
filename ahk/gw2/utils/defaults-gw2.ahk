@@ -3,6 +3,8 @@
 
 #Include CoordsData.ahk
 
+; #Include ..\blish-utility.ahk
+
 #Include ..\..\utils\defaults-global.ahk
 #Include chat\technical-guild-chat.ahk
 #Include SendItToChat.ahk
@@ -23,7 +25,7 @@ GoToGw2() {
 
 }
 
-F12:: {
-    GoToGw2
-    RecordMousePosition(, ["C:\Users\stash\Documents\scripts\ahk\gw2\tp\tp.png", "this.Anchor"])
-}
+; F12:: {
+;     GoToGw2
+;     RecordMousePosition(, ["C:\Users\stash\Documents\scripts\ahk\gw2\tp\tp.png", "this.Anchor"])
+; }

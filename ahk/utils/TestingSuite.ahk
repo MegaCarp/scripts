@@ -4,13 +4,16 @@
 TestOutput(WhatAreWeTesting_str, TestedOutput, ExpectedOutput, ErrorOnly := "Yes") {
 
     returner := ''
-    if Type(TestedOutput) = "Array"
-    {
-        returner := TestedOutput[2]
-        TestedOutput := TestedOutput[1] 
-        ; for GatherBountifully I'm implementing memory of the last usage - i want to restore the memory after last usage, and for that the "return" will have an array - the 1st value will have the output of the test 
+        ;;; for GatherBountifully 
+    ; if Type(TestedOutput) = "Array"    {
+        ; returner := TestedOutput[2]
+        ; TestedOutput := TestedOutput[1] 
+        ;;; for GatherBountifully I'm implementing memory of the last usage - i want to restore the memory after last usage, and for that the "return" will have an array - the 1st value will have the output of the test 
         ; have the original value being returned by the function - find a use for it 
-    }
+
+
+    ; }
+    ; return returner
 
     if TestedOutput = ExpectedOutput {
         if ErrorOnly != "Yes" {
@@ -18,7 +21,6 @@ TestOutput(WhatAreWeTesting_str, TestedOutput, ExpectedOutput, ErrorOnly := "Yes
         }
     } else MsgBox "❗Err! " WhatAreWeTesting_str " output differs from the expected!`nOutput:`n`n" TestedOutput ; TODO - notification here, TODO logger here
 
-    return returner
 }
 
 WorkWith_GetUserInput(Input) {

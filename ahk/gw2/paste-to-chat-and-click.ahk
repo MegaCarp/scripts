@@ -1,4 +1,5 @@
 #Requires AutoHotkey v2.0
+#SingleInstance Force
 #Include utils\defaults-gw2.ahk
 
 #Include ..\lib\lib_base64ToBinToHex.ahk
@@ -27,7 +28,7 @@ foundChatLink := PrintChatLink(A_Clipboard)
             ; A_Clipboard := ("it's a skill template [&" foundChatLink "]") ; there is a chat link [&BDgAAAA=]
             ; MsgBox ("it's a skill template [&" foundChatLink "]") ; there is a chat link [&BDgAAAA=]
 
-            SendItToChat
+            SendItToChat A_Clipboard
             #IncludeAgain utils\chat\template\macro-open-a-template.ahk
             ; Click(Button := 'R', X := 219, Y := 1014) ; right click on pasted template
             ; w8
@@ -43,23 +44,13 @@ foundChatLink := PrintChatLink(A_Clipboard)
         case RegExMatch(chatLink2Hex, "^04"):
         {
             ; it's a map link, probably a waypoint
-            SendItToChat
-            Click X := 210, Y := 1010 ; LButton click in chat on the link following the nickname in the last
-            w8(standardWaitTime + 900)
-            Click X := 962, Y := 541 ; wait for map to show the wp then double click it
-            Click
+            SendWaypointToChatAndClickIt A_Clipboard
         }
 
         ; okay, send me to the mystic forge then
         default: 
         {
-            A_Clipboard := "[&BBAEAAA=]"
-            ; it's a map link, probably a waypoint
-            SendItToChat
-            Click X := 210, Y := 1010 ; LButton click in chat on the link following the nickname in the last
-            w8(standardWaitTime + 900)
-            Click X := 962, Y := 541 ; wait for map to show the wp then double click it
-            Click
+            SendWaypointToChatAndClickIt 
         }
         ; default: TrayTip "No link", "No chatlink found in A_Clipboard."
 
@@ -74,6 +65,14 @@ foundChatLink := PrintChatLink(A_Clipboard)
 ;     ; MsgBox "no chat link" foundChatLink
 
 ; }
+
+SendWaypointToChatAndClickIt(WaypointLink := "[&BBAEAAA=]", WhichChatToSendItTo := technicalGuildChat) {
+            SendItToChat WaypointLink, WhichChatToSendItTo
+            Click X := 230, Y := 1010 ; LButton click in chat on the link following the nickname in the last
+            w8(standardWaitTime + 900)
+            Click X := 962, Y := 541 ; wait for map to show the wp then double click it
+            Click
+}
 
 PrintChatLink(aString) {
 

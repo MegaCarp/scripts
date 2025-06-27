@@ -41,63 +41,40 @@ Gw2Launcher() {
     LaunchGW2(Name) {
 
         SourceLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\" Name ".dat"
-        if !FileExist(SourceLocalDat) {
-            MsgBox "SourceLocalDat " SourceLocalDat " does not exist! Exiting."
-            return
-        }
-
         TargetLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\Local.dat"
-        if !FileExist(TargetLocalDat) {
-            MsgBox "TargetLocalDat " TargetLocalDat " does not exist - continue regardless."
-        }
 
         SourceBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
-        if !FileExist(SourceBlishTodo) {
-            MsgBox "SourceBlishTodo " SourceBlishTodo " does not exist! Exiting."
-            return
-        }
-
         TargetBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
-        if !FileExist(TargetBlishTodo) {
-            MsgBox "TargetBlishTodo " TargetBlishTodo " does not exist! Exiting."
-            return
-        }
 
-        while ProcessExist("Gw2-64.exe")
-            ProcessClose("Gw2-64.exe")
-        while ProcessExist("Blish")
-            ProcessClose("Blish")
-
-        ;;;;;;;;;;;;;;;;
-
-        loop files SourceBlishTodo '\*' {
-            try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
-            catch {
-                SplitPath SourceBlishTodo,,&OutDir
-                MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
-                FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
-            }
-        }
-
-        FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
-        
-        scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
-        try FileRecycle(scriptFileName)
-
-        ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
-        loop files SourceBlishTodo '\*'
-            ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
-
-        FileAppend ToWriteToScript, scriptFileName
-        FileRecycle TargetLocalDat
-
-        ;;;;;;;;;;;;;;;;
-
-        ; RunWait 'pwsh.exe -File `"' scriptFileName '`"'
-        RunWait 'pwsh.exe -WindowStyle Hidden -File `"' scriptFileName '`"'
-        ;;;;;;;;;;;;;;;;
+;         ScriptText := "
+; (
+;         $fileNames = (Get-ChildItem -Path "{SourceBlishTodo}" -File).Name ``
+;             foreach ($xml in $fileNames) `{``
+;             ``
+;             $sourcePath = "C:\Users\stash\Documents\scripts\ahk\gw2\InputBinds\" + $xml``
+;                 $targetPath = "C:\Users\stash\Documents\Guild Wars 2\InputBinds\" + $xml``
+;                 ``
+;             New-Item -ItemType HardLink -Path $sourcePath -Target $targetPath``
+;         `}
+; Another way of using variables with a continuation section.
+; Input value 1: {1}
+; Input value 2: {2}
+; )"
 
         RunGw2ArenaNet(Name) {
+            while ProcessExist("Gw2-64.exe")
+                ProcessClose("Gw2-64.exe")
+            while ProcessExist("Blish")
+                ProcessClose("Blish")
+
+
+            RunWait "PowerShell.exe -File "
+
+            FileCopy "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\" Name ".dat", "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\Local.dat",
+                1 ; change to hardlink
+            FileCopy "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name, "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos",
+                1 ; change to hardlink
+            Sleep 200
             Run BlishExe
             Run Gw2Exe " -autologin", , , &outID ; gw2arenanet
         }
@@ -105,8 +82,10 @@ Gw2Launcher() {
             case 'Captatrix': RunGw2ArenaNet(Name)
             case 'Marina': RunGw2ArenaNet(Name)
             case 'Carp':
+                while ProcessExist("Gw2-64.exe")
+                    ProcessClose("Gw2-64.exe")
                 Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true", , , &
-                outID ; gw2epic
+                    outID ; gw2epic
                 Run BlishExe
             default:
         }
