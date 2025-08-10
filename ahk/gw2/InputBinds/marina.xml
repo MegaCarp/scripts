@@ -13,9 +13,10 @@
     <action name="Take Target" id="33" device="None"/>
     <action name="Next Enemy" id="35" device="Keyboard" button="67" mod="4"/>
     <action name="Information Dialog" id="51" device="Keyboard" button="78"/>
-    <action name="Raptor Mount/Dismount" id="155" device="Keyboard" button="98"/>
-    <action name="Springer Mount/Dismount" id="156" device="Keyboard" button="97"/>
-    <action name="Skimmer Mount/Dismount" id="157" device="Keyboard" button="99"/>
-    <action name="Warclaw Mount/Dismount" id="169" device="Keyboard" button="96"/>
+    <action name="Raptor Mount/Dismount" id="155" device2="Keyboard" button2="100"/>
+    <action name="Springer Mount/Dismount" id="156" device2="Keyboard" button2="99"/>
+    <action name="Skimmer Mount/Dismount" id="157" device2="Keyboard" button2="98"/>
+    <action name="Jackal Mount/Dismount" id="158" device2="Keyboard" button2="97"/>
+    <action name="Warclaw Mount/Dismount" id="169" device2="Keyboard" button2="96"/>
     <action name="Special Action" id="82" device="Keyboard"/>
 </InputBindings>

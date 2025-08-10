@@ -15,6 +15,8 @@
 #Include ahk\utils\TestableDataForSwitching.ahk
 #Include ahk\utils\TestingSuite.ahk
 
+#Include ahk\utils\InputChecker.ahk
+
 ; #Include SearchableImage.ahk
 
 #Include ahk\utils\Screenshot.ahk
@@ -35,7 +37,7 @@ screenshotUtility := "C:\Program Files (x86)\MiniCap\MiniCap.exe"
 if !FileExist(screenshotUtility)
     MsgBox "Screenshot utility path is invalid! Path is `"" screenshotUtility " `""
 
-msPaintExecutable := "C:\Program Files\WindowsApps\Microsoft.Paint_11.2503.381.0_x64__8wekyb3d8bbwe\PaintApp\mspaint.exe"
+msPaintExecutable := "C:\Users\stash\AppData\Local\Microsoft\WindowsApps\mspaint.exe"
 if !FileExist(msPaintExecutable)
     MsgBox "msPaintExecutable path is invalid! Path is `"" screenshotUtility " `""
 

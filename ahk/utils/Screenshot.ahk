@@ -17,8 +17,15 @@ class Screenshot {
 
     }
 
-    GetName(postfix := '') {
-        return FormatTime(, "yy-MM-dd_HH.mm.ss") postfix
+    GetName(postfix := '', UseLast := 'Yes') {
+
+        static TheLast := ''
+
+        if UseLast != 'Yes' OR !TheLast
+            TheLast := FormatTime(, "yy-MM-dd_HH.mm.ss") postfix
+
+        return TheLast
+
     }
 
     defaultParameters := A_Space "-exit -save" A_Space
@@ -145,6 +152,7 @@ class Screenshot {
         ; toggleNightlight()
 
     }
+
     /**
      * @description Works like Slurp, using a super simple GUI to show what's being saved. 
      * - Illustrates where the top left of the rectangle will be with a red dot.
@@ -199,6 +207,8 @@ class Screenshot {
 
         if OfferRename = 'Yes'
             this._AskForName(, 'Yeah, open in paint')
+
+        return this.lastFilename
     }
 
     /**

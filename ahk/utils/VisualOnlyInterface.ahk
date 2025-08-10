@@ -2,42 +2,61 @@
 #SingleInstance Force
 
 #Include defaults-global.ahk
+;;;;;;;;;
+#Include ClickData_builderUtility.ahk
+;;;;;;;;;;
 
-class GraphicalVisualOnlyInterface {
+class VisualOnlyInterface {
 
+    /**
+     * @description During creation check for Anchor being present and if it's not, then immediately attempt to create it.
+     * - Ask where to put the saved 
+     * - Illustrates where the top left of the rectangle will be with a red dot.
+     * - Uses MsgBox for controls and script pause.
+     * @param {'home\Downloads\date_time-region.png'|String} Filename
+     * - by default it saves to a hardcoded single file.
+     * @param {'Yes'|String} OfferRename
+     * - Anything but 'Yes' is a negation and the rename won't be asked about. 
+     */
     __New(PngForAnchor := '', DefaultDirectory := A_MyDocuments 'scripts\ahk\gw2') {
+
+        this.MapOfCoordinatesData := Map()
 
         this.Screenshotter := Screenshot(screenshotUtility, msPaintExecutable)
 
-        this.Screenshotter.defaultSavePath FileSelect('D', DefaultDirectory)
-
-        if FileExist(PngForAnchor)
+        if FileExist(PngForAnchor) {
             this.Anchor := PngForAnchor
-        else {
+            this.Screenshotter.defaultSavePath := FileSelect('D', DefaultDirectory)
+        } else {
             if PngForAnchor {
                 MsgBox "file " PngForAnchor " wasn't found!"
             }
 
-            this.Screenshotter.ScreenshotRegion()
+            this.Screenshotter.ScreenshotRegion(DefaultDirectory)
         }
 
         SplitPath this.Anchor, &AnchorName
         this.AnchorName := AnchorName
         this.currentObjectFile := A_MyDocuments "\scripts\ahk\object-trail\" this.GetName '_' this.AnchorName '.json'
 
-        SetTimer this.PrintOutTheObject, 5000
+        ; SetTimer this.PrintOutTheObject, 5000
 
     }
 
-    GetName(postfix := '') {
-        return FormatTime(, "yy-MM-dd_HH.mm.ss") postfix
+    GetName(postfix := '', UseLast := 'Yes') {
+
+        static TheLast := ''
+
+        if UseLast != 'Yes' OR !TheLast
+            TheLast := FormatTime(, "yy-MM-dd_HH.mm.ss") postfix
+
+        return TheLast
+
     }
 
     PrintOutTheObject() {
-        FileAppend JSON.Dump(this, 1), this.currentObjectFile
+        FileAppend '`n`n' JSON.Dump(this.Clone, 1), this.currentObjectFile
     }
-
-    this.MapOfCoordinatesData := Map()
 
     /**
      * @description Add a map of values to the map of maps for use by the object.
@@ -60,7 +79,7 @@ class GraphicalVisualOnlyInterface {
             return
         }
 
-        this.MapOfCoordinatesData.[Name] := ClickData_builderUtility(Data[1], Data[2], Data[3], Data[4])
+        this.MapOfCoordinatesData[Name] := ClickData_builderUtility(Data[1], Data[2], Data[3], Data[4])
 
     }
 

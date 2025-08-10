@@ -1,13 +1,13 @@
 #Requires AutoHotkey v2.0
-
-#Include defaults-gw2.ahk
+#Include defaults-global.ahk
 
 /**
  * 
  * @description Creates an object that can be used to find and click a thing optionally visually on screen.  
  * @param {'[0, 0]'| Array} Coords_Arr  
  * - **Coords_Arr:** Where to click.  
- *   - If there's an image to search, then the   
+ *   - If there's an image to search, then the coords are relative
+ *   - Meant for there always be an Anchor.
  * @param {'200'|'0'|'800'| Integer} Delay  
  * - **Delay:** Delay in ms after the click needed for load.  
  *   - By default delay is 200 ms
