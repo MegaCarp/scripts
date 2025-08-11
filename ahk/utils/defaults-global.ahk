@@ -7,7 +7,8 @@
 #Include ahk\lib\lib_runcmd.ahk
 #Include ahk\lib\lib_dsvparser-ahk2.ahk
 #Include ahk\lib\lib_mutex.ahk
-#Include ahk\lib\JSON.ahk
+#Include ahk\lib\jsongo.v2.ahk
+#Include ahk\lib\Peep.v2.ahk
 
 #Include ahk\work\go-to-VDI.ahk
 
@@ -15,7 +16,11 @@
 #Include ahk\utils\TestableDataForSwitching.ahk
 #Include ahk\utils\TestingSuite.ahk
 
-#Include ahk\utils\InputChecker.ahk
+#Include ahk\utils\ClickData_builderUtility.ahk
+
+
+; #Include ahk\utils\InputChecker.ahk
+; #Include ahk\utils\logger.ahk
 
 ; #Include SearchableImage.ahk
 
@@ -24,7 +29,6 @@
 
 #Include ahk\utils\record-mouse-position.ahk
 
-#Include ahk\utils\logger.ahk
 #Include ahk\utils\notification.ahk
 
 #Include ahk\utils\ticksTimer.ahk

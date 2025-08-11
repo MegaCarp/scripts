@@ -37,13 +37,13 @@
  *  -   'LogLevel' mode will check Data against an Array of appropriate Log Level values.
  *         - LogLevel has no principal difference with Notification Level.
  *          'SILENT' 
+ *          '[SERVICE]' 
  *          'FATAL' 
  *          'ERROR' 
  *          'WARN' 
  *          'INFO' 
  *          'DEBUG'
  *          'TRACE' 
- *          'LINEBREAK' 
  *  -   'CriticalityLevel' mode will check Data against an Array of appropriate Criticality Level values.
  *          'CLEAR' 
  *          'FATAL' 
@@ -53,13 +53,13 @@
  * @param {String | Integer} ExpectedResult This should be a 
  * @param {
  *          'SILENT' 
+ *          '[SERVICE]' 
  *          'FATAL' 
  *          'ERROR' 
  *          'WARN' 
  *          'INFO' 
  *          'DEBUG'
  *          'TRACE' 
- *          'LINEBREAK' 
  *           String } NotificationLevel The value that decides when is the user to be informed.
  * - Defaults to SILENT - at this level, the function will be silent even after FATAL.
  * 
@@ -74,6 +74,23 @@
  */
 InputChecker(Summary, Mode, Data, ExpectedResult, NotificationLevel := 'SILENT') {
 
+    InputChecker_mode([Summary, Mode, Data, ExpectedResult, NotificationLevel])
+
+    InputChecker_mode(Array) {
+        if Type_mode(Array, 'Array') = 'FATAL'
+            return
+    }
+
+    Type_mode(Summary, Data, ExpectedResult, NotificationLevel) {
+        if Type(Object) != ExpectedResult {
+
+            ErrorLevel := 'FATAL'
+            if NotificationLevel != 'SILENT'
+                MsgBox 'Testing ' Summary 'failed'
+
+            return 'FATAL'
+        }
+    }
 }
 
 /**
@@ -107,6 +124,6 @@ InputChecker_Wrapper(ArrayOfArrays, NotificationLevel := 'FATAL') {
         value["Upper criticality level"]
         value["Summary of the event"]
         value["Log from the logger"]
-        }
+    }
 
 }

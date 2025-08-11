@@ -40,6 +40,7 @@ Gw2Launcher() {
 
     LaunchGW2(Name) {
 
+        ;;;; turn this into a battery of tests with C:\Users\stash\Documents\scripts\ahk\utils\InputChecker.ahk
         SourceLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\" Name ".dat"
         if !FileExist(SourceLocalDat) {
             MsgBox "SourceLocalDat " SourceLocalDat " does not exist! Exiting."
@@ -54,6 +55,20 @@ Gw2Launcher() {
         SourceBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
         if !FileExist(SourceBlishTodo) {
             MsgBox "SourceBlishTodo " SourceBlishTodo " does not exist! Exiting."
+            return
+        }
+
+        ; "C:\Users\stash\Documents\Guild Wars 2\addons\blishhud\events\event_states.json"
+        ; Event states for Blish Event Timeers
+        TargetBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
+        if !FileExist(TargetBlishEventStates) {
+            MsgBox "TargetBlishEventStates " TargetBlishEventStates " does not exist! Exiting."
+            return
+        }
+
+        SourceBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
+        if !FileExist(SourceBlishEventStates) {
+            MsgBox "SourceBlishEventStates " SourceBlishEventStates " does not exist! Exiting."
             return
         }
 
@@ -84,7 +99,9 @@ Gw2Launcher() {
         scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
         try FileRecycle(scriptFileName)
 
+        ; Local.dat
         ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
+
         loop files SourceBlishTodo '\*'
             ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
 

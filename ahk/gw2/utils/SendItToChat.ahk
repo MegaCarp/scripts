@@ -17,6 +17,7 @@ SendItToChat(Payload, WhichChatToSendTo := technicalGuildChat, prependWith := ""
     Send Payload
     Send "{Enter}"
     w8
+    RunWait "C:\Users\stash\Documents\scripts\ahk\gw2\utils\chat\open-technical-channel.ahk"
     ; #IncludeAgain chat\open-technical-channel.ahk
 
 }

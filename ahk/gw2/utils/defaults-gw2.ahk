@@ -1,8 +1,6 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-#Include CoordsData.ahk
-
 ; #Include ..\blish-utility.ahk
 
 #Include ..\..\utils\defaults-global.ahk

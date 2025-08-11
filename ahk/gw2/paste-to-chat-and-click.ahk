@@ -29,7 +29,7 @@ foundChatLink := PrintChatLink(A_Clipboard)
             ; MsgBox ("it's a skill template [&" foundChatLink "]") ; there is a chat link [&BDgAAAA=]
 
             SendItToChat A_Clipboard
-            #IncludeAgain utils\chat\template\macro-open-a-template.ahk
+            RunWait "utils\chat\template\macro-open-a-template.ahk"
             ; Click(Button := 'R', X := 219, Y := 1014) ; right click on pasted template
             ; w8
             ; ; Click X := 213, Y := 1013
@@ -38,7 +38,7 @@ foundChatLink := PrintChatLink(A_Clipboard)
             ; MouseMove X := 431, Y := 1053 ; move to not close the template picker
             ; w8
             ; MouseMove X := 414, Y := 1020 ; prepick template 3
-            #IncludeAgain utils\chat\template\go-to-build-template-3.ahk
+            RunWait "utils\chat\template\go-to-build-template-3.ahk"
         }
 
         case RegExMatch(chatLink2Hex, "^04"):

@@ -1,5 +1,5 @@
 <InputBindings>
-    <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7"/>
+    <action name="Roller Beetle Mount/Dismount" id="161" device="Keyboard" button="54" mod="7"/>
     <action name="Move Forward" id="0" device="Keyboard" button="68"/>
     <action name="Move Backward" id="1" device="None"/>
     <action name="Strafe Left" id="2" device="Keyboard" button="88" device2="None"/>
@@ -11,7 +11,7 @@
     <action name="Swim Down / Fly Down" id="11" device="Keyboard" button="21" mod="1"/>
     <action name="About Face" id="12" device="Keyboard" button="67"/>
     <action name="Toggle Action Camera" id="78" device="Keyboard" button="10" mod="7"/>
-    <action name="Swap Weapons" id="17" device="Keyboard" button="8" mod="7"/>
+    <action name="Swap Weapons" id="17" device="Keyboard" button="8" mod="7" device2="Keyboard" button2="65"/>
     <action name="Weapon Skill 1" id="18" device="Keyboard" button="83"/>
     <action name="Weapon Skill 2" id="19" device="Keyboard" button="70"/>
     <action name="Weapon Skill 3" id="20" device="None"/>
@@ -41,11 +41,13 @@
     <action name="Interact" id="65" device="Keyboard" button="36"/>
     <action name="Show Enemy Names" id="66" device="None"/>
     <action name="Stow/Draw Weapons" id="68" device2="Keyboard" button2="77" mod2="7"/>
-    <action name="Mount Ability 1" id="130" device="Mouse" button="3"/>
+    <action name="Mount Ability 1" id="130" device="Mouse" button="3" device2="Keyboard" button2="70"/>
+    <action name="Mount Ability 2" id="153" device="Keyboard" button="83"/>
     <action name="Raptor Mount/Dismount" id="155" device="Keyboard" button="78" mod="7"/>
     <action name="Springer Mount/Dismount" id="156" device="Keyboard" button="15" mod="7"/>
     <action name="Skimmer Mount/Dismount" id="157" device="Keyboard" button="89" mod="7"/>
     <action name="Jackal Mount/Dismount" id="158" device="Keyboard" button="85" mod="7"/>
+    <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7"/>
     <action name="Warclaw Mount/Dismount" id="169" device="Keyboard" button="3" mod="7"/>
     <action name="Special Action" id="82" device="Keyboard" button="12" mod="7"/>
     <action name="Equip/Unequip Novelty" id="162" device2="Keyboard" button2="14" mod2="7"/>

@@ -1,4 +1,5 @@
 <InputBindings>
+    <action name="Roller Beetle Mount/Dismount" id="161" device="Keyboard" button="54" mod="7"/>
     <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7"/>
     <action name="Jackal Mount/Dismount" id="158" device="Keyboard" button="85" mod="7"/>
     <action name="Move Forward" id="0" device="Keyboard" button="68"/>
@@ -42,7 +43,8 @@
     <action name="Interact" id="65" device="Keyboard" button="36"/>
     <action name="Show Enemy Names" id="66" device="None"/>
     <action name="Stow/Draw Weapons" id="68" device2="Keyboard" button2="77" mod2="7"/>
-    <action name="Mount Ability 1" id="130" device="Mouse" button="3"/>
+    <action name="Mount Ability 1" id="130" device="Mouse" button="3" device2="Keyboard" button2="70"/>
+    <action name="Mount Ability 2" id="153" device="Keyboard" button="83"/>
     <action name="Raptor Mount/Dismount" id="155" device="Keyboard" button="78" mod="7"/>
     <action name="Springer Mount/Dismount" id="156" device="Keyboard" button="15" mod="7"/>
     <action name="Skimmer Mount/Dismount" id="157" device="Keyboard" button="89" mod="7"/>

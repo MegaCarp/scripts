@@ -46,7 +46,7 @@ GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
 
     }
 
-    ; HideAndWaitToRestoreBlish()
+    HideAndWaitToRestoreBlish()
 
     LastWindow := WinGetID("A")
     WinActivate "DNP"
