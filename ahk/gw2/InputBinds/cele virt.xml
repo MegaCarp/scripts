@@ -1,4 +1,5 @@
 <InputBindings>
+    <action name="Skyscale Mount/Dismount" id="170" device="Keyboard" button="55" mod="7"/>
     <action name="Roller Beetle Mount/Dismount" id="161" device="Keyboard" button="54" mod="7"/>
     <action name="Mount Ability 1" id="130" device="Mouse" button="3" device2="Keyboard" button2="70"/>
     <action name="Mount Ability 2" id="153" device="Keyboard" button="83"/>

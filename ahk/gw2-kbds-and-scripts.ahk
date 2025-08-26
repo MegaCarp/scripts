@@ -17,10 +17,56 @@ F6:: Send "{Enter}"
 
 F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
+; +g:: {
+
+;     releaseInput() {
+;         BlockInput 0
+;         Send '{Control Up}'
+;     }
+;     SetTimer releaseInput, -1000
+;     BlockInput 1
+
+;     Send '{Control Down}{Alt Down}{Control Down}'
+
+;     MouseGetPos &xout, &yout
+
+;     Send '{Control Down}'
+;     w8 100
+;     Click 'Right', X := 774, Y := 1033 ; weapon 3
+;     w8 100
+;     MouseMove xout, yout, 0
+
+;     Send '{Control Up}'
+;     BlockInput 0
+;     SetTimer releaseInput, 0
+; }
+
+; +t:: {
+
+;     releaseInput() {
+;         BlockInput 0
+;         Send '{Control Up}'
+;     }
+;     SetTimer releaseInput, -1000
+;     BlockInput 1
+
+;     MouseGetPos &xout, &yout
+
+;     Send '{Control Down}'
+;     w8 100
+;     Click 'Right', X := 834, Y := 1034 ; weapon 4
+;     w8 100
+;     MouseMove xout, yout, 0
+
+;     Send '{Control Up}'
+;     BlockInput 0
+;     SetTimer releaseInput, 0
+; }
+
 ; F2:: Gw2Sell10
 ; F2:: RunWait("gw2\tp\cancel-ten.ahk")
 ; F3:: RunWait("gw2\tp\buy-ten.ahk")
-; F4:: ForgeAndFill()
+F4:: ForgeAndFill()
 
 ; ^g:: tech_TimingGather(1,2)
 ; +g:: MouseMove X := 848, Y := 676, 0 ; first slot of the inventory ; show me where the first slot is

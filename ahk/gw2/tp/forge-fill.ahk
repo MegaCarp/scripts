@@ -23,7 +23,7 @@ ForgeAndFill(Testing := '') {
     MouseGetPos(&outx, &outy)
     RoundsToGo := InputBox(,,, 5).Value
 
-    var := ''
+    IndexVar := ''
 
     MouseMove outx, outy, 0
     while (repeatPress AND A_Index < RoundsToGo +1) {
@@ -34,12 +34,12 @@ ForgeAndFill(Testing := '') {
         w8 200
         if Testing {
             MsgBox "round" A_Space A_Index
-            var := A_Index
+            IndexVar := A_Index
         }
     }
 
-    if Testing AND var
-        MsgBox "fin on round №" var A_Space "out of " RoundsToGo
+    if Testing AND IndexVar
+        MsgBox "fin on round №" IndexVar A_Space "out of " RoundsToGo
     else if Testing
         MsgBox "fin - aborted, rounds to go was " RoundsToGo
 

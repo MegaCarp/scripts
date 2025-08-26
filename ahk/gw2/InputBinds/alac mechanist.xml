@@ -1,5 +1,4 @@
 <InputBindings>
-    <action name="Roller Beetle Mount/Dismount" id="161" device="Keyboard" button="54" mod="7"/>
     <action name="Move Forward" id="0" device="Keyboard" button="68"/>
     <action name="Move Backward" id="1" device="None"/>
     <action name="Strafe Left" id="2" device="Keyboard" button="88"/>
@@ -11,8 +10,8 @@
     <action name="Swim Down / Fly Down" id="11" device="Keyboard" button="21" mod="1"/>
     <action name="About Face" id="12" device="Keyboard" button="67"/>
     <action name="Toggle Action Camera" id="78" device="Keyboard" button="10" mod="7"/>
-    <action name="Swap Weapons" id="17" device="Keyboard" button="8" mod="7"/>
-    <action name="Weapon Skill 1" id="18" device="Keyboard" button="84"/>
+    <action name="Swap Weapons" id="17" device="None"/>
+    <action name="Weapon Skill 1" id="18" device="Keyboard" button="71"/>
     <action name="Weapon Skill 2" id="19" device="Keyboard" button="87"/>
     <action name="Weapon Skill 3" id="20" device="Keyboard" button="69"/>
     <action name="Weapon Skill 4" id="21" device="Keyboard" button="82"/>
@@ -26,8 +25,10 @@
     <action name="Profession Skill 1" id="28" device="Keyboard" button="50" device2="Keyboard" button2="90"/>
     <action name="Profession Skill 2" id="29" device="Keyboard" button="51"/>
     <action name="Profession Skill 3" id="30" device="Keyboard" button="52"/>
-    <action name="Profession Skill 4" id="31" device="None" device2="Keyboard" button2="71"/>
+    <action name="Profession Skill 4" id="31" device="Keyboard" button="84"/>
     <action name="Profession Skill 5" id="79" device="Keyboard" button="22"/>
+    <action name="Profession Skill 6" id="201" device="Keyboard" button="65"/>
+    <action name="Profession Skill 7" id="202" device="Keyboard" button="8" mod="7"/>
     <action name="Take Target" id="33" device="None"/>
     <action name="Set Personal Target" id="199" device="Keyboard" button="84" mod="4"/>
     <action name="Next Enemy" id="35" device="Mouse" button="4"/>
@@ -48,7 +49,9 @@
     <action name="Skimmer Mount/Dismount" id="157" device="Keyboard" button="89" mod="7"/>
     <action name="Jackal Mount/Dismount" id="158" device="Keyboard" button="85" mod="7"/>
     <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7"/>
+    <action name="Roller Beetle Mount/Dismount" id="161" device="Keyboard" button="54" mod="7"/>
     <action name="Warclaw Mount/Dismount" id="169" device="Keyboard" button="3" mod="7"/>
+    <action name="Skyscale Mount/Dismount" id="170" device="Keyboard" button="55" mod="7"/>
     <action name="Special Action" id="82" device="Keyboard" button="12" mod="7"/>
     <action name="Equip/Unequip Novelty" id="162" device2="Keyboard" button2="14" mod2="7"/>
     <action name="Activate Chair" id="163" device="Keyboard" button="76" mod="7"/>

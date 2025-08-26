@@ -1,4 +1,5 @@
 <InputBindings>
+    <action name="Skyscale Mount/Dismount" id="170" device="Keyboard" button="55" mod="7"/>
     <action name="Move Forward" id="0" device="Keyboard" button="68"/>
     <action name="Move Backward" id="1" device="None"/>
     <action name="Strafe Left" id="2" device="Keyboard" button="88" device2="None"/>
