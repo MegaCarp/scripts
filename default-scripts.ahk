@@ -7,6 +7,13 @@
 Run "ahk\utils\killAHK.ahk"
 Run "ahk\gw2-kbds-and-scripts.ahk"
 
+#HotIf WinActive("ahk_exe firefox.exe")
+
+RButton:: MButton
+MButton:: RButton
+
+#HotIf 
+
 F12:: RecordMousePosition
 
 ; F1:: RunWait "ahk\gw2\research-item-name-on-bltc.ahk"

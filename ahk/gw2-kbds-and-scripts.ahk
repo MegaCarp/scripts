@@ -18,15 +18,9 @@ F6:: Send "{Enter}"
 F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
 ; double click
-; a:: {
-
-;     loop 10 {
-;         Click
-;         w8 300
-;         Click
-;         w8 500
-;     }
-; }
+F3:: run 'gw2\tp\forge-and-fill.ahk'
+; F3:: ForgeAndFill()
+F4:: run 'gw2\tp\double-click.ahk'
 
 ; +g:: {
 
@@ -78,7 +72,6 @@ F10:: Run("gw2\paste-to-chat-and-click.ahk")
 ; F2:: RunWait("gw2\tp\cancel-ten.ahk")
 ; F3:: RunWait("gw2\tp\buy-ten.ahk")
 
-F4:: ForgeAndFill()
 
 ; ^g:: tech_TimingGather(1,2)
 ; +g:: MouseMove X := 848, Y := 676, 0 ; first slot of the inventory ; show me where the first slot is

@@ -5,3 +5,9 @@
 
 test := TransparentGui()
 test.TestOut
+
+SetTimer terminateGui, -10000
+
+terminateGui() {
+    test.Destroy
+}

@@ -2,34 +2,32 @@
     <action name="Skyscale Mount/Dismount" id="170" device="Keyboard" button="55" mod="7"/>
     <action name="Move Forward" id="0" device="Keyboard" button="68"/>
     <action name="Move Backward" id="1" device="None"/>
-    <action name="Strafe Left" id="2" device="Keyboard" button="88"/>
-    <action name="Strafe Right" id="3" device="Keyboard" button="86"/>
-    <action name="Turn Left" id="4" device="None"/>
-    <action name="Turn Right" id="5" device="None"/>
-    <action name="Dodge" id="6" device="Mouse" button="3"/>
+    <action name="Strafe Left" id="2" device="Keyboard" button="88" device2="None"/>
+    <action name="Strafe Right" id="3" device="Keyboard" button="86" device2="None"/>
+    <action name="Turn Left" id="4" device="None" device2="Keyboard" button2="29"/>
+    <action name="Turn Right" id="5" device="None" device2="Keyboard" button2="30"/>
+    <action name="Dodge" id="6" device="Mouse" button="3" device2="Keyboard" button2="8" mod2="7"/>
     <action name="Autorun" id="7" device="Keyboard" button="69" mod="3" device2="Keyboard" button2="19"/>
     <action name="Swim Down / Fly Down" id="11" device="Keyboard" button="21" mod="1"/>
     <action name="About Face" id="12" device="Keyboard" button="67"/>
     <action name="Toggle Action Camera" id="78" device="Keyboard" button="10" mod="7"/>
-    <action name="Swap Weapons" id="17" device="None"/>
-    <action name="Weapon Skill 1" id="18" device="Keyboard" button="71"/>
-    <action name="Weapon Skill 2" id="19" device="Keyboard" button="87"/>
-    <action name="Weapon Skill 3" id="20" device="Keyboard" button="69"/>
+    <action name="Swap Weapons" id="17" device="Keyboard" button="90"/>
+    <action name="Weapon Skill 1" id="18" device="Keyboard" button="84"/>
+    <action name="Weapon Skill 2" id="19" device="Keyboard" button="70"/>
+    <action name="Weapon Skill 3" id="20" device="Keyboard" button="82" mod="2"/>
     <action name="Weapon Skill 4" id="21" device="Keyboard" button="82"/>
-    <action name="Weapon Skill 5" id="22" device="Keyboard" button="81"/>
-    <action name="Healing Skill" id="23" device="None" device2="Keyboard" button2="87" mod2="2"/>
-    <action name="Utility Skill 1" id="24" device="Keyboard" button="83" device2="Keyboard" button2="69" mod2="2"/>
-    <action name="Utility Skill 2" id="25" device="None" device2="Keyboard" button2="82" mod2="2"/>
-    <action name="Utility Skill 3" id="26" device="Keyboard" button="66"/>
-    <action name="Elite Skill" id="27" device="Keyboard" button="70"/>
+    <action name="Weapon Skill 5" id="22" device="Keyboard" button="83"/>
+    <action name="Healing Skill" id="23" device="Keyboard" button="66"/>
+    <action name="Utility Skill 1" id="24" device="Keyboard" button="50"/>
+    <action name="Utility Skill 2" id="25" device="Keyboard" button="51"/>
+    <action name="Utility Skill 3" id="26" device="Keyboard" button="71"/>
+    <action name="Elite Skill" id="27" device="Keyboard" button="69"/>
     <action name="Mount/Dismount" id="152" device="Keyboard" button="80" mod="7"/>
-    <action name="Profession Skill 1" id="28" device="Keyboard" button="50" device2="Keyboard" button2="90"/>
-    <action name="Profession Skill 2" id="29" device="Keyboard" button="51"/>
-    <action name="Profession Skill 3" id="30" device="Keyboard" button="52"/>
-    <action name="Profession Skill 4" id="31" device="Keyboard" button="84"/>
+    <action name="Profession Skill 1" id="28" device="Keyboard" button="65"/>
+    <action name="Profession Skill 2" id="29" device="Keyboard" button="87"/>
+    <action name="Profession Skill 3" id="30" device="Keyboard" button="81"/>
+    <action name="Profession Skill 4" id="31" device="Keyboard" button="53"/>
     <action name="Profession Skill 5" id="79" device="Keyboard" button="22"/>
-    <action name="Profession Skill 6" id="201" device="Keyboard" button="65"/>
-    <action name="Profession Skill 7" id="202" device="Keyboard" button="8" mod="7"/>
     <action name="Take Target" id="33" device="None"/>
     <action name="Set Personal Target" id="199" device="Keyboard" button="84" mod="4"/>
     <action name="Next Enemy" id="35" device="Mouse" button="4"/>
