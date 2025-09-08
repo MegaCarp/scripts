@@ -1,172 +1,157 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
+if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
+    BlishExe := A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe"
+else if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
+    BlishExe := A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
+else {
+    MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
+}
+
+if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
+    Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
+else {
+    MsgBox "Can't find GW2! Here's where I looked: `nC:\games\GuildWars2-arenanet\Gw2-64.exe"
+    ExitApp
+}
+
 Esc:: ExitApp
 ; c:: Gw2Launcher('Captatrix')
-Hotkey 'c', Gw2Launcher
-Hotkey 'p', Gw2Launcher
-Hotkey 'a', Gw2Launcher
+Hotkey 'c', SetCaptatrixToLaunch
+Hotkey 'p', SetPoroToLaunch
+Hotkey 'a', SetCarpToLaunch
+Hotkey 'm', SetCarpToLaunch
 
-Gw2Launcher
+Gw2Launcher := Gui('AlwaysOnTop -Caption')
 
-Gw2Launcher(StraightLaunch := 'No') {
+Gw2Launcher.AddButton(, '(C)aptatrix').OnEvent('Click', SetCaptatrixToLaunch)
+Gw2Launcher.AddButton(, '(P)oro').OnEvent('Click', SetPoroToLaunch)
+Gw2Launcher.AddButton(, 'C(a)rp').OnEvent('Click', SetCarpToLaunch)
+Gw2Launcher.AddCheckbox('vMultibox')
+Gw2Launcher.AddText(,'Multibox?')
 
-    static WhatToLaunch := Gui('AlwaysOnTop -Caption')
 
-    if StraightLaunch != 'No'
-        WhatToLaunch.Hide
 
-    static CaptatrixID := ''
-    static PoroID := ''
-    static CarpID := ''
-    
-    WhatToLaunch.AddButton(, '(C)aptatrix').OnEvent('Click', SetCaptatrixToLaunch)
-    WhatToLaunch.AddButton(, '(P)oro').OnEvent('Click', SetPoroToLaunch)
-    WhatToLaunch.AddButton(, 'C(a)rp').OnEvent('Click', SetCarpToLaunch)
-    WhatToLaunch.AddCheckbox('vMutexCheckbox')
+; Run "C:\games\GuildWars2-arenanet\Gw2-64.exe -shareArchive",,, &outID ; gw2arenanet
+; Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true",,, &outID ; gw2epic
+; Run A_MyDocuments "..\games\gw2\blishud\Blish HUD.exe"
 
-    if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
-        BlishExe := A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe"
-    else if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
-        BlishExe := A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
-    else {
-        MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
+SetCaptatrixToLaunch(*) {
+    Gw2Launcher.Destroy
+    LaunchGW2('Captatrix')
+    ExitApp
+}
+SetPoroToLaunch(*) {
+    Gw2Launcher.Destroy
+    LaunchGW2('Poro')
+    ExitApp
+}
+SetCarpToLaunch(*) {
+    Gw2Launcher.Destroy
+    LaunchGW2('Carp')
+    ExitApp
+}
+
+CancelOperation(*) {
+    Gw2Launcher.Destroy
+    ExitApp
+}
+
+LaunchGW2(Name) {
+
+    ;;;; turn this into a battery of tests with C:\Users\stash\Documents\scripts\ahk\utils\InputChecker.ahk
+    SourceLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\" Name ".dat"
+    if !FileExist(SourceLocalDat) {
+        MsgBox "SourceLocalDat " SourceLocalDat " does not exist! Exiting."
+        return
     }
 
-    if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
-        Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
-    else {
-        MsgBox "Can't find GW2! Here's where I looked: `nC:\games\GuildWars2-arenanet\Gw2-64.exe"
-        ExitApp
+    TargetLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\Local.dat"
+    if !FileExist(TargetLocalDat) {
+        MsgBox "TargetLocalDat " TargetLocalDat " does not exist - continue regardless."
     }
 
-    switch StraightLaunch {
-        case 'c': SetCaptatrixToLaunch
-        case 'm': SetPoroToLaunch
-        case 'a': SetCarpToLaunch
+    SourceBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
+    if !FileExist(SourceBlishTodo) {
+        MsgBox "SourceBlishTodo " SourceBlishTodo " does not exist! Exiting."
+        return
+    }
+
+    ; "C:\Users\stash\Documents\Guild Wars 2\addons\blishhud\events\event_states.json"
+    ; Event states for Blish Event Timeers
+    TargetBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
+    if !FileExist(TargetBlishEventStates) {
+        MsgBox "TargetBlishEventStates " TargetBlishEventStates " does not exist! Exiting."
+        return
+    }
+
+    SourceBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
+    if !FileExist(SourceBlishEventStates) {
+        MsgBox "SourceBlishEventStates " SourceBlishEventStates " does not exist! Exiting."
+        return
+    }
+
+    TargetBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
+    if !FileExist(TargetBlishTodo) {
+        MsgBox "TargetBlishTodo " TargetBlishTodo " does not exist! Exiting."
+        return
+    }
+
+    ; while ProcessExist("Gw2-64.exe")
+    ;     ProcessClose("Gw2-64.exe")
+    ; while ProcessExist("Blish")
+    ;     ProcessClose("Blish")
+
+    ;;;;;;;;;;;;;;;;
+
+    loop files SourceBlishTodo '\*' {
+        try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
+        catch {
+            SplitPath SourceBlishTodo, , &OutDir
+            MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
+            FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
+        }
+    }
+
+    FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
+
+    scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
+    try FileRecycle(scriptFileName)
+
+    ; Local.dat
+    ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
+
+    loop files SourceBlishTodo '\*'
+        ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
+
+    FileAppend ToWriteToScript, scriptFileName
+    FileRecycle TargetLocalDat
+
+    ;;;;;;;;;;;;;;;;
+
+    ; RunWait 'pwsh.exe -File `"' scriptFileName '`"'
+    RunWait 'pwsh.exe -WindowStyle Hidden -File `"' scriptFileName '`"'
+    ;;;;;;;;;;;;;;;;
+
+    RunGw2ArenaNet(Name) {
+        Run BlishExe
+        Run Gw2Exe " -autologin", , , &outID ; gw2arenanet
+    }
+    switch Name {
+        case 'Captatrix': RunGw2ArenaNet(Name)
+        case 'Poro': RunGw2ArenaNet(Name)
+        case 'Carp':
+            Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true", , , &
+            outID ; gw2epic
+            Run BlishExe
         default:
     }
 
-    ; Run "C:\games\GuildWars2-arenanet\Gw2-64.exe -shareArchive",,, &outID ; gw2arenanet
-    ; Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true",,, &outID ; gw2epic
-    ; Run A_MyDocuments "..\games\gw2\blishud\Blish HUD.exe"
-
-    SetCaptatrixToLaunch(*) {
-        WhatToLaunch.Destroy
-        LaunchGW2('Captatrix')
-        ExitApp
-    }
-    SetPoroToLaunch(*) {
-        WhatToLaunch.Destroy
-        LaunchGW2('Poro')
-        ExitApp
-    }
-    SetCarpToLaunch(*) {
-        WhatToLaunch.Destroy
-        LaunchGW2('Carp')
-        ExitApp
-    }
-
-    CancelOperation(*) {
-        WhatToLaunch.Destroy
-        ExitApp
-    }
-
-    LaunchGW2(Name) {
-
-        ;;;; turn this into a battery of tests with C:\Users\stash\Documents\scripts\ahk\utils\InputChecker.ahk
-        SourceLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\" Name ".dat"
-        if !FileExist(SourceLocalDat) {
-            MsgBox "SourceLocalDat " SourceLocalDat " does not exist! Exiting."
-            return
-        }
-
-        TargetLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\Local.dat"
-        if !FileExist(TargetLocalDat) {
-            MsgBox "TargetLocalDat " TargetLocalDat " does not exist - continue regardless."
-        }
-
-        SourceBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
-        if !FileExist(SourceBlishTodo) {
-            MsgBox "SourceBlishTodo " SourceBlishTodo " does not exist! Exiting."
-            return
-        }
-
-        ; "C:\Users\stash\Documents\Guild Wars 2\addons\blishhud\events\event_states.json"
-        ; Event states for Blish Event Timeers
-        TargetBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
-        if !FileExist(TargetBlishEventStates) {
-            MsgBox "TargetBlishEventStates " TargetBlishEventStates " does not exist! Exiting."
-            return
-        }
-
-        SourceBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
-        if !FileExist(SourceBlishEventStates) {
-            MsgBox "SourceBlishEventStates " SourceBlishEventStates " does not exist! Exiting."
-            return
-        }
-
-        TargetBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
-        if !FileExist(TargetBlishTodo) {
-            MsgBox "TargetBlishTodo " TargetBlishTodo " does not exist! Exiting."
-            return
-        }
-
-        while ProcessExist("Gw2-64.exe")
-            ProcessClose("Gw2-64.exe")
-        while ProcessExist("Blish")
-            ProcessClose("Blish")
-
-        ;;;;;;;;;;;;;;;;
-
-        loop files SourceBlishTodo '\*' {
-            try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
-            catch {
-                SplitPath SourceBlishTodo, , &OutDir
-                MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
-                FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
-            }
-        }
-
-        FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
-
-        scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
-        try FileRecycle(scriptFileName)
-
-        ; Local.dat
-        ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
-
-        loop files SourceBlishTodo '\*'
-            ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
-
-        FileAppend ToWriteToScript, scriptFileName
-        FileRecycle TargetLocalDat
-
-        ;;;;;;;;;;;;;;;;
-
-        ; RunWait 'pwsh.exe -File `"' scriptFileName '`"'
-        RunWait 'pwsh.exe -WindowStyle Hidden -File `"' scriptFileName '`"'
-        ;;;;;;;;;;;;;;;;
-
-        RunGw2ArenaNet(Name) {
-            Run BlishExe
-            Run Gw2Exe " -autologin", , , &outID ; gw2arenanet
-        }
-        switch Name {
-            case 'Captatrix': RunGw2ArenaNet(Name)
-            case 'Poro': RunGw2ArenaNet(Name)
-            case 'Carp':
-                Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true", , , &
-                outID ; gw2epic
-                Run BlishExe
-            default:
-        }
-
-    }
-
-    WhatToLaunch.Show
-
 }
+
+Gw2Launcher.Show
+
 
 ; SetTimer killMutex(), -20000
 
