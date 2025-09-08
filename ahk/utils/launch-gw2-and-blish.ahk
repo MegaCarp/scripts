@@ -2,11 +2,29 @@
 #SingleInstance Force
 
 Esc:: ExitApp
-
+; c:: Gw2Launcher('Captatrix')
+Hotkey 'c', Gw2Launcher
+Hotkey 'p', Gw2Launcher
+Hotkey 'a', Gw2Launcher
 
 Gw2Launcher
 
-Gw2Launcher() {
+Gw2Launcher(StraightLaunch := 'No') {
+
+    static WhatToLaunch := Gui('AlwaysOnTop -Caption')
+
+    if StraightLaunch != 'No'
+        WhatToLaunch.Hide
+
+    static CaptatrixID := ''
+    static PoroID := ''
+    static CarpID := ''
+    
+    WhatToLaunch.AddButton(, '(C)aptatrix').OnEvent('Click', SetCaptatrixToLaunch)
+    WhatToLaunch.AddButton(, '(P)oro').OnEvent('Click', SetPoroToLaunch)
+    WhatToLaunch.AddButton(, 'C(a)rp').OnEvent('Click', SetCarpToLaunch)
+    WhatToLaunch.AddCheckbox('vMutexCheckbox')
+
     if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
         BlishExe := A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe"
     else if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
@@ -22,6 +40,13 @@ Gw2Launcher() {
         ExitApp
     }
 
+    switch StraightLaunch {
+        case 'c': SetCaptatrixToLaunch
+        case 'm': SetPoroToLaunch
+        case 'a': SetCarpToLaunch
+        default:
+    }
+
     ; Run "C:\games\GuildWars2-arenanet\Gw2-64.exe -shareArchive",,, &outID ; gw2arenanet
     ; Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true",,, &outID ; gw2epic
     ; Run A_MyDocuments "..\games\gw2\blishud\Blish HUD.exe"
@@ -29,18 +54,22 @@ Gw2Launcher() {
     SetCaptatrixToLaunch(*) {
         WhatToLaunch.Destroy
         LaunchGW2('Captatrix')
+        ExitApp
     }
-    SetMarinaToLaunch(*) {
+    SetPoroToLaunch(*) {
         WhatToLaunch.Destroy
-        LaunchGW2('Marina')
+        LaunchGW2('Poro')
+        ExitApp
     }
     SetCarpToLaunch(*) {
         WhatToLaunch.Destroy
         LaunchGW2('Carp')
+        ExitApp
     }
 
     CancelOperation(*) {
         WhatToLaunch.Destroy
+        ExitApp
     }
 
     LaunchGW2(Name) {
@@ -125,19 +154,15 @@ Gw2Launcher() {
         }
         switch Name {
             case 'Captatrix': RunGw2ArenaNet(Name)
-            case 'Marina': RunGw2ArenaNet(Name)
+            case 'Poro': RunGw2ArenaNet(Name)
             case 'Carp':
                 Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true", , , &
                 outID ; gw2epic
                 Run BlishExe
             default:
         }
-    }
 
-    WhatToLaunch := Gui('AlwaysOnTop -Caption')
-    WhatToLaunch.AddButton(, 'Captatrix').OnEvent('Click', SetCaptatrixToLaunch)
-    WhatToLaunch.AddButton(, 'Marina').OnEvent('Click', SetMarinaToLaunch)
-    WhatToLaunch.AddButton(, 'Carp').OnEvent('Click', SetCarpToLaunch)
+    }
 
     WhatToLaunch.Show
 
