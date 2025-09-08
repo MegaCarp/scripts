@@ -1,6 +1,9 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
+Esc:: ExitApp
+
+
 Gw2Launcher
 
 Gw2Launcher() {
@@ -10,12 +13,14 @@ Gw2Launcher() {
         BlishExe := A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
     else {
         MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
-        ExitApp
     }
 
     if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
         Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
-    else MsgBox "Can't find GW2! Here's where I looked: `nC:\games\GuildWars2-arenanet\Gw2-64.exe"
+    else {
+        MsgBox "Can't find GW2! Here's where I looked: `nC:\games\GuildWars2-arenanet\Gw2-64.exe"
+        ExitApp
+    }
 
     ; Run "C:\games\GuildWars2-arenanet\Gw2-64.exe -shareArchive",,, &outID ; gw2arenanet
     ; Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true",,, &outID ; gw2epic
@@ -88,14 +93,14 @@ Gw2Launcher() {
         loop files SourceBlishTodo '\*' {
             try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
             catch {
-                SplitPath SourceBlishTodo,,&OutDir
+                SplitPath SourceBlishTodo, , &OutDir
                 MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
                 FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
             }
         }
 
         FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
-        
+
         scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
         try FileRecycle(scriptFileName)
 
@@ -129,11 +134,10 @@ Gw2Launcher() {
         }
     }
 
-    WhatToLaunch := Gui()
+    WhatToLaunch := Gui('AlwaysOnTop -Caption')
     WhatToLaunch.AddButton(, 'Captatrix').OnEvent('Click', SetCaptatrixToLaunch)
     WhatToLaunch.AddButton(, 'Marina').OnEvent('Click', SetMarinaToLaunch)
     WhatToLaunch.AddButton(, 'Carp').OnEvent('Click', SetCarpToLaunch)
-    WhatToLaunch.AddButton(, 'Cancel').OnEvent('Click', CancelOperation)
 
     WhatToLaunch.Show
 

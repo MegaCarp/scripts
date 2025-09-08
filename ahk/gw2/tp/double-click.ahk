@@ -1,16 +1,22 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
-
-#HotIf WinActive("ahk_exe Gw2-64.exe")
 #Include ..\utils\defaults-gw2.ahk
 
-Esc:: ExitApp
-{
+Gw2_DoubleClicker(Coord_X, Coord_Y) {
     loop {
-        Click
-        w8 300
-        Click
-        w8 300
+
+        MouseGetPos(, , &WindowId)
+
+        try if WinGetID("ahk_exe Gw2-64.exe") != WindowId {
+            MsgBox 'window is not gw, exit'
+            ExitApp
+        }
+        catch
+            ExitApp
+
+        BlockInput('MouseMove')
+        MouseMove Coord_X, Coord_Y, 0
+        DoubleClicker(300)
+        BlockInput('MouseMoveOff')
     }
-    ExitApp
 }

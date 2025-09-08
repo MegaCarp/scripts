@@ -2,6 +2,8 @@
 
 #Include ..\..
 
+#Include ahk\utils\DoubleClicker.ahk
+
 #Include ahk\utils\local-vars.ahk
 
 #Include ahk\lib\lib_runcmd.ahk

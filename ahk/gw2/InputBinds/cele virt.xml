@@ -57,8 +57,9 @@
     <action name="Activate Held Item" id="165" device="Keyboard" button="74" mod="7"/>
     <action name="Activate Toy" id="166" device="Keyboard" button="72" mod="7"/>
     <action name="Activate Tonic" id="167" device="Keyboard" button="13" mod="7"/>
-    <action name="Build Template 1" id="171" device="Keyboard" button="32" mod="2"/>
-    <action name="Build Template 2" id="172" device="Keyboard" button="33"/>
-    <action name="Build Template 3" id="173" device="Keyboard" button="34"/>
+    <action name="Build Template 1" id="171" device="Keyboard" button="32" mod="3"/>
+    <action name="Build Template 2" id="172" device="Keyboard" button="33" mod="3"/>
+    <action name="Build Template 3" id="173" device="Keyboard" button="34" mod="3"/>
+    <action name="Build Template 4" id="174" device="Keyboard" button="35" mod="3"/>
     <action name="Activate Mastery Skill" id="196" device="Keyboard" button="6" mod="7"/>
 </InputBindings>

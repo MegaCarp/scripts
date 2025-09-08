@@ -3,10 +3,12 @@
 
 #Include TransparentGui.ahk
 
-test := TransparentGui()
+Esc:: ExitApp
+
+test := TransparentGui(, 'ahk_exe Code.exe', 1)
 test.TestOut
 
-SetTimer terminateGui, -10000
+SetTimer terminateGui, -12000
 
 terminateGui() {
     test.Destroy

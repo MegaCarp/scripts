@@ -1,14 +1,16 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-; #Include ..\blish-utility.ahk
+#Include Blish_ShowAndHide.ahk
+#Include Case_AltTabbedIntoBlish.ahk
 
 #Include ..\..\utils\defaults-global.ahk
 #Include chat\technical-guild-chat.ahk
 #Include SendItToChat.ahk
 #Include time-to-gather.ahk
 
-#Include ..\tp\forge-fill.ahk
+#Include ..\tp\double-click.ahk
+#Include ..\tp\forge-and-fill.ahk
 
 #Include ..\tp\sell-ten.ahk
 

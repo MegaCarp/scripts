@@ -9,7 +9,13 @@ CheckOnVdi() {
 
         SetTimer ConditionToResetTheChecker ; if active win is VDI then reset the timer on the checker
 
-        if WinActive("DNP") = 0 {
+        try DNPid := WinGetID('DNP')
+        catch TargetError
+            DNPid := ''
+
+        MouseGetPos , , &id
+
+        if id = DNPid {
             GoToVDI()
         }
 
@@ -32,23 +38,20 @@ GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
     EmergencyReenablementOfInput() {
         BlockInput 0
         BlockInput 'MouseMoveOff'
-        }
+    }
 
-    MouseGetPos &xpos, &ypos
+    MouseGetPos &xpos, &ypos, &LastWindow
 
     if NOT BackAndForth = "Yes" {
 
         if NOT LeaveChar = "No" {
-            GoToCharSelectIfInGw()
+            GoToCharSelectIfInGw(LastWindow)
         }
 
         ; HangUpInTelegram()
 
     }
 
-    HideAndWaitToRestoreBlish()
-
-    LastWindow := WinGetID("A")
     WinActivate "DNP"
     w8
     Click X := 1839, Y := 249 ; click inside VDI to guarantee it's active
@@ -64,12 +67,12 @@ GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
     if BackAndForth = "Yes" {
         BlockInput 1
         BlockInput 'MouseMove'
-            Sleep 200
+        Sleep 200
         try WinActivate LastWindow
         MouseMove xpos, ypos, 0
         BlockInput 0
         BlockInput 'MouseMoveOff'
-            ; if WinActive("ahk_exe Gw2-64.exe") != 0 { ; why the hell does gw get locked into autorun?..
+        ; if WinActive("ahk_exe Gw2-64.exe") != 0 { ; why the hell does gw get locked into autorun?..
         ;     Sleep 100
         ;     Send "e"
         ;     Send "e"
@@ -83,51 +86,29 @@ GoToVDI(BackAndForth := "Yes", LeaveChar := "No") {
 ; }
 
 ConditionToResetTheChecker() {
-    if WinActive("DNP") {
+
+    try DNPid := WinGetID('DNP')
+    catch TargetError
+        DNPid := ''
+
+    MouseGetPos , , &id
+
+    if id = DNPid {
         SetTimer CheckOnVdi, -300000
         ; SetTimer ShowNotification, -290000
     }
 }
 
-HideAndWaitToRestoreBlish() {
-    try {
-        WinMinimize "Blish"
-    }
+GoToCharSelectIfInGw(LastWindow) {
+    try Gw2ID := WinGetID('ahk_exe Gw2-64.exe')
+    catch TargetError
+        Gw2ID := ''
 
-    if WinExist("ahk_exe Gw2-64.exe") {
-        SetTimer WaitForGw
-    }
+    if LastWindow = Gw2ID {
 
-    WaitForGw() {
-        try {
-            if (WinGetProcessName("A") = "Gw2-64.exe") {
-                if WinExist("Blish") {
-                    WinRestore "Blish"
-                    WinActivate "ahk_exe Gw2-64.exe"
-                    SetTimer WaitForGw, 0
-                } else {
-                    try {
-                        Run A_MyDocuments "..\games\gw2\blishud\Blish HUD.exe"
-                    } catch {
-                        Run A_MyDocuments "..\games\gw2\addons\Blish HUD.exe"
-                    }
-                    SetTimer WaitForGw, 0
-                }
-            }
-        }
-    }
-}
-
-GoToCharSelectIfInGw() {
-    try {
-        ActiveWin := WinGetProcessName("A")
-    } catch {
-        ActiveWin := ''
-    }
-    if ActiveWin = "Gw2-64.exe" {
-
-        Click X := 15, Y := 20  ; Main menu
-        Click X := 955, Y := 585, 3  ; Log Out - doesn't actually press anything if in char select already :)
+        MouseMove X := 15, Y := 20, 0  ; Main menu
+        Click
+        Click X := 955, Y := 585  ; Log Out - doesn't actually press anything if in char select already :)
 
     }
 }

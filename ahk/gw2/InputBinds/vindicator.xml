@@ -1,5 +1,4 @@
 <InputBindings>
-    <action name="Skyscale Mount/Dismount" id="170" device="Keyboard" button="55" mod="7"/>
     <action name="Move Forward" id="0" device="Keyboard" button="68"/>
     <action name="Move Backward" id="1" device="None"/>
     <action name="Strafe Left" id="2" device="Keyboard" button="88" device2="None"/>
@@ -50,6 +49,7 @@
     <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7"/>
     <action name="Roller Beetle Mount/Dismount" id="161" device="Keyboard" button="54" mod="7"/>
     <action name="Warclaw Mount/Dismount" id="169" device="Keyboard" button="3" mod="7"/>
+    <action name="Skyscale Mount/Dismount" id="170" device="Keyboard" button="55" mod="7"/>
     <action name="Special Action" id="82" device="Keyboard" button="12" mod="7"/>
     <action name="Equip/Unequip Novelty" id="162" device2="Keyboard" button2="14" mod2="7"/>
     <action name="Activate Chair" id="163" device="Keyboard" button="76" mod="7"/>
@@ -57,8 +57,9 @@
     <action name="Activate Held Item" id="165" device="Keyboard" button="74" mod="7"/>
     <action name="Activate Toy" id="166" device="Keyboard" button="72" mod="7"/>
     <action name="Activate Tonic" id="167" device="Keyboard" button="13" mod="7"/>
-    <action name="Build Template 1" id="171" device="Keyboard" button="32" mod="2"/>
-    <action name="Build Template 2" id="172" device="Keyboard" button="33"/>
-    <action name="Build Template 3" id="173" device="Keyboard" button="34"/>
+    <action name="Build Template 1" id="171" device="Keyboard" button="32" mod="3"/>
+    <action name="Build Template 2" id="172" device="Keyboard" button="33" mod="3"/>
+    <action name="Build Template 3" id="173" device="Keyboard" button="34" mod="3"/>
+    <action name="Build Template 4" id="174" device="Keyboard" button="35" mod="3"/>
     <action name="Activate Mastery Skill" id="196" device="Keyboard" button="6" mod="7"/>
 </InputBindings>

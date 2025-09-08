@@ -2,12 +2,16 @@
 #SingleInstance Force
 
 #HotIf WinActive("ahk_exe Gw2-64.exe")
+
 #Include gw2\utils\defaults-gw2.ahk
-#Include gw2\tp\forge-fill.ahk
+; #Include gw2\tp\forge-fill.ahk
 
 #Include gw2\translit.ahk
 
 standardWaitTime := 100
+
+SetTimer Blish_ShowAndHide, 5000
+!Tab:: Case_AltTabbedIntoBlish
 
 ; weapon swap
 Enter:: Send "{Ctrl down}{Alt Down}{Shift down}={Ctrl up}{Alt up}{Shift up}"
@@ -17,10 +21,8 @@ F6:: Send "{Enter}"
 
 F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
-; double click
-F3:: run 'gw2\tp\forge-and-fill.ahk'
 ; F3:: ForgeAndFill()
-F4:: run 'gw2\tp\double-click.ahk'
+F9:: Run 'gw2\tp\TP_Utilities.ahk'
 
 ; +g:: {
 
@@ -72,7 +74,6 @@ F4:: run 'gw2\tp\double-click.ahk'
 ; F2:: RunWait("gw2\tp\cancel-ten.ahk")
 ; F3:: RunWait("gw2\tp\buy-ten.ahk")
 
-
 ; ^g:: tech_TimingGather(1,2)
 ; +g:: MouseMove X := 848, Y := 676, 0 ; first slot of the inventory ; show me where the first slot is
 ; ^g:: GatherBountifully
@@ -96,6 +97,6 @@ F22:: Send "{Ctrl down}{Alt Down}{Shift down}m{Ctrl up}{Alt up}{Shift up}" ; sto
 
 ; F4::Run "gw2\fractals\precast\alac-resist.ahk"
 
-; #HotIf
+#HotIf
 ; F6:: Run "gw2\gw2crafts\main.ahk"
 ; #HotIf WinActive("ahk_exe Gw2-64.exe")
