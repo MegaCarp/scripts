@@ -1,6 +1,8 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
+#Include launch-gw2-and-blish.ahk
+
 #Include Blish_ShowAndHide.ahk
 #Include Case_AltTabbedIntoBlish.ahk
 

@@ -1,6 +1,8 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
+#w:: Gw2Launcher
+
 #HotIf WinActive("ahk_exe Gw2-64.exe")
 
 #Include gw2\utils\defaults-gw2.ahk
