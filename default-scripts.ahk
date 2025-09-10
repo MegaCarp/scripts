@@ -3,7 +3,6 @@
 
 #Include ahk\utils\defaults-global.ahk
 
-
 Run "ahk\utils\killAHK.ahk"
 Run "ahk\gw2-kbds-and-scripts.ahk"
 

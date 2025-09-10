@@ -12,7 +12,7 @@
 
 standardWaitTime := 100
 
-SetTimer Blish_ShowAndHide, 5000
+SetTimer Blish_ShowAndHide, 100*60*5
 !Tab:: Case_AltTabbedIntoBlish
 
 ; weapon swap

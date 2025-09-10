@@ -19,15 +19,15 @@ else {
 Gw2LauncherGui := Gui('AlwaysOnTop -Caption')
 
 Gw2LauncherGui.AddText(,'Use Control with kbd to move Local.dat`nand to close other instances of GW.')
-Gw2LauncherGui.AddButton('vCaptatrix', '(C)aptatrix').OnEvent('Click', Gw2Launcher)
-Gw2LauncherGui.AddButton('vPoro', '(P)oro').OnEvent('Click', Gw2Launcher)
-Gw2LauncherGui.AddButton('vCarp', 'C(a)rp').OnEvent('Click', Gw2Launcher)
+Gw2LauncherGui.AddButton('vCaptatrix x50', '(C)aptatrix').OnEvent('Click', Gw2Launcher)
+Gw2LauncherGui.AddButton('vPoro x50', '(P)oro').OnEvent('Click', Gw2Launcher)
+Gw2LauncherGui.AddButton('vCarp x50', 'C(a)rp').OnEvent('Click', Gw2Launcher)
 
 Gw2LauncherGui['Carp'].GetPos(, , , &heightOut)
 
-Gw2LauncherGui.AddButton('vUpdate yp+' heightOut * 2, '(U)pdate').OnEvent('Click', Gw2Launcher)
-Gw2LauncherGui.AddButton('vKillAll', '(K)ill all Gw2').OnEvent('Click', Gw2Launcher)
-Gw2LauncherGui.AddButton('vKillBlish', 'Kill (B)lish').OnEvent('Click', Gw2Launcher)
+Gw2LauncherGui.AddButton('vUpdate x50 yp+' heightOut * 2, '(U)pdate').OnEvent('Click', Gw2Launcher)
+Gw2LauncherGui.AddButton('vKillAll x50', '(K)ill all Gw2').OnEvent('Click', Gw2Launcher)
+Gw2LauncherGui.AddButton('vKillBlish x50', 'Kill (B)lish').OnEvent('Click', Gw2Launcher)
 
 ; MouseGetPos ,, &outid
 
@@ -155,6 +155,19 @@ Gw2Launcher(MaybeHotkey := '', *) {
         else
             while ProcessExist("Gw2-64.exe")
                 ProcessClose("Gw2-64.exe")
+    }
+
+    LaunchBlish() {
+        Run BlishExe
+
+        CheckIfItRuns(*) {
+            if !ProcessExist('Blish HUD.exe')
+                Run BlishExe
+            else
+                SetTimer CheckIfItRuns, 0
+        }
+
+        SetTimer CheckIfItRuns, 100*60*2
     }
 
     MoveLocalDat(Name) {
