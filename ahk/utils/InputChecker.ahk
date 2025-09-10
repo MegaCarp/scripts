@@ -50,7 +50,7 @@
  *          'ERROR' 
  *          'WARN' 
  * @param {Any} Data For example this could be a function given over a variable - then this will be ensured using Type Mode.
- * @param {String | Integer} ExpectedResult This should be a 
+ * @param {String | Integer} ExpectedResult This should be a String that is compared to the output of Data.
  * @param {
  *          'SILENT' 
  *          '[SERVICE]' 
@@ -74,12 +74,39 @@
  */
 InputChecker(Summary, Mode, Data, ExpectedResult, NotificationLevel := 'SILENT') {
 
-    InputChecker_mode([Summary, Mode, Data, ExpectedResult, NotificationLevel])
+    ; InputChecker_mode([Summary, Mode, Data, ExpectedResult, NotificationLevel])
 
-    InputChecker_mode(Array) {
-        if Type_mode(Array, 'Array') = 'FATAL'
-            return
+    switch {
+        case Mode = 'FileExist_mode':
+        {
+            TestOutput(Summary, isTrue(FileExist(Data)), true,)
+
+            if !FileExist(Data) 
+                MsgBox
+            SourceMainAddonsFolder := gw_arena_net_directory '\addons'
+            if !FileExist(SourceMainAddonsFolder) {
+                MsgBox "SourceLocalDat " SourceMainAddonsFolder " does not exist! Exiting."
+                return
+            }
+        }
+
+        default:
+
     }
+
+    isTrue(TheData) {
+        if TheData
+            return true
+        else
+            return false
+    }
+
+    TestOutput('Source of main addons exist', isTrue(FileExist(gw_arena_net_directory '\addons')), true)
+
+    ; InputChecker_mode(Array) {
+    ;     if Type_mode(Array, 'Array') = 'FATAL'
+    ;         return
+    ; }
 
     Type_mode(Summary, Data, ExpectedResult, NotificationLevel) {
         if Type(Object) != ExpectedResult {

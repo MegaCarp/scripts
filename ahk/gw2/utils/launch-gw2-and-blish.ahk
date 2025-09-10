@@ -13,12 +13,12 @@ if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
     Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
 else {
     MsgBox "Can't find GW2! Here's where I looked: `nC:\games\GuildWars2-arenanet\Gw2-64.exe"
-    ExitApp
+    ; ExitApp ;; this script has been folded as a function into main so this would crash the whole thing
 }
 
 Gw2LauncherGui := Gui('AlwaysOnTop -Caption')
 
-Gw2LauncherGui.AddText(,'Use Control with kbd to move Local.dat`nand to close other instances of GW.')
+Gw2LauncherGui.AddText(, 'Use Control with kbd to move Local.dat`nand to close other instances of GW.')
 Gw2LauncherGui.AddButton('vCaptatrix x50', '(C)aptatrix').OnEvent('Click', Gw2Launcher)
 Gw2LauncherGui.AddButton('vPoro x50', '(P)oro').OnEvent('Click', Gw2Launcher)
 Gw2LauncherGui.AddButton('vCarp x50', 'C(a)rp').OnEvent('Click', Gw2Launcher)
@@ -30,7 +30,6 @@ Gw2LauncherGui.AddButton('vKillAll x50', '(K)ill all Gw2').OnEvent('Click', Gw2L
 Gw2LauncherGui.AddButton('vKillBlish x50', 'Kill (B)lish').OnEvent('Click', Gw2Launcher)
 
 ; MouseGetPos ,, &outid
-
 
 #HotIf WinActive('ahk_id ' Gw2LauncherGui.Hwnd)
 Esc:: Gw2LauncherGui.Hide
@@ -47,8 +46,6 @@ u:: Gw2Launcher(ThisHotkey)
 k:: Gw2Launcher(ThisHotkey)
 b:: Gw2Launcher(ThisHotkey)
 #HotIf
-
-; Gw2Launcher ;todo
 
 Gw2Launcher(MaybeHotkey := '', *) {
 
@@ -148,28 +145,6 @@ Gw2Launcher(MaybeHotkey := '', *) {
     ; Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true",,, &outID ; gw2epic
     ; Run A_MyDocuments "..\games\gw2\blishud\Blish HUD.exe"
 
-    KillGW2(PID := '') {
-
-        if PID
-            ProcessClose PID
-        else
-            while ProcessExist("Gw2-64.exe")
-                ProcessClose("Gw2-64.exe")
-    }
-
-    LaunchBlish() {
-        Run BlishExe
-
-        CheckIfItRuns(*) {
-            if !ProcessExist('Blish HUD.exe')
-                Run BlishExe
-            else
-                SetTimer CheckIfItRuns, 0
-        }
-
-        SetTimer CheckIfItRuns, 100*60*2
-    }
-
     MoveLocalDat(Name) {
 
         ;;;; turn this into a battery of tests with C:\Users\stash\Documents\scripts\ahk\utils\InputChecker.ahk
@@ -244,6 +219,28 @@ Gw2Launcher(MaybeHotkey := '', *) {
 
     }
 
+}
+
+KillGW2(PID := '') {
+
+    if PID
+        ProcessClose PID
+    else
+        while ProcessExist("Gw2-64.exe")
+            ProcessClose("Gw2-64.exe")
+}
+
+LaunchBlish() {
+    Run BlishExe
+
+    CheckIfItRuns(*) {
+        if !ProcessExist('Blish HUD.exe')
+            Run BlishExe
+        else
+            SetTimer CheckIfItRuns, 0
+    }
+
+    SetTimer CheckIfItRuns, 100 * 60 * 2
 }
 
 ; SetTimer killMutex(), -20000
