@@ -17,6 +17,12 @@ TP_Utilities_func(Coord_X, Coord_Y) {
         Gw2_DoubleClicker(Coord_X, Coord_Y)
     }
 
+    TPU_DoubleClickerFast(*) {
+        TP_Utilities.Destroy
+        GoToGw2
+        Gw2_DoubleClicker(Coord_X, Coord_Y, 30)
+    }
+
     TPU_ForgeAndFill(*) {
         TP_Utilities.Destroy
         GoToGw2
@@ -42,7 +48,8 @@ TP_Utilities_func(Coord_X, Coord_Y) {
     ; if TPU_CraftingLevellingSetup_ID = '' {
         TP_Utilities.AddButton(, 'Crafting levelling KBDs').OnEvent('Click', TPU_CraftingLevellingSetup)
     ; } else {
-        TP_Utilities.AddButton(, 'kill Crafting levelling KBDs').OnEvent('Click', TPU_CraftingLevellingSetup)
+        TP_Utilities.AddButton(, 'kill Crafting levelling KBDs').OnEvent('Click', TPU_CraftingLevellingSetup_TurnOff)
+        TP_Utilities.AddButton(, 'Fast Double Click').OnEvent('Click', TPU_DoubleClickerFast)
     ; }
     TP_Utilities.Show()
 

@@ -2,7 +2,7 @@
 #SingleInstance Force
 #Include ..\utils\defaults-gw2.ahk
 
-Gw2_DoubleClicker(Coord_X, Coord_Y) {
+Gw2_DoubleClicker(Coord_X, Coord_Y, Delay := 300) {
     loop {
 
         MouseGetPos(, , &WindowId)
@@ -16,7 +16,7 @@ Gw2_DoubleClicker(Coord_X, Coord_Y) {
 
         BlockInput('MouseMove')
         MouseMove Coord_X, Coord_Y, 0
-        DoubleClicker(300)
+        DoubleClicker(Delay)
         BlockInput('MouseMoveOff')
     }
 }

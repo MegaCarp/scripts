@@ -2,128 +2,140 @@
 #SingleInstance Force
 #Include defaults-gw2.ahk
 
-gw_arena_net_directory_addons := 'C:\games\GuildWars2-arenanet\addons'
-gw_epic_directory_addons := 'C:\games\GuildWars2\addons'
+HardlinkDllAddonsFromMainGW2ToSecondaryFolder('C:\games\GuildWars2-arenanet\addons', 'C:\games\GuildWars2\addons')
 
-if TestOutput_fileExist(gw_arena_net_directory_addons)
-    ExitApp ;!!
+; Function to compare two files byte by byte. Returns 0 if same!
+TheseAreDifferentFiles(file1Path, file2Path) {
+    ; Check if both files exist
+    if (!FileExist(file1Path) || !FileExist(file2Path)) {
+        return 1 ; One or both files do not exist
+    }
 
-TestOutput_fileExist(gw_epic_directory_addons) ;; doesn't have to exist
+    ; Get file sizes
+    file1Size := FileGetSize(file1Path)
+    file2Size := FileGetSize(file2Path)
 
+    ; If sizes are different, files cannot be the same
+    if (file1Size != file2Size) {
+        return 1
+    }
 
-; Define the paths for the existing file and the new hard link
-existingFile := A_Desktop "\original_file.txt"
-hardLink := A_Desktop "\hard_link_to_file.txt"
+    ; Open both files for reading
+    file1 := FileOpen(file1Path, "r")
+    file2 := FileOpen(file2Path, "r")
 
-; Create a sample original file if it doesn't exist
-if (!FileExist(existingFile)) {
-    FileAppend "This is the content of the original file.", existingFile
+    ; If files couldn't be opened, return false
+    if (!IsObject(file1) || !IsObject(file2)) {
+        return 1
+    }
+
+    ; Read and compare in chunks
+    chunkSize := 4096 ; Define a chunk size (e.g., 4KB)
+    while (!file1.AtEOF && !file2.AtEOF) {
+        chunk1 := file1.Read(chunkSize)
+        chunk2 := file2.Read(chunkSize)
+        if (chunk1 != chunk2) {
+            file1.Close()
+            file2.Close()
+            return 1 ; Mismatch found
+        }
+    }
+
+    ; Close files
+    file1.Close()
+    file2.Close()
+
+    return 0 ; Files are identical
 }
 
-; Create the hard link using DllCall
-; DllCall("CreateHardLink", Str, lpFileName, Str, lpExistingFileName, Ptr, lpSecurityAttributes)
-; lpFileName: The path to the new hard link
-; lpExistingFileName: The path to the existing file
-; lpSecurityAttributes: Optional security attributes (set to 0 for default)
-success := DllCall("CreateHardLink", "Str", hardLink, "Str", existingFile, "Ptr", 0)
+HardlinkA_File(existingFile, hardLink) {
+    ; Create the hard link using DllCall
+    ; DllCall("CreateHardLink", Str, lpFileName, Str, lpExistingFileName, Ptr, lpSecurityAttributes)
+    ; lpFileName: The path to the new hard link
+    ; lpExistingFileName: The path to the existing file
+    ; lpSecurityAttributes: Optional security attributes (set to 0 for default)
+    try success := DllCall("CreateHardLink", "Str", hardLink, "Str", existingFile, "Ptr", 0)
 
-; Check if the hard link creation was successful
-if (success) {
-    MsgBox "Hard link created successfully: " hardLink
-} else {
-    MsgBox "Failed to create hard link. Error: " A_LastError
+    ; Check if the hard link creation was successful
+    if !success
+        MsgBox "Failed to create hard link. Error: " A_LastError
 }
 
-; loop files FilePattern, 'FDR'
-; MoveLocalDat(Name) {
+HardlinkDllAddonsFromMainGW2ToSecondaryFolder(source, target) {
 
-;     ;;;; turn this into a battery of tests with C:\Users\stash\Documents\scripts\ahk\utils\InputChecker.ahk
-;     SourceMainAddonsFolder := gw_arena_net_directory '\addons'
-;     if !FileExist(SourceMainAddonsFolder) {
-;         MsgBox "SourceLocalDat " SourceMainAddonsFolder " does not exist! Exiting."
-;         return
-;     }
+    if TestOutput_fileExist(source) {
+        return 1
+    }
 
-;     SourceLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\" Name ".dat"
-;     if !FileExist(SourceLocalDat) {
-;         MsgBox "SourceLocalDat " SourceLocalDat " does not exist! Exiting."
-;         return
-;     }
+    TestOutput_fileExist(target) ;; doesn't have to exist
 
-;     TargetLocalDat := "C:\Users\" A_UserName "\AppData\Roaming\Guild Wars 2\Local.dat"
-;     if !FileExist(TargetLocalDat) {
-;         MsgBox "TargetLocalDat " TargetLocalDat " does not exist - continue regardless."
-;     }
+    KillGW2
 
-;     SourceBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
-;     if !FileExist(SourceBlishTodo) {
-;         MsgBox "SourceBlishTodo " SourceBlishTodo " does not exist! Exiting."
-;         return
-;     }
+}
+/**
+ * 
+ * @param source 
+ * @param target 
+ */
+__CheckDirectoriesForDifferences(source, target) {
 
-;     ; "C:\Users\stash\Documents\Guild Wars 2\addons\blishhud\events\event_states.json"
-;     ; Event states for Blish Event Timers
-;     TargetBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
-;     if !FileExist(TargetBlishEventStates) {
-;         MsgBox "TargetBlishEventStates " TargetBlishEventStates " does not exist! Exiting."
-;         return
-;     }
+    LogFileName := A_Temp '\' FormatTime(, 'MM-dd.hh-mm-ss.log')
 
-;     SourceBlishEventStates := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos - " Name
-;     if !FileExist(SourceBlishEventStates) {
-;         MsgBox "SourceBlishEventStates " SourceBlishEventStates " does not exist! Exiting."
-;         return
-;     }
+    Log := ''
+    Log := Log 'source is ' source '`n'
+    Log := Log 'target is ' target '`n'
 
-;     TargetBlishTodo := "C:\Users\" A_UserName "\Documents\Guild Wars 2\addons\blishhud\todos"
-;     if !FileExist(TargetBlishTodo) {
-;         MsgBox "TargetBlishTodo " TargetBlishTodo " does not exist! Exiting."
-;         return
-;     }
+    returner := []
 
-;     KillGW2
-;     ;;;;;;;;;;;;;;;
+    MatchPath(SpecificFilePath) {
+        return StrReplace(SpecificFilePath, source, target)
+    }
 
-;     loop files SourceBlishTodo '\*' {
-;         try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
-;         catch {
-;             SplitPath SourceBlishTodo, , &OutDir
-;             MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
-;             FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
-;         }
-;     }
+    try DirCreate(target)
 
-;     FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
+    loop files source '\*', '>File,Directory,Recurse' {
+        if RegExMatch(A_LoopFileAttrib, 'D') ; ensure matching directory structure
 
-;     scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
-;     try FileRecycle(scriptFileName)
 
-;     ; Local.dat
-;     ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
 
-;     loop files SourceBlishTodo '\*'
-;         ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
+            else {
+            if TheseAreDifferentFiles(A_LoopFileFullPath, MatchPath(A_LoopFileFullPath))
+                if SyncInstead != 'No'
+                HardlinkA_File(A_LoopFileFullPath, MatchPath(A_LoopFileFullPath))
+        }
 
-;     FileAppend ToWriteToScript, scriptFileName
-;     FileRecycle TargetLocalDat
+    }
 
-;     ;;;;;;;;;;;;;;;;
+}
 
-;     ; RunWait 'pwsh.exe -File `"' scriptFileName '`"'
-;     RunWait 'pwsh.exe -WindowStyle Hidden -File `"' scriptFileName '`"'
-;     ;;;;;;;;;;;;;;;;
-
-; }
-
-;;;;;;;;;;;
-
-;     $sourcePath = "C:\Users\" + $env: USERNAME + "\Documents\Guild Wars 2\InputBinds"
-
-;     $fileNames = (Get - ChildItem - Path$sourcePath - File).Name
-
-; foreach ($xml in $fileNames) {
-;     $whereToPutLink = "C:\Users\stash\Documents\scripts\ahk\gw2\InputBinds\" + $xml
-;         $LinkFrom = "C:\Users\stash\Documents\Guild Wars 2\InputBinds\" + $xml
-
-;     New - Item - ItemType HardLink - Path$whereToPutLink - Target$LinkFrom
-; }
+MoveLocalDat(Name) {
+    loop files SourceBlishTodo '\*' {
+        try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
+        catch {
+            SplitPath SourceBlishTodo, , &OutDir
+            MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
+            FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
+        }
+    }
+    FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
+    scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
+    try FileRecycle(scriptFileName)
+    ; Local.dat
+    ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
+    loop files SourceBlishTodo '\*'
+        ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
+    FileAppend ToWriteToScript, scriptFileName
+    FileRecycle TargetLocalDat
+    ;;;;;;;;;;;;;;;;
+    ; RunWait 'pwsh.exe -File `"' scriptFileName '`"'
+    RunWait 'pwsh.exe -WindowStyle Hidden -File `"' scriptFileName '`"'
+    ;;;;;;;;;;;;;;;;
+}
+;;;;;;;;;;
+    $sourcePath = "C:\Users\" + $env: USERNAME + "\Documents\Guild Wars 2\InputBinds"
+    $fileNames = (Get - ChildItem - Path$sourcePath - File).Name
+foreach ($xml in $fileNames) {
+    $whereToPutLink = "C:\Users\stash\Documents\scripts\ahk\gw2\InputBinds\" + $xml
+        $LinkFrom = "C:\Users\stash\Documents\Guild Wars 2\InputBinds\" + $xml
+    New - Item - ItemType HardLink - Path$whereToPutLink - Target$LinkFrom
+}

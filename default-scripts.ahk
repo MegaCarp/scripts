@@ -1,10 +1,12 @@
 #Requires AutoHotkey v2.0
 #SingleInstance
 
+
 #Include ahk\utils\defaults-global.ahk
 
 Run "ahk\utils\killAHK.ahk"
 Run "ahk\gw2-kbds-and-scripts.ahk"
+^!+F5:: Send '{Shift up}{Alt up}{Control up}{Win Up}'
 
 #HotIf WinActive("ahk_exe firefox.exe")
 

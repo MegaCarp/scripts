@@ -9,8 +9,10 @@ else {
     MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
 }
 
-if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
-    Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
+if FileExist("C:\games\Gw2Launcher.exe")
+    Gw2Exe := "C:\games\Gw2Launcher.exe"
+; if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
+;     Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
 else {
     MsgBox "Can't find GW2! Here's where I looked: `nC:\games\GuildWars2-arenanet\Gw2-64.exe"
     ; ExitApp ;; this script has been folded as a function into main so this would crash the whole thing
@@ -56,34 +58,46 @@ Gw2Launcher(MaybeHotkey := '', *) {
     static PoroPID := ''
     static CarpPID := ''
 
-    if ProcessExist(CaptatrixPID) {
-        ControlGetPos &xout, &yout, , , Gw2LauncherGui['Captatrix']
-        try Gw2LauncherGui.AddText('x' xout - 60 'y' yout ' vRelaunchCaptatrix', 'relaunch ')
-    } else
-        try Gw2LauncherGui['RelaunchCaptatrix'].Delete
+    ; if WinExist('ahk_exe Gw2-64.exe') {
+    ;     AddButtonForBlish(ControlNameForTheGW2_OrDeleteBlishButton, BlishNameButton) {
+    ;         if ControlNameForTheGW2_OrDeleteBlishButton {
+    ;             ControlGetPos &xout, &yout, &width, &height, Gw2LauncherGui[ControlNameForTheGW2_OrDeleteBlishButton]
+    ;             Gw2LauncherGui.AddButton('v' BlishNameButton ' x' xout + width + 20 ' y' height, BlishNameButton)
+    ;         } else try Gw2LauncherGui[BlishNameButton].Delete
+    ;     }
 
-    if ProcessExist(PoroPID) {
-        ControlGetPos &xout, &yout, , , Gw2LauncherGui['Poro']
-        try Gw2LauncherGui.AddText('x' xout - 60 'y' yout ' vRelaunchPoro', 'relaunch ')
-    } else
-        try Gw2LauncherGui['RelaunchPoro'].Delete
+    ;     AddButtonForBlish 'Captatrix', 'Launch_Captatrix_Blish'
+    ;     AddButtonForBlish 'Poro', 'Launch_Poro_Blish'
+    ;     AddButtonForBlish 'Carp', 'Launch_Carp_Blish'
 
-    if ProcessExist(CarpPID) {
-        ControlGetPos &xout, &yout, , , Gw2LauncherGui['Carp']
-        try Gw2LauncherGui.AddText('x' xout - 60 'y' yout ' vRelaunchCarp', 'relaunch ')
-    } else
-        try Gw2LauncherGui['RelaunchCarp'].Delete
-
-    ; if MaybeHotkey {
-    ;     try Gw2LauncherGui.Hide
+    ; } else {
+    ;     AddButtonForBlish '', 'Launch_Captatrix_Blish'
+    ;     AddButtonForBlish '', 'Launch_Poro_Blish'
+    ;     AddButtonForBlish '', 'Launch_Carp_Blish'
     ; }
-    ; else
-    ;     Gw2LauncherGui.Show('Restore')
+    
+    ; if ProcessExist(CaptatrixPID) {
+    ;     ControlGetPos &xout, &yout, , , Gw2LauncherGui['Captatrix']
+    ;     try Gw2LauncherGui.AddText('x' xout - 60 'y' yout ' vRelaunchCaptatrix', 'relaunch ')
+    ; } else
+    ;     try Gw2LauncherGui['RelaunchCaptatrix'].Delete
+
+    ; if ProcessExist(PoroPID) {
+    ;     ControlGetPos &xout, &yout, , , Gw2LauncherGui['Poro']
+    ;     try Gw2LauncherGui.AddText('x' xout - 60 'y' yout ' vRelaunchPoro', 'relaunch ')
+    ; } else
+    ;     try Gw2LauncherGui['RelaunchPoro'].Delete
+
+    ; if ProcessExist(CarpPID) {
+    ;     ControlGetPos &xout, &yout, , , Gw2LauncherGui['Carp']
+    ;     try Gw2LauncherGui.AddText('x' xout - 60 'y' yout ' vRelaunchCarp', 'relaunch ')
+    ; } else
+    ;     try Gw2LauncherGui['RelaunchCarp'].Delete
 
     switch {
         case (MaybeHotkey = 'c' OR MaybeHotkey = '^c' OR MaybeHotkey = "Captatrix"):
             try Gw2LauncherGui.Hide
-            Run BlishExe
+            ; Run BlishExe
 
             if ProcessExist(CaptatrixPID)
                 while (ProcessExist(CaptatrixPID))
@@ -92,11 +106,12 @@ Gw2Launcher(MaybeHotkey := '', *) {
             if MaybeHotkey = '^c'
                 MoveLocalDat('Captatrix')
 
-            Run Gw2Exe A_Space "-autologin -shareArchive", , , &CaptatrixPID ; gw2arenanet
+            Run Gw2Exe A_Space "-l:silent -l:uid:1", , , &CaptatrixPID ; gw2arenanet
+            ; Run Gw2Exe A_Space "-autologin -mumble MumbleLink_Captatrix.6428 -shareArchive", , , &CaptatrixPID ; gw2arenanet
 
         case (MaybeHotkey = 'p' OR MaybeHotkey = '^p' OR MaybeHotkey = "Poro"):
             try Gw2LauncherGui.Hide
-            Run BlishExe
+            ; Run BlishExe
 
             if ProcessExist(PoroPID)
                 while (ProcessExist(PoroPID))
@@ -105,11 +120,12 @@ Gw2Launcher(MaybeHotkey := '', *) {
             if MaybeHotkey = '^p'
                 MoveLocalDat('Poro')
 
-            Run Gw2Exe A_Space "-autologin -shareArchive", , , &PoroPID ; gw2arenanet
+            Run Gw2Exe A_Space "-l:silent -l:uid:2", , , &PoroPID ; gw2arenanet
+            ; Run Gw2Exe A_Space "-autologin -shareArchive", , , &PoroPID ; gw2arenanet
 
         case (MaybeHotkey = 'a' OR MaybeHotkey = '^a' OR MaybeHotkey = "Carp"):
             try Gw2LauncherGui.Hide
-            Run BlishExe
+            Run BlishExe A_Space '--mumble "MumbleLink_AltPaid" --settings "mbprofiles\blishhud.AltPaid"'
 
             if ProcessExist(CarpPID)
                 while (ProcessExist(CarpPID))
@@ -124,7 +140,7 @@ Gw2Launcher(MaybeHotkey := '', *) {
         case (MaybeHotkey = 'u' OR MaybeHotkey = "Update"):
             try Gw2LauncherGui.Hide
             KillGW2
-            Run Gw2Exe A_Space '-update -quit'
+            Run Gw2Exe A_Space '-update' A_Space '`"' A_AppData '\Guild Wars 2\*.dat' '`"'
 
         case (MaybeHotkey = 'k' OR MaybeHotkey = "KillAll"):
             KillGW2

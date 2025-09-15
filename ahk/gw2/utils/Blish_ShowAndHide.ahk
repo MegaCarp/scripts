@@ -10,7 +10,7 @@ Blish_ShowAndHide() {
     try Gw2ID := WinGetID('ahk_exe Gw2-64.exe')
     catch TargetError {
         Gw2ID := ''
-        try WinClose 'ahk_exe Blish HUD.exe'
+        try WinHide 'ahk_exe Blish HUD.exe'
     }
 
     if Gw2ID {
