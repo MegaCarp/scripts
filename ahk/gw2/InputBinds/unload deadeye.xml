@@ -1,4 +1,5 @@
 <InputBindings>
+    <action name="Log Out" id="47" device="Keyboard" button="57" mod="7"/>
     <action name="Move Forward" id="0" device="Keyboard" button="68"/>
     <action name="Move Backward" id="1" device="None"/>
     <action name="Strafe Left" id="2" device="Keyboard" button="88" device2="None"/>

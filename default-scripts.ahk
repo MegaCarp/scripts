@@ -1,7 +1,6 @@
 #Requires AutoHotkey v2.0
 #SingleInstance
 
-
 #Include ahk\utils\defaults-global.ahk
 
 Run "ahk\utils\killAHK.ahk"

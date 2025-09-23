@@ -24,6 +24,12 @@ TestOutput(WhatAreWeTesting_str, TestedOutput, ExpectedOutput, ErrorOnly := "Yes
     }
 }
 
+
+TestOutput_ObjectType(obj, NeedsToBeType) {
+    if TestOutput('Test for object typing - looking for type ' NeedsToBeType, isTrue(StrCompare(Type(obj), NeedsToBeType)), '')
+        return 1
+}
+
 isTrue(TheData) {
     if TheData
         return true
@@ -32,6 +38,32 @@ isTrue(TheData) {
 TestOutput_fileExist(FileName) {
     if TestOutput('Test for whether' A_Space FileName A_Space 'exists', isTrue(FileExist(FileName)), true)
         return 1
+}
+
+TestOutput_fileType(FileName, NeedsToBeType) {
+    if TestOutput('Test for whether file ' A_Space FileName A_Space 'is Type ' NeedsToBeType, isTrue(RegExMatch(FileExist(
+        FileName), NeedsToBeType)), true)
+        return 1
+}
+
+Logging(Text, File) {
+    FileAppend Text, File
+    try FileAppend(Text, '*')
+}
+
+/**
+ * Returns 2 if file does not exist
+ * 
+ * Returns 3 if file is the wrong type
+ */
+TestOutput_FileExistAndIsType(fileName, NeedsToBeType) {
+
+    if TestOutput_fileExist(fileName)
+        return 2
+
+    if TestOutput_fileType(fileName, NeedsToBeType)
+        return 3
+
 }
 
 ; WorkWith_GetUserInput(Input) {

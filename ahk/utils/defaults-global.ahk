@@ -17,6 +17,7 @@
 #Include ahk\utils\base-sleep-interval.ahk
 #Include ahk\utils\TestableDataForSwitching.ahk
 #Include ahk\utils\TestingSuite.ahk
+#Include ahk\utils\HardLink.ahk
 
 #Include ahk\utils\ClickData_builderUtility.ahk
 

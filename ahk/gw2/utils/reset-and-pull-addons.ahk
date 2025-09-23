@@ -48,19 +48,6 @@ TheseAreDifferentFiles(file1Path, file2Path) {
     return 0 ; Files are identical
 }
 
-HardlinkA_File(existingFile, hardLink) {
-    ; Create the hard link using DllCall
-    ; DllCall("CreateHardLink", Str, lpFileName, Str, lpExistingFileName, Ptr, lpSecurityAttributes)
-    ; lpFileName: The path to the new hard link
-    ; lpExistingFileName: The path to the existing file
-    ; lpSecurityAttributes: Optional security attributes (set to 0 for default)
-    try success := DllCall("CreateHardLink", "Str", hardLink, "Str", existingFile, "Ptr", 0)
-
-    ; Check if the hard link creation was successful
-    if !success
-        MsgBox "Failed to create hard link. Error: " A_LastError
-}
-
 HardlinkDllAddonsFromMainGW2ToSecondaryFolder(source, target) {
 
     if TestOutput_fileExist(source) {
@@ -72,70 +59,64 @@ HardlinkDllAddonsFromMainGW2ToSecondaryFolder(source, target) {
     KillGW2
 
 }
-/**
- * 
- * @param source 
- * @param target 
- */
-__CheckDirectoriesForDifferences(source, target) {
+; /**
+;  *
+;  * @param source
+;  * @param target
+;  */
+; __CheckDirectoriesForDifferences(source, target) {
 
-    LogFileName := A_Temp '\' FormatTime(, 'MM-dd.hh-mm-ss.log')
+;     LogFileName := A_Temp '\' FormatTime(, 'MM-dd.hh-mm-ss.log')
 
-    Log := ''
-    Log := Log 'source is ' source '`n'
-    Log := Log 'target is ' target '`n'
+;     Log := ''
+;     Log := Log 'source is ' source '`n'
+;     Log := Log 'target is ' target '`n'
 
-    returner := []
+;     returner := []
 
-    MatchPath(SpecificFilePath) {
-        return StrReplace(SpecificFilePath, source, target)
-    }
+;     MatchPath(SpecificFilePath) {
+;         return StrReplace(SpecificFilePath, source, target)
+;     }
 
-    try DirCreate(target)
+;     try DirCreate(target)
 
-    loop files source '\*', '>File,Directory,Recurse' {
-        if RegExMatch(A_LoopFileAttrib, 'D') ; ensure matching directory structure
-
-
-
-            else {
-            if TheseAreDifferentFiles(A_LoopFileFullPath, MatchPath(A_LoopFileFullPath))
-                if SyncInstead != 'No'
-                HardlinkA_File(A_LoopFileFullPath, MatchPath(A_LoopFileFullPath))
-        }
-
-    }
-
-}
-
-MoveLocalDat(Name) {
-    loop files SourceBlishTodo '\*' {
-        try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
-        catch {
-            SplitPath SourceBlishTodo, , &OutDir
-            MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
-            FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
-        }
-    }
-    FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
-    scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
-    try FileRecycle(scriptFileName)
-    ; Local.dat
-    ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
-    loop files SourceBlishTodo '\*'
-        ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
-    FileAppend ToWriteToScript, scriptFileName
-    FileRecycle TargetLocalDat
-    ;;;;;;;;;;;;;;;;
-    ; RunWait 'pwsh.exe -File `"' scriptFileName '`"'
-    RunWait 'pwsh.exe -WindowStyle Hidden -File `"' scriptFileName '`"'
-    ;;;;;;;;;;;;;;;;
-}
-;;;;;;;;;;
-    $sourcePath = "C:\Users\" + $env: USERNAME + "\Documents\Guild Wars 2\InputBinds"
-    $fileNames = (Get - ChildItem - Path$sourcePath - File).Name
-foreach ($xml in $fileNames) {
-    $whereToPutLink = "C:\Users\stash\Documents\scripts\ahk\gw2\InputBinds\" + $xml
-        $LinkFrom = "C:\Users\stash\Documents\Guild Wars 2\InputBinds\" + $xml
-    New - Item - ItemType HardLink - Path$whereToPutLink - Target$LinkFrom
-}
+;     loop files source '\*', '>File,Directory,Recurse' {
+;         if RegExMatch(A_LoopFileAttrib, 'D') ; ensure matching directory structure
+;         else {
+;             if TheseAreDifferentFiles(A_LoopFileFullPath, MatchPath(A_LoopFileFullPath))
+;             if SyncInstead != 'No'
+;             HardlinkA_File(A_LoopFileFullPath, MatchPath(A_LoopFileFullPath))
+;             }
+;         }
+;     }
+;     MoveLocalDat(Name) {
+;     loop files SourceBlishTodo '\*' {
+;         try FileRecycle(TargetBlishTodo '\' A_LoopFileName)
+;         catch {
+;             SplitPath SourceBlishTodo, , &OutDir
+;             MsgBox 'a todo has been deleted, moving it to trash`nFrom: ' A_LoopFilePath '`nTo: ' OutDir '\todo-trashed\' A_LoopFileName
+;             FileMove A_LoopFilePath, OutDir '\todo-trashed\' A_LoopFileName, 1
+;         }
+;     }
+;     FileCopy TargetBlishTodo '\*.*', SourceBlishTodo '\*.*'
+;     scriptFileName := A_WorkingDir '\hardlinker-script.ps1'
+;     try FileRecycle(scriptFileName)
+;     ; Local.dat
+;     ToWriteToScript := 'New-Item -ItemType HardLink -Target `"' SourceLocalDat '`" -Path `"' TargetLocalDat '`"`n'
+;     loop files SourceBlishTodo '\*'
+;         ToWriteToScript := ToWriteToScript 'New-Item -ItemType HardLink -Target `"' A_LoopFilePath '`" -Path `"' TargetBlishTodo '\' A_LoopFileName '`"`n'
+;     FileAppend ToWriteToScript, scriptFileName
+;     FileRecycle TargetLocalDat
+;     ;;;;;;;;;;;;;;;;
+;     ; RunWait 'pwsh.exe -File `"' scriptFileName '`"'
+;     RunWait 'pwsh.exe -WindowStyle Hidden -File `"' scriptFileName '`"'
+;     ;;;;;;;;;;;;;;;;
+; }
+; ;;;;;;;;;;
+; $sourcePath = "C:\Users\" + $env: USERNAME + "\Documents\Guild Wars 2\InputBinds"
+;     $fileNames = (Get - ChildItem - Path$sourcePath - File).Name
+; foreach ($xml in $fileNames) {
+;     $whereToPutLink = "C:\Users\stash\Documents\scripts\ahk\gw2\InputBinds\" + $xml
+;         $LinkFrom = "C:\Users\stash\Documents\Guild Wars 2\InputBinds\" + $xml
+;     New -Item - ItemType HardLink - Path$whereToPutLink - Target$LinkFrom
+; }

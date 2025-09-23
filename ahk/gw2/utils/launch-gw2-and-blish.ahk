@@ -103,8 +103,8 @@ Gw2Launcher(MaybeHotkey := '', *) {
                 while (ProcessExist(CaptatrixPID))
                     ProcessClose CaptatrixPID
 
-            if MaybeHotkey = '^c'
-                MoveLocalDat('Captatrix')
+            ; if MaybeHotkey = '^c'
+                ; MoveLocalDat('Captatrix')
 
             Run Gw2Exe A_Space "-l:silent -l:uid:1", , , &CaptatrixPID ; gw2arenanet
             ; Run Gw2Exe A_Space "-autologin -mumble MumbleLink_Captatrix.6428 -shareArchive", , , &CaptatrixPID ; gw2arenanet
@@ -117,8 +117,8 @@ Gw2Launcher(MaybeHotkey := '', *) {
                 while (ProcessExist(PoroPID))
                     ProcessClose PoroPID
 
-            if MaybeHotkey = '^p'
-                MoveLocalDat('Poro')
+            ; if MaybeHotkey = '^p'
+            ;     MoveLocalDat('Poro')
 
             Run Gw2Exe A_Space "-l:silent -l:uid:2", , , &PoroPID ; gw2arenanet
             ; Run Gw2Exe A_Space "-autologin -shareArchive", , , &PoroPID ; gw2arenanet
@@ -131,11 +131,17 @@ Gw2Launcher(MaybeHotkey := '', *) {
                 while (ProcessExist(CarpPID))
                     ProcessClose CarpPID
 
-            if MaybeHotkey = '^a'
-                MoveLocalDat('Carp')
+            ; if MaybeHotkey = '^a'
+            ;     MoveLocalDat('Carp')
 
             Run "com.epicgames.launcher://apps/10cab3b738244873bacb8ec7cef8128c%3Aada1dbe6d6d64aebb788713ec8d709c0%3A8d87562b481d44dd938c6a34a87d7355?action=launch&silent=true", , , &
                 CarpPID ; gw2epic
+
+                ; SetTimer ChangeWinTitleForCarp, -20000
+
+                ; ChangeWinTitleForCarp(*) {
+                ;     WinSetTitle('Carp', 'ahk_pid ' CarpPID)
+                ; }
 
         case (MaybeHotkey = 'u' OR MaybeHotkey = "Update"):
             try Gw2LauncherGui.Hide
