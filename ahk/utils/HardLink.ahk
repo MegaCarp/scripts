@@ -3,16 +3,24 @@
 #Include defaults-global.ahk
 
 HardlinkA_File(from, to) {
-    ; Create the hard link using DllCall
-    ; DllCall("CreateHardLink", Str, lpFileName, Str, lpExistingFileName, Ptr, lpSecurityAttributes)
-    ; lpFileName: The path to the new hard link
-    ; lpExistingFileName: The path to the existing file
-    ; lpSecurityAttributes: Optional security attributes (set to 0 for default)
-    try success := DllCall("CreateHardLink", "Str", from, "Str", to, "Ptr", 0)
+; Ensure paths are wide (UTF-16) for CreateHardLinkW
+CreateHardLinkW(ptrSource := StrGet(from, "UTF-16"), ptrLink := StrGet(to, "UTF-16")) {
+    ; DllCall signature: BOOL CreateHardLinkW(LPCWSTR lpFileName, LPCWSTR lpExistingFileName, LPSECURITY_ATTRIBUTES lpSecurityAttributes)
+    ; Note parameter order: newLinkName, existingFileName, securityAttributes (NULL)
+    res := DllCall("Kernel32.dll\CreateHardLinkW"
+        , "Ptr", &ptrLink                 ; lpFileName (new hard link)
+        , "Ptr", &ptrSource               ; lpExistingFileName (existing file)
+        , "Ptr", 0                        ; lpSecurityAttributes = NULL
+        , "Int")                          ; return BOOL as Int
+    return res
+}
 
-    ; Check if the hard link creation was successful
-    if !success
-        MsgBox "Failed to create hard link. Error: " A_LastError
+if CreateHardLinkW(from, to)
+    MsgBox "Hardlink created successfully."
+else {
+    err := DllCall("GetLastError", "UInt")
+    MsgBox "Failed to create hardlink. GetLastError(): " err
+}
 }
 
 Hardlink_RemoveTarget_HardlinkSource(from, to, exceptionsArray := '', dryRun := 'Yes') {
