@@ -1,4 +1,8 @@
 <InputBindings>
+    <action name="Log Out" id="47" device="Keyboard" button="57" mod="7"/>
+    <action name="Skyscale Mount/Dismount" id="170" device="Keyboard" button="55" mod="7"/>
+    <action name="Roller Beetle Mount/Dismount" id="161" device="Keyboard" button="54" mod="7"/>
+    <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7"/>
     <action name="Strafe Left" id="2" device="None"/>
     <action name="Strafe Right" id="3" device="None"/>
     <action name="Turn Left" id="4" device="Keyboard" button="65"/>
@@ -12,11 +16,10 @@
     <action name="Take Target" id="33" device="None"/>
     <action name="Next Enemy" id="35" device="Keyboard" button="67" mod="4"/>
     <action name="Information Dialog" id="51" device="Keyboard" button="78"/>
-    <action name="Raptor Mount/Dismount" id="155" device="Keyboard" button="78" mod="7" device2="Keyboard" button2="100"/>
-    <action name="Springer Mount/Dismount" id="156" device="Keyboard" button="15" mod="7" device2="Keyboard" button2="99"/>
-    <action name="Skimmer Mount/Dismount" id="157" device="Keyboard" button="89" mod="7" device2="Keyboard" button2="98"/>
-    <action name="Jackal Mount/Dismount" id="158" device="Keyboard" button="85" mod="7" device2="Keyboard" button2="97"/>
-    <action name="Griffon Mount/Dismount" id="159" device="Keyboard" button="4" mod="7" device2="Keyboard" button2="101"/>
-    <action name="Warclaw Mount/Dismount" id="169" device="Keyboard" button="3" mod="7" device2="Keyboard" button2="96"/>
+    <action name="Raptor Mount/Dismount" id="155" device2="Keyboard" button2="100"/>
+    <action name="Springer Mount/Dismount" id="156" device2="Keyboard" button2="99"/>
+    <action name="Skimmer Mount/Dismount" id="157" device2="Keyboard" button2="98"/>
+    <action name="Jackal Mount/Dismount" id="158" device2="Keyboard" button2="97"/>
+    <action name="Warclaw Mount/Dismount" id="169" device2="Keyboard" button2="96"/>
     <action name="Special Action" id="82" device="Keyboard"/>
 </InputBindings>
