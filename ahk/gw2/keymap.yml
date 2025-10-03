@@ -1,0 +1,7 @@
+﻿layout: {qmk_keyboard: xbows/knight, layout_name: LAYOUT}
+layers:
+  L0: [ESC LangSwitch, F1, F2, F3, F4, F5, F6 Open Chat, F7 /gg, F8 AltTab, F9, F10, F11, F12, DEL Autorun, PSCR, '` Map', '1', '2', '3', '4', '5', '6 takeTarget', '7', '8 PvP tab', '9 Contacts', '0', '-', '=', BSPC, TAB Hero Panel, Q, W, E, R,
+    T, Y Set G.Target, U, I Wizard'sVault, O, P, '[', ']', \, PGUP ItemSet1, CAPS, A, S, D Move Forward, F, G, BSPC SAK, H Set P.Target, J, K Guild, L, ;, '''', ENT, PGDN ItemSet1, LSFT, Z, X Strafe Left, C AboutFace, V Strafe Right, B, ENT Holster, N Take P.Target, M, ', Auction', ., /, RSFT, UP Build1, LCTL Interact, Num1,
+    LALT Dodge, SPC, RCTL SwapWP Mount1, RSFT FREE Mount2, SPC, RALT Show AllNames, L1, RCTL, LEFT Build2, DOWN Build3, RGHT Build4]
+
+    

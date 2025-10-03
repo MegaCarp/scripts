@@ -1,4 +1,6 @@
 ﻿;ahk;on-mouse
+if Blish;f22;
+if !Blish;Num2
 special action key;.;f23
 mastery key;,;f24
 stow weapon;m;f22
@@ -24,6 +26,14 @@ toy;h;
 tonic;];
 ;;
 action camera;[;
+
+targeting;
+call target;y;
+call personal target;h;
+take target;6;
+take personal target;n;
+
+
 
 Up 
 Down  
@@ -52,3 +62,6 @@ NumpadMult * (multiplication)
 NumpadAdd + (addition) 
 NumpadSub - (subtraction) 
 NumpadEnter 
+
+
+https://keyboard-layout-editor.com/##@@=Esc&_x:1%3B&=F1&=F2&=F3&=F4&_x:0.5%3B&=F5&=F6%0Aopen%20chat&=F7%0A%2F%2Fgg&=F8&_x:0.5%3B&=F9&=F10&=F11&=F12&_x:0.25%3B&=PrtSc&=Scroll%20Lock&=Pause%0ABreak%3B&@_y:0.5%3B&=interact&=!%0A1&=%2F@%0A2&=%23%0A3&=$%0A4&=%25%0A5&=6%0Atake%20target&=7&=8%0Apvp%20tab&=(%0A9&=)%0A0&=%2F_%0A-&=+%0A%2F=&_w:2%3B&=SAK&_x:0.25%3B&=Insert&=Home&=PgUp&_x:0.25%3B&=Num%20Lock&=%2F%2F&=*&=-%3B&@_w:1.5%3B&=Tab&=Q&=W&=E&=R&=T&=Y%0Aset%20g.target&=U&=i%0Awizard%20vault&=O&=P&=%7B%0A%5B&=%7D%0A%5D&_w:1.5%3B&=%7C%0A%5C&_x:0.25%3B&=Delete&=End&=PgDn&_x:0.25%3B&=7%0AHome&=8%0A%E2%86%91&=9%0APgUp&_h:2%3B&=+%3B&@_w:1.75%3B&=escape&=A&=S&=D%0Aforward&=F&=G&=H%0Aset%20p.target&=J&=K%0Aguild&=L&=%2F:%0A%2F%3B&=%22%0A'&_a:7&w:2.25%3B&=&_x:3.5&a:4%3B&=4%0A%E2%86%90&=5&=6%0A%E2%86%92%3B&@_w:2.25%3B&=inventory&=Z&=X%0Aleft&=C%0Aturn%20around&=V%0Aright&=B&=N%0Atake%20p.target&=M%0Amap&=,%0Aauction&=%3E%0A.&=%3F%0A%2F%2F&_w:2.75%3B&=f1&_x:1.25%3B&=%E2%86%91&_x:1.25%3B&=1%0AEnd&=2%0A%E2%86%93&=3%0APgDn&_h:2%3B&=Enter%3B&@_w:1.25%3B&=weapon%20swap&_w:1.25%3B&=Win&_w:1.25%3B&=Alt%0Adodge&_a:7&w:6.25%3B&=&_a:4&w:1.25%3B&=RAlt%0A%0A%0A%0A%0A%0Ashow%20all%20names&_w:1.25%3B&=Win&_w:1.25%3B&=Menu&_w:1.25%3B&=Ctrl&_x:0.25%3B&=%E2%86%90&=%E2%86%93&=%E2%86%92&_x:0.25&w:2%3B&=0%0AIns&=.%0ADel
