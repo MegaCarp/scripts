@@ -2,4 +2,4 @@
 #SingleInstance Force
 #Include gw2\utils\defaults-gw2.ahk
 
-Enter:: send '{f13}'
+Enter:: send '{f24}'

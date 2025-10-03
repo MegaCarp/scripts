@@ -16,7 +16,7 @@ SetTimer Blish_ShowAndHide, 100 * 60 * 5
 ; !Tab:: Case_AltTabbedIntoBlish
 
 ; weapon swap
-; Enter:: Send "{Ctrl down}{Alt Down}{Shift down}={Ctrl up}{Alt up}{Shift up}"
+Enter:: Send "{Ctrl down}{Alt Down}{Shift down}={Ctrl up}{Alt up}{Shift up}"
 
 ; can mount without blish - no Backspace tho
 #HotIf !WinExist('ahk_exe Blish HUD.exe') AND WinActive("ahk_exe Gw2-64.exe")
