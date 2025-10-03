@@ -1,8 +1,8 @@
 ﻿;ahk;on-mouse
-mount;if Blish;f24;
+mount;if Blish;Num3;
 mount;if !Blish;Num2
-special action key;.;f23
-mastery key;,;f24
+# special action key;.;f24
+mastery key;,;f23
 stow weapon;m;f22
 ;;
 unmount;p;

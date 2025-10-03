@@ -16,15 +16,18 @@ SetTimer Blish_ShowAndHide, 100 * 60 * 5
 ; !Tab:: Case_AltTabbedIntoBlish
 
 ; weapon swap
-Enter:: Send "{Ctrl down}{Alt Down}{Shift down}={Ctrl up}{Alt up}{Shift up}"
+; Enter:: Send "{Ctrl down}{Alt Down}{Shift down}={Ctrl up}{Alt up}{Shift up}"
 
 ; can mount without blish - no Backspace tho
 #HotIf !WinExist('ahk_exe Blish HUD.exe') AND WinActive("ahk_exe Gw2-64.exe")
-Backspace:: Send('^!+p')
+F24:: Send '{Numpad2}'
 #HotIf WinActive("ahk_exe Gw2-64.exe")
+F24:: Send '{Numpad3}'
+
+LWin:: Send '{Numpad1}'
 
 ; chat
-F6:: Send "{Enter}"
+; F6:: Send "{Enter}"
 
 F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
@@ -92,9 +95,6 @@ F9:: Run 'gw2\tp\TP_Utilities.ahk'
 
 F7:: Run "gw2\fractals\slash-gg.ahk"
 
-F23:: Send "{Ctrl down}{Alt Down}{Shift down},{Ctrl up}{Alt up}{Shift up}" ; mastery key
-F24:: Send "{Ctrl down}{Alt Down}{Shift down}.{Ctrl up}{Alt up}{Shift up}" ; special action key
-F22:: Send "{Ctrl down}{Alt Down}{Shift down}m{Ctrl up}{Alt up}{Shift up}" ; stow weapon key
 
 ; F4::Run "gw2\fractals\precast\quick.ahk"
 
