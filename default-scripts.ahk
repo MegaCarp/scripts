@@ -13,6 +13,7 @@ RButton:: MButton
 MButton:: RButton
 
 #HotIf 
+Launch_Media:: rControl
 
 F12:: RecordMousePosition
 

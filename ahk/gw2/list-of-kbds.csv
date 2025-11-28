@@ -1,9 +1,10 @@
 ﻿;ahk;on-mouse
 mount;if Blish;Num3;
 mount;if !Blish;Num2
-# special action key;.;f24
-mastery key;,;f23
-stow weapon;m;f22
+logout;Num4
+mastery key;Num5
+special action key;backspace
+stow weapon;enter
 ;;
 unmount;p;
 raptor;n;
