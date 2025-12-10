@@ -1,5 +1,5 @@
 ﻿layout: {qmk_keyboard: xbows/knight, layout_name: LAYOUT}
 layers:
   L0: [ESC LangSwitch, F1 Map, F2 Move Back, F3, F4, F5, F6 Open Chat, F7 /gg, F8 AltTab, F9, F10, F11, F12, DEL Autorun, PSCR, '` Map', '1', '2', '3', '4', '5 Autorun', '6 takeTarget', '7 Homestead', '8 PvP tab', '9 Contacts', '0 Switch Char', '- Skiff', '=', BSPC, TAB Hero Panel, Q, W, E, R,
-    T, Y Set G.Target, U, I Wizard'sVault, O Griffon, P Jackal, '[ Skimmer', '] Springer', \ Raptor, PGUP ItemSet1, CAPS, A, S, D Move Forward, F, G, BSPC SAK, H Set P.Target, J, K Guild, L Roller Beetle, ; Warclaw, ''' Skyscale', ENT, PGDN ItemSet1, LSFT Inventory, Z, X Strafe Left, C AboutFace, V Strafe Right, B, ENT Holster, N Take P.Target, M, ', Auction', . Fish, /, RSFT, UP Build1, LCTL Interact, Num1,
+    T, Y Set G.Target, U, I Wizard'sVault, O Griffon, P Jackal, '[ Skimmer', '] Springer', \ Raptor, PGUP ItemSet1, CAPS, A, S, D Move Forward, F, G, BSPC SAK, H Set P.Target, J, K Guild, L Roller Beetle, ; Warclaw, ''' Skyscale', ENT, PGDN ItemSet1, LSFT Inventory, Z, X Strafe Left, C AboutFace, V Strafe Right, B, ENT Holster, N Take P.Target, M, ', Auction', . Fish, '/ Turtle', RSFT, UP Build1, LCTL Interact, Num1,
     LALT Dodge, SPC, RCTL SwapWP Mount1, RSFT 1 Mount2, SPC, RALT Show AllNames, fn, RCTL, LEFT Build2, DOWN Build3, RGHT Build4] 

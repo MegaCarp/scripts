@@ -30,8 +30,8 @@ F12:: RecordMousePosition
 CheckOnVdi()
 
 ; `:: GoToVDI("And stay in VDI", 'leave char')
-; `:: GoToVDI("And stay in VDI")
-; ^`:: GoToVDI()
+`:: GoToVDI("And stay in VDI")
+^`:: GoToVDI()
 
 ;  HotIf
 
