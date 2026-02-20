@@ -7,10 +7,11 @@
 			"path": "../Guild Wars 2/addons"
 		},
 		{
-			"path": "../../../../games/Guild Wars 2/addons"
+			"path": "Z:/"
 		}
 	],
 	"settings": {
-		"powershell.cwd": "scripts"
+		"powershell.cwd": "scripts",
+		"ansible.python.interpreterPath": ""
 	}
 }

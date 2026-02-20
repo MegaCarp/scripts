@@ -1,0 +1,87 @@
+- name: Open new SSH port (firewall) before changing sshd
+  hosts: debian
+  become: true
+  vars:
+    ssh_default_port: 22
+  tasks:
+    - name: Open new port with ufw if present
+      ansible.builtin.shell: |
+        ufw allow {{ ssh_new_port }}/tcp
+        ufw reload || true
+      when: ansible_facts.packages.ufw is defined
+      ignore_errors: yes
+
+    - name: Open new port with firewalld if present
+      ansible.builtin.shell: |
+        firewall-cmd --permanent --add-port={{ ssh_new_port }}/tcp
+        firewall-cmd --reload || true
+      when: ansible_facts.packages.firewalld is defined
+      ignore_errors: yes
+
+    - name: Open new port with nftables if present
+      ansible.builtin.shell: |
+        nft add rule inet filter input tcp dport {{ ssh_new_port }} accept || true
+      when: ansible_facts.packages.nftables is defined
+      ignore_errors: yes
+
+    - name: Open new port with iptables fallback
+      ansible.builtin.shell: |
+        iptables -I INPUT -p tcp --dport {{ ssh_new_port }} -m conntrack --ctstate NEW -j ACCEPT || true
+      when:
+        - ansible_facts.packages.ufw is not defined
+        - ansible_facts.packages.firewalld is not defined
+        - ansible_facts.packages.nftables is not defined
+      ignore_errors: yes
+
+    - name: Ensure public key present for target user
+      ansible.builtin.authorized_key:
+        user: "{{ target_user | default(ansible_user) }}"
+        key: "{{ ssh_pubkey_string }}"
+        state: present
+
+    - name: Wait on control node until new port is reachable (from control machine)
+      local_action:
+        module: wait_for
+        host: "{{ inventory_hostname }}"
+        port: "{{ ssh_new_port }}"
+        timeout: 30
+
+    - name: Backup sshd_config before editing
+      ansible.builtin.copy:
+        src: /etc/ssh/sshd_config
+        dest: "/etc/ssh/sshd_config.bak_{{ lookup('pipe','date +%s') }}"
+        remote_src: yes
+
+    - name: Ensure sshd listens on new port and disable password auth
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp | default(omit) }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: '^\s*Port\s+', line: "Port {{ ssh_new_port }}" }
+        - { regexp: '^\s*PasswordAuthentication\s+', line: 'PasswordAuthentication no' }
+        - { regexp: '^\s*PermitEmptyPasswords\s+', line: 'PermitEmptyPasswords no' }
+        - { regexp: '^\s*ChallengeResponseAuthentication\s+', line: 'ChallengeResponseAuthentication no' }
+        - { regexp: '^\s*PubkeyAuthentication\s+', line: 'PubkeyAuthentication yes' }
+
+    - name: Restart sshd to apply new port
+      ansible.builtin.service:
+        name: sshd
+        state: restarted
+
+    - name: Wait for SSH new port to be ready after restart (control node)
+      local_action:
+        module: wait_for
+        host: "{{ inventory_hostname }}"
+        port: "{{ ssh_new_port }}"
+        timeout: 30
+
+    - name: (Optional) Close old port 22 in firewall after confirming new port works
+      ansible.builtin.shell: |
+        ufw delete allow 22/tcp || true
+        firewall-cmd --permanent --remove-port=22/tcp || true
+        nft delete rule inet filter input tcp dport 22 accept >/dev/null 2>&1 || true
+        iptables -I INPUT -p tcp --dport 22 -j REJECT || true
+        if command -v netfilter-persistent >/dev/null 2>&1; then netfilter-persistent save || true; fi
+      become: true
+      ignore_errors: yes

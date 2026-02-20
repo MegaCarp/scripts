@@ -1,6 +1,7 @@
 #Requires AutoHotkey v2.0
 
 #Include ..\..
+#Include ahk\utils\base-sleep-interval.ahk
 
 #Include ahk\utils\DoubleClicker.ahk
 
@@ -14,7 +15,6 @@
 
 #Include ahk\work\go-to-VDI.ahk
 
-#Include ahk\utils\base-sleep-interval.ahk
 #Include ahk\utils\TestableDataForSwitching.ahk
 #Include ahk\utils\TestingSuite.ahk
 #Include ahk\utils\HardLink.ahk

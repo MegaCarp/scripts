@@ -1,0 +1,12 @@
+vps:
+  vps:
+    proxy:
+    jumper:
+      ansible_port: 24495
+      ansible_host: vm52323.it-garage.network
+      ansible_user: root
+      # ansible_host: 144.31.251.90
+
+group_vars:
+  all:
+    ansible_ssh_common_args: '-o ForwardAgent=yes'
