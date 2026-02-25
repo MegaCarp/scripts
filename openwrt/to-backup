@@ -4,3 +4,4 @@
 /etc/config/wireless
 /etc/config/dropbear
 /etc/config/uhttpd
+/etc/config/momo

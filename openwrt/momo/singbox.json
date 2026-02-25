@@ -3,6 +3,7 @@
         "level": "info"
     },
     "dns": {
+        "strategy": "prefer_ipv6",
         "servers": [
             {
                 "type": "udp",
@@ -12,37 +13,54 @@
             },
             {
                 "type": "udp",
+                "tag": "yandex-dnsv6",
+                "server": "2a02:6b8::feed:0ff",
+                "detour": "direct-out"
+            },
+            {
+                "type": "udp",
                 "tag": "NSDI-dns",
                 "server": "195.208.5.1",
                 "detour": "direct-out"
             },
             {
-                "type": "https",
+                "type": "udp",
                 "tag": "cloudflare-dns",
                 "server": "1.1.1.1",
-                "detour": "direct-out"
+                "detour": "tunnel"
             },
             {
-                "type": "https",
+                "type": "udp",
                 "tag": "google-dns",
                 "server": "8.8.8.8",
-                "detour": "direct-out"
+                "detour": "tunnel"
             },
             {
-                "type": "https",
+                "type": "udp",
                 "tag": "home-dns",
-                "server": "192.168.1.1",
-                "detour": "home-net"
+                "server": "192.168.1.1"
             },
             {
-                "type": "https",
+                "type": "udp",
                 "tag": "Quad9-dns",
                 "server": "dns.quad9.net",
-                "domain_resolver": "yandex-dns",
-                "detour": "direct-out"
+                "domain_resolver": "cloudflare-dns",
+                "detour": "tunnel"
             }
         ],
         "rules": [
+            {
+                "ip_is_private": true,
+                "server": "home-dns"
+            },
+            {
+                "rule_set": "home-sites",
+                "server": "home-dns"
+            },
+            {
+                "rule_set": "gw2",
+                "server": "Quad9-dns"
+            },
             {
                 "rule_set": "geosite-category-ru",
                 "server": "NSDI-dns"
@@ -86,7 +104,6 @@
         {
             "type": "direct",
             "tag": "home-net",
-            "connect_timeout": "20s",
             "domain_resolver": {
                 "server": "home-dns"
             }
@@ -133,19 +150,16 @@
     "route": {
         "rules": [
             {
-                "domain_suffix": [
-                    "popsmops.duckdns.org",
-                    "lan",
-                    "router"
-                ],
+                "ip_is_private": true,
                 "outbound": "home-net"
             },
             {
-                "domain_suffix": [
-                    "ncplatform.net",
-                    "staticwars.com"
-                ],
-                "outbound": "block-check"
+                "rule_set": "home-sites",
+                "outbound": "home-net"
+            },
+            {
+                "rule_set": "gw2",
+                "outbound": "tunnel"
             },
             {
                 "action": "sniff"
@@ -157,13 +171,6 @@
             {
                 "inbound": "dns-in",
                 "action": "hijack-dns"
-            },
-            {
-                "domain": [
-                    "dzen.ru",
-                    "www.dzen.ru"
-                ],
-                "outbound": "direct-out"
             },
             {
                 "rule_set": "refilter_domains",
@@ -182,54 +189,95 @@
                 "outbound": "block"
             },
             {
+                "rule_set": "geosite-category-ru",
+                "outbound": "direct-out"
+            },
+            {
+                "rule_set": "geoip-category-ru",
+                "outbound": "direct-out"
+            },
+            {
                 "protocol": "bittorrent",
                 "outbound": "direct-out"
             },
             {
-                "ip_is_private": true,
-                "outbound": "direct-out"
-            },
-            {
-                "outbound": "tunnel"
+                "outbound": "block-check"
             }
         ],
         "rule_set": [
+            {
+                "tag": "home-sites",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_suffix": [
+                            "popsmops.duckdns.org",
+                            "lan",
+                            "router"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tag": "gw2",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_suffix": [
+                            "ncplatform.net",
+                            "staticwars.com"
+                        ]
+                    }
+                ]
+            },
             {
                 "tag": "refilter_domains",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://github.com/1andrevich/Re-filter-lists/releases/latest/download/ruleset-domain-refilter_domains.srs",
-                "download_detour": "direct-out"
+                "download_detour": "direct-out",
+                "update_interval": "168h0m0s"
             },
             {
                 "tag": "geosite-category-ru",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-category-ru.srs",
-                "download_detour": "direct-out"
+                "download_detour": "direct-out",
+                "update_interval": "168h0m0s"
+            },
+            {
+                "tag": "geoip-category-ru",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ru.srs",
+                "download_detour": "direct-out",
+                "update_interval": "168h0m0s"
             },
             {
                 "tag": "refilter_ipsum",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://github.com/1andrevich/Re-filter-lists/releases/latest/download/ruleset-ip-refilter_ipsum.srs",
-                "download_detour": "direct-out"
+                "download_detour": "direct-out",
+                "update_interval": "168h0m0s"
             },
             {
                 "tag": "geosite-category-ads-all",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-category-ads-all.srs",
-                "download_detour": "direct-out"
+                "url": "https://github.com/burjuyz/RuRulesets/raw/main/ruleset-domain-oisd_big.srs",
+                "download_detour": "direct-out",
+                "update_interval": "168h0m0s"
             }
         ],
         "auto_detect_interface": true,
-        "default_domain_resolver": "google-dns",
+        "default_domain_resolver": "yandex-dns",
         "final": "block-check"
     },
     "experimental": {
         "cache_file": {
-            "enabled": false
+            "enabled": true
         },
         "clash_api": {
             "external_controller": "[::]:9090"
