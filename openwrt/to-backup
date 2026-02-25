@@ -1,0 +1,6 @@
+/etc/config/dhcp
+/etc/config/firewall
+/etc/config/network
+/etc/config/wireless
+/etc/config/dropbear
+/etc/config/uhttpd

@@ -1,6 +1,6 @@
 {
     "log": {
-        "level": "warn"
+        "level": "info"
     },
     "dns": {
         "servers": [
@@ -27,6 +27,12 @@
                 "tag": "google-dns",
                 "server": "8.8.8.8",
                 "detour": "direct-out"
+            },
+            {
+                "type": "https",
+                "tag": "home-dns",
+                "server": "192.168.1.1",
+                "detour": "home-net"
             },
             {
                 "type": "https",
@@ -78,6 +84,14 @@
             }
         },
         {
+            "type": "direct",
+            "tag": "home-net",
+            "connect_timeout": "20s",
+            "domain_resolver": {
+                "server": "home-dns"
+            }
+        },
+        {
             "type": "urltest",
             "tag": "block-check",
             "outbounds": [
@@ -120,22 +134,18 @@
         "rules": [
             {
                 "domain_suffix": [
+                    "popsmops.duckdns.org",
+                    "lan",
+                    "router"
+                ],
+                "outbound": "home-net"
+            },
+            {
+                "domain_suffix": [
                     "ncplatform.net",
                     "staticwars.com"
                 ],
                 "outbound": "block-check"
-            },
-            {
-                "domain_suffix": [
-                    "router",
-                    "popsmops.duckdns.org",
-                    "lan"
-                ],
-                "outbound": "direct-out"
-            },
-            {
-                "rule_set": "geosite-category-ads-all",
-                "outbound": "block"
             },
             {
                 "action": "sniff"
@@ -149,11 +159,10 @@
                 "action": "hijack-dns"
             },
             {
-                "ip_is_private": true,
-                "outbound": "direct-out"
-            },
-            {
-                "protocol": "bittorrent",
+                "domain": [
+                    "dzen.ru",
+                    "www.dzen.ru"
+                ],
                 "outbound": "direct-out"
             },
             {
@@ -167,6 +176,21 @@
             {
                 "rule_set": "refilter_ipsum",
                 "outbound": "block-check"
+            },
+            {
+                "rule_set": "geosite-category-ads-all",
+                "outbound": "block"
+            },
+            {
+                "protocol": "bittorrent",
+                "outbound": "direct-out"
+            },
+            {
+                "ip_is_private": true,
+                "outbound": "direct-out"
+            },
+            {
+                "outbound": "tunnel"
             }
         ],
         "rule_set": [
@@ -174,29 +198,34 @@
                 "tag": "refilter_domains",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://github.com/1andrevich/Re-filter-lists/releases/latest/ruleset-domain-refilter_domains.srs"
-            },
-            {
-                "tag": "refilter_ipsum",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://github.com/1andrevich/Re-filter-lists/releases/latest/ruleset-ip-refilter_ipsum.srs"
+                "url": "https://github.com/1andrevich/Re-filter-lists/releases/latest/download/ruleset-domain-refilter_domains.srs",
+                "download_detour": "direct-out"
             },
             {
                 "tag": "geosite-category-ru",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://github.com/Chocolate4U/Iran-sing-box-rules/raw/refs/heads/rule-set/geosite-category-ru.srs"
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-category-ru.srs",
+                "download_detour": "direct-out"
+            },
+            {
+                "tag": "refilter_ipsum",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://github.com/1andrevich/Re-filter-lists/releases/latest/download/ruleset-ip-refilter_ipsum.srs",
+                "download_detour": "direct-out"
             },
             {
                 "tag": "geosite-category-ads-all",
                 "type": "remote",
                 "format": "binary",
-                "url": "https://github.com/Chocolate4U/Iran-sing-box-rules/raw/refs/heads/rule-set/geosite-category-ads-all.srs"
+                "url": "https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-category-ads-all.srs",
+                "download_detour": "direct-out"
             }
         ],
         "auto_detect_interface": true,
-        "default_domain_resolver": "google-dns"
+        "default_domain_resolver": "google-dns",
+        "final": "block-check"
     },
     "experimental": {
         "cache_file": {
