@@ -1,20 +1,20 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
-    BlishExe := A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe"
+if FileExist(A_MyDocuments "\gw2\blishud\Blish HUD.exe")
+    BlishExe := A_MyDocuments "\gw2\blishud\Blish HUD.exe"
 else if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
     BlishExe := A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
 else {
-    MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
+    MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
 }
 
-if FileExist("C:\games\Gw2Launcher.exe")
-    Gw2Exe := "C:\games\Gw2Launcher.exe"
+if FileExist("C:\Users\stash\SteamLibrary\steamapps\common\Gw2Launcher.exe")
+    Gw2Exe := "C:\Users\stash\SteamLibrary\steamapps\common\Gw2Launcher.exe"
 ; if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
 ;     Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
 else {
-    MsgBox "Can't find GW2! Here's where I looked: `nC:\games\GuildWars2-arenanet\Gw2-64.exe"
+    MsgBox "Can't find GW2! Here's where I looked: `nC:\Users\stash\games\GuildWars2-arenanet\Gw2-64.exe"
     ; ExitApp ;; this script has been folded as a function into main so this would crash the whole thing
 }
 

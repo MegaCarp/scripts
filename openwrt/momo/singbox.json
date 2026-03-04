@@ -178,11 +178,15 @@
             },
             {
                 "action": "resolve",
-                "strategy": "ipv4_only"
+                "strategy": "prefer_ipv4"
             },
             {
                 "rule_set": "refilter_ipsum",
                 "outbound": "block-check"
+            },
+            {
+                "rule_set": "additional-ru-domains",
+                "outbound": "tunnel"
             },
             {
                 "rule_set": "geosite-category-ads-all",
@@ -190,6 +194,14 @@
             },
             {
                 "rule_set": "geosite-category-ru",
+                "outbound": "direct-out"
+            },
+            {
+                "domain_suffix": [  
+                    "рф",
+                    ".рф",
+                    "xn--p1ai"
+                ],
                 "outbound": "direct-out"
             },
             {
@@ -226,6 +238,17 @@
                         "domain_suffix": [
                             "ncplatform.net",
                             "staticwars.com"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tag": "additional-ru-domains",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_suffix": [
+                            "ntc.party"
                         ]
                     }
                 ]
