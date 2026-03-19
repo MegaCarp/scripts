@@ -9,8 +9,8 @@ else {
     MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
 }
 
-if FileExist("C:\Users\stash\SteamLibrary\steamapps\common\Gw2Launcher.exe")
-    Gw2Exe := "C:\Users\stash\SteamLibrary\steamapps\common\Gw2Launcher.exe"
+if FileExist("C:\Users\stash\Gw2Launcher.exe")
+    Gw2Exe := "C:\Users\stash\Gw2Launcher.exe"
 ; if FileExist("C:\games\GuildWars2-arenanet\Gw2-64.exe")
 ;     Gw2Exe := "C:\games\GuildWars2-arenanet\Gw2-64.exe"
 else {
