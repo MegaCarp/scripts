@@ -162,6 +162,10 @@
                 "outbound": "tunnel"
             },
             {
+                "rule_set": "additional-foreign-domains",
+                "outbound": "tunnel"
+            },
+            {
                 "action": "sniff"
             },
             {
@@ -197,11 +201,7 @@
                 "outbound": "direct-out"
             },
             {
-                "domain_suffix": [  
-                    "рф",
-                    ".рф",
-                    "xn--p1ai"
-                ],
+                "domain_suffix": "рф",
                 "outbound": "direct-out"
             },
             {
@@ -249,6 +249,17 @@
                     {
                         "domain_suffix": [
                             "ntc.party"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tag": "additional-foreign-domains",
+                "type": "inline",
+                "rules": [
+                    {
+                        "domain_suffix": [
+                            "ubuntu.com"
                         ]
                     }
                 ]
