@@ -259,7 +259,9 @@
                 "rules": [
                     {
                         "domain_suffix": [
-                            "ubuntu.com"
+                            "ubuntu.com",
+                            "tiktok.com",
+                            "redgifs.com"
                         ]
                     }
                 ]
