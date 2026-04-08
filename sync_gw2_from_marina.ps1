@@ -1,6 +1,7 @@
 # Sync-GW2_fixed.ps1
 $jobs = @(
     @{ Source = '\\DENIS-PC\Steam\steamapps\common\GuildWars2\addons'; Destination = 'C:\games\Guild Wars 2\Gw2Launcher\1\addons'; Log = 'C:\games\Guild Wars 2\Gw2Launcher\sync_addons.log' },
+    @{ Source = '\\DENIS-PC\Steam\steamapps\common\GuildWars2\d3d11.dll'; Destination = 'C:\games\Guild Wars 2\Gw2Launcher\1\d3d11.dll"'; Log = 'C:\games\Guild Wars 2\Gw2Launcher\sync-nexus.log' },
     @{ Source = '\\DENIS-PC\Users\stash\AppData\Roaming\Gw2Launcher\data\1\Documents\Guild Wars 2'; Destination = 'C:\Users\stash\AppData\Roaming\Gw2Launcher\data\1\Documents\Guild Wars 2'; Log = 'C:\games\Guild Wars 2\Gw2Launcher\sync_docs_KBDs.log' },
     @{ Source = '\\DENIS-PC\Users\stash\Documents\gw2\blishud\mbprofiles\blishhud.1'; Destination = 'C:\Users\stash\games\Blish HUD\mbprofiles\blishhud.1'; Log = 'C:\games\Guild Wars 2\Gw2Launcher\sync_blish.log' },
     @{ Source = '\\DENIS-PC\Users\stash\AppData\Roaming\Guild Wars 2'; Destination = 'C:\Users\stash\AppData\Roaming\Gw2Launcher\data\1\AppData\Roaming\Guild Wars 2'; Log = 'C:\games\Guild Wars 2\Gw2Launcher\sync_settings.log' }
@@ -51,6 +52,7 @@ function Is-RoboSuccess([int]$rc) {
 }
 
 $overallExit = 0
+
 foreach ($j in $jobs) {
     try {
         $rc = Run-Robocopy -src $j.Source -dst $j.Destination -log $j.Log
