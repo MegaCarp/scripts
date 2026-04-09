@@ -29,7 +29,7 @@ LWin:: Send '{Numpad1}'
 ; chat
 ; F6:: Send "{Enter}"
 
-F10:: Run("gw2\paste-to-chat-and-click.ahk")
+; F10:: Run("gw2\paste-to-chat-and-click.ahk")
 
 ; F3:: ForgeAndFill()
 F9:: Run 'gw2\tp\TP_Utilities.ahk'
