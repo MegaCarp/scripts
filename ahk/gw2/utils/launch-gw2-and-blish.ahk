@@ -1,10 +1,10 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-if FileExist(A_MyDocuments "\gw2\blishud\Blish HUD.exe")
-    BlishExe := A_MyDocuments "\gw2\blishud\Blish HUD.exe"
-else if FileExist(A_MyDocuments "\..\games\gw2\blishud\Blish HUD.exe")
-    BlishExe := A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
+if FileExist(A_MyDocuments "\..\gw2\blishud\Blish HUD.exe")
+    BlishExe := A_MyDocuments "\..\gw2\blishud\Blish HUD.exe"
+else if FileExist(A_MyDocuments "\..\games\Blish HUD\Blish HUD.exe")
+    BlishExe := A_MyDocuments "\..\games\Blish HUD\Blish HUD.exe"
 else {
     MsgBox "Can't find Blish HUD! Here's where I looked: `n" A_MyDocuments "\gw2\blishud\Blish HUD.exe`n" A_MyDocuments "\..\games\gw2\addons\Blish HUD.exe"
 }
